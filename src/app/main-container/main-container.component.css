@@ -1,0 +1,15 @@
+.main-right-container {
+    width: auto;
+    float: left;
+    padding: 30px;
+}
+
+.main-right-container div:first-of-type {
+    width: 500px;
+    float: left;
+}
+
+.main-right-container div:last-of-type {
+    width: auto;
+    float: left;
+}

@@ -1,0 +1,10 @@
+#main-container {
+    width:100%;
+    border-top: 2px solid black;
+}
+
+#sidebar-container {
+    width: 250px;
+    float: left;
+    border-right: 2px solid black;
+}

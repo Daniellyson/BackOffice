@@ -1,0 +1,61 @@
+<div class="tab">
+  <button class="tablinks" (click) = "validations(event, 'profilePicture')">Profile picture</button>
+  <button class="tablinks" (click) = "validations(event, 'idCard')">ID card</button>
+  <button class="tablinks" (click) = "validations(event, 'vehicle')">Vehicle</button>
+</div>
+
+
+<div id="profilePicture" class="tabcontent">
+  <h1>Picture</h1>
+  <ul class="picFrame" *ngFor= "let pic of pictures$ | slice:0:10; let i=index">
+    <li class="picValidation">
+      <div>
+        <img src="{{pic.url}}"/>
+      </div>
+      <div>
+          <button class="validationButton">Validate</button>
+          <button class="validationButton">Refuse</button>
+      </div>
+
+    </li>
+  </ul>
+</div>
+
+<div id="idCard" class="tabcontent">
+  <h1>ID card</h1>
+  <ul class="picFrame" *ngFor="let pic of pictures$ | slice:0:10; let i=index">
+    <li class="picValidation">
+
+      <div>
+          <img src="{{pic.url}}"/>
+      </div>
+      <div>
+        <button class="validationButton">Validate</button>
+        <button class="validationButton">Refuse</button>
+      </div>
+
+    </li>
+  </ul>
+</div>
+
+<div id="vehicle" class="tabcontent">
+  <h1>Vehicle</h1>
+  <ul class="picFrame" *ngFor="let pic of pictures$ | slice:0:10; let i=index">
+    <li class="picValidation">
+
+      <div>
+        <img src="{{pic.url}}"/>
+      </div>  
+      <div>
+        <p>Brand: </p>
+        <p>Model: </p>
+        <p>Licence plate: </p>
+      </div>
+      <div>
+        <button class="validationButton">Validate</button>
+        <button class="validationButton">Refuse</button>
+      </div>
+   
+    </li>
+  </ul> 
+</div>
