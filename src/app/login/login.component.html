@@ -1,17 +1,12 @@
-<div class="container">
-  <br>
-  <form>
-    <label for="uname"> Username </label>
-    <input type="text" #userName placeholder="Enter Username" required>
-    <br><br>
-    <label for="psw">Password </label>
-    <input type="password" #password placeholder="Enter Password" required>
-    <br><br>
-    <button (click)="onSubmit(userName.value, password.value)">Login</button>
-  </form>
-  <br>
-  
-  <div id="login" *ngIf="!isLogin">
-    <p>Username or password is incorrect</p>
+<div class="login-page">
+  <div class="form">
+    <form class="login-form">
+      <input type="text" placeholder="username" #userName/>
+      
+      <input type="password" placeholder="password" #password />
+      <button (click)="onSubmit(userName.value, password.value)">login</button>
+    </form>
+    <br>
+    <p id="login" *ngIf="!isLogin">Username or password is incorrect</p>
   </div>
 </div>
