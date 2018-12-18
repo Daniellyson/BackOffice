@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -18,12 +19,14 @@ export class UsersComponent implements OnInit {
 
   apiResponse: boolean = true;
 
-  constructor(private data: DataService) { }
+  modify_user: boolean = false;
+
+  constructor(private data: DataService, private router: Router) { }
 
   ngOnInit() {
     this.data.getUsers().subscribe(
       data => this.users = data
-    )
+    );
   }
 
   getOneUser(value: string) {
@@ -37,7 +40,14 @@ export class UsersComponent implements OnInit {
     );
   }
 
+  modifyUser(id: Number) {
+    //alert(id);
+    //this.router.navigate(['modify-user']);
+    this.modify_user = true;
+  }
+
   getAllUsersBack() {
     this.allUsers = true;
+    this.modify_user = false;
   }
 }

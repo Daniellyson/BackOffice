@@ -1,16 +1,17 @@
 <div class="container">
   <br>
-  <form #loginForm="ngForm" (ngSubmit)="OnSubmit(UserName.value, Password.value)">
+  <form>
     <label for="uname"> Username </label>
-    <input type="text" #UserName nbModel name = "UserName" placeholder="Enter Username" required>
+    <input type="text" #userName placeholder="Enter Username" required>
     <br><br>
     <label for="psw">Password </label>
-    <input type="password" #Password nbModel name = "Password" placeholder="Enter Password" required>
+    <input type="password" #password placeholder="Enter Password" required>
     <br><br>
-    <button type="submit"> Login </button>
+    <button (click)="onSubmit(userName.value, password.value)">Login</button>
   </form>
-  <a routerLink="mainWindow"> GO </a>
   <br>
-  <a href="#">Forgot password?</a>
-  <br>
+  
+  <div id="login" *ngIf="!isLogin">
+    <p>Username or password is incorrect</p>
+  </div>
 </div>

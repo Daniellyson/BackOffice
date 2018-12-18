@@ -1,50 +1,57 @@
-<div class="main-right-container">
-  <h2>
-    <label>Search <input id="search" placeholder="Enter A VALIDE User Name" #box (keyup)="0"></label>
-    <button (click)="getOneUser(box.value)">Go</button>
-    <button (click)="getAllUsersBack()">Back</button>
-  </h2>
-
-  <div *ngIf="!apiResponse && !allUsers">
-    <p>Please, give a valide User Name</p>
-  </div>
+<ng-container *ngIf="!modify_user">
+  <div class="main-right-container">
+    <h2>
+      <label>Search <input id="search" placeholder="Enter A VALIDE User Name" #box></label>
+      <button (click)="getOneUser(box.value)">Go</button>
+      <button (click)="getAllUsersBack()">Back</button>
+    </h2>
+    
+    <ng-container *ngIf="!allUsers">
+      <table *ngIf="apiResponse">
+        <tr>
+          <th>Name</th>
+          <th>User Name</th>
+          <th>E-mail</th>
+          <th>Phone Number</th>
+        </tr>
+        <tr *ngFor="let user of get_A_User | async">
+          <td><strong>{{ user.name }}</strong></td>
+          <td>{{ user.username }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.phone }}</td>      
+          <button>Modify</button>
+          <button>Delete</button>
+        </tr>
+      </table>
+    </ng-container>
   
-  <ng-container *ngIf="!allUsers">
-    <table *ngIf="apiResponse">
-      <tr>
-        <th>Name</th>
-        <th>User Name</th>
-        <th>E-mail</th>
-        <th>Phone Number</th>
-      </tr>
-      <tr *ngFor="let user of get_A_User | async">
-        <td><strong>{{ user.name }}</strong></td>
-        <td>{{ user.username }}</td>
-        <td>{{ user.email }}</td>
-        <td>{{ user.phone }}</td>      
-        <button>Modify</button>
-        <button>Delete</button>
-      </tr>
-    </table>
-  </ng-container>
+    <ng-container *ngIf="allUsers">
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>User Name</th>
+          <th>E-mail</th>
+          <th>Phone Number</th>
+        </tr>
+        <tr *ngFor="let user of users">
+          <td><strong>{{ user.name }}</strong></td>
+          <td>{{ user.username }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.phone }}</td>
+          
+          <button (click)="modifyUser(user.id)" routerLink="modify-user">Modify</button>
+          <button>Delete</button>
+        </tr>
+      </table>
+    </ng-container>
+  
+    <div *ngIf="!apiResponse" id="api-res"> <!-- && !allUsers -->
+      <h3>Please, give a valide User Name</h3>
+    </div>
+  </div>
+</ng-container> <!--TODO-->
 
-  <ng-container *ngIf="allUsers">
-    <table>
-      <tr>
-        <th>Name</th>
-        <th>User Name</th>
-        <th>E-mail</th>
-        <th>Phone Number</th>
-      </tr>
-      <tr *ngFor="let user of users">
-        <td><strong>{{ user.name }}</strong></td>
-        <td>{{ user.username }}</td>
-        <td>{{ user.email }}</td>
-        <td>{{ user.phone }}</td>
-        
-        <button>Modify</button>
-        <button>Delete</button>
-      </tr>
-    </table>
-  </ng-container>
+<div *ngIf="modify_user">
+  <app-modify-user></app-modify-user>
+  <button (click)="getAllUsersBack()">Back</button>
 </div>

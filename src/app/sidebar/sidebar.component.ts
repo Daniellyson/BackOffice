@@ -27,6 +27,6 @@ export class SidebarComponent implements OnInit {
     for(let elem = 0; elem < sidebar.length; elem++) {
       sidebar[elem].style.color = "black";
     }
-    document.getElementById(id).style.color = "#009688";
+    document.getElementById(id).style.color = "rgb(10, 45, 150)";
   }
 }

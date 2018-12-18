@@ -14,19 +14,34 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class LoginComponent implements OnInit {
 
-  isLoginError : boolean = false;
+  isLogin : boolean = true;
+
+  isLoginError: boolean; //test login
+
   constructor(private userService : DataService, private router : Router) { }
 
   ngOnInit() {
   }
+  
+  onSubmit(name: string, password: string) {
+    
+    this.userService.getOneUser(name).subscribe(data => {
+      this.isLogin = (data[0].username == name && data[0].username == password);
+    });
 
-  OnSubmit(userName,password){
-     this.userService.userAuthentication(userName,password).subscribe((data : any)=>{
-      localStorage.setItem('userToken',data.access_token);
+    if(this.isLogin) {
+      this.router.navigate(['mainWindow']);
+    }
+  }
+  
+
+  /*onSubmit(userName, password){
+      this.userService.userAuthentication(userName, password).subscribe((data : any) => {
+      localStorage.setItem('userToken', data.access_token);
       this.router.navigate(['/home']);
     },
-    (err : HttpErrorResponse)=>{
+    (err : HttpErrorResponse) => {
       this.isLoginError = true;
     });
-  }
+  }*/
 }

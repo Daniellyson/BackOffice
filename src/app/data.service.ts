@@ -45,7 +45,12 @@ export class DataService {
     return this.get_A_User;
   }
 
-  registerUser(user: User) {
+  /*userAuthentication(userName: string, password: string) {
+    let params = new HttpParams().set('username', userName);
+    this.get_A_User = this.http.get(this.rootUrl + '/users', { params }); 
+  }*/
+
+  /*registerUser(user: User) {
     const body: User = {
       id: user.id,
       phone: user.phone,
@@ -57,17 +62,17 @@ export class DataService {
     }
     var reqHeader = new HttpHeaders({'No-Auth':'True'});
     return this.http.post(this.rootUrl + '/api/User/Register', body,{headers : reqHeader});
-  }
+  }*/
 
-  userAuthentication(userName, password) {
+  /*userAuthentication(userName, password) {
     var data = "username=" + userName + "&password=" + password + "&grant_type=password";
     var reqHeader = new HttpHeaders({ 'Content-Type': 'application/x-www-urlencoded','No-Auth':'True' });
     return this.http.post(this.rootUrl + '/token', data, { headers: reqHeader });
   }
 
   getUserClaims(){
-   return  this.http.get(this.rootUrl+'/api/GetUserClaims');
-  }
+    return  this.http.get(this.rootUrl+'/api/GetUserClaims');
+  }*/
 
 
 }

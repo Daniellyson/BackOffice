@@ -7,6 +7,7 @@ import { ApiStatComponent } from './api-stat/api-stat.component';
 import { ValidationComponent } from './validation/validation.component';
 import { LoginComponent } from './login/login.component';
 import { MainWindowComponent } from './main-window/main-window.component';
+import { ModifyUserComponent } from './modify-user/modify-user.component';
 
 
 const routes: Routes = [
@@ -29,7 +30,7 @@ const routes: Routes = [
       },
       {
         path: 'users',
-        component: UsersComponent
+        component: UsersComponent,
       },
       {
         path: 'carpooling',
@@ -42,7 +43,7 @@ const routes: Routes = [
       {
         path: 'validation',
         component: ValidationComponent
-      }
+      },
     ]
   },
 ];
@@ -63,5 +64,6 @@ export const routingComponents = [
   ApiStatComponent,
   ValidationComponent,
   LoginComponent,
-  MainWindowComponent
+  MainWindowComponent,
+  ModifyUserComponent
 ];
