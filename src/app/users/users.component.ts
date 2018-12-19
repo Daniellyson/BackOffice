@@ -21,7 +21,7 @@ export class UsersComponent implements OnInit {
 
   modify_user: boolean = false;
 
-  constructor(private data: DataService, private router: Router) { }
+  constructor(private data: DataService) { }
 
   ngOnInit() {
     this.data.getUsers().subscribe(
@@ -41,8 +41,6 @@ export class UsersComponent implements OnInit {
   }
 
   modifyUser(id: Number) {
-    //alert(id);
-    //this.router.navigate(['modify-user']);
     this.modify_user = true;
   }
 

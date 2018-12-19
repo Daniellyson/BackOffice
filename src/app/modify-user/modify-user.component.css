@@ -1,3 +1,13 @@
 form {
     padding-left: 300px;
+    padding-right: 300px;
+}
+
+label, input {
+    display: block;
+}
+
+label {
+    padding-top: 20px;
+    padding-bottom: 5px;
 }

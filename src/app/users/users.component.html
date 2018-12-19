@@ -19,7 +19,7 @@
           <td>{{ user.username }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.phone }}</td>      
-          <button>Modify</button>
+          <button (click)="modifyUser(user.id)">Modify</button>
           <button>Delete</button>
         </tr>
       </table>
@@ -39,19 +39,18 @@
           <td>{{ user.email }}</td>
           <td>{{ user.phone }}</td>
           
-          <button (click)="modifyUser(user.id)" routerLink="modify-user">Modify</button>
+          <button (click)="modifyUser(user.id)">Modify</button>
           <button>Delete</button>
         </tr>
       </table>
     </ng-container>
   
-    <div *ngIf="!apiResponse" id="api-res"> <!-- && !allUsers -->
+    <div *ngIf="!apiResponse && !allUsers" id="api-res">
       <h3>Please, give a valide User Name</h3>
     </div>
   </div>
-</ng-container> <!--TODO-->
+</ng-container>
 
 <div *ngIf="modify_user">
-  <button (click)="getAllUsersBack()">Back</button>
   <app-modify-user></app-modify-user>
 </div>
