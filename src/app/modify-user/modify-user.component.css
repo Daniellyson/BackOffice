@@ -11,3 +11,20 @@ label {
     padding-top: 20px;
     padding-bottom: 5px;
 }
+
+input {
+    width: 500px;
+}
+
+button {
+    margin-top: 20px;
+    margin-right: 10px;
+    border: 1px solid;
+    border-radius: 8px;
+}
+
+input {
+    border: 1px solid;
+    border-radius: 8px;
+    width: 400px;
+}

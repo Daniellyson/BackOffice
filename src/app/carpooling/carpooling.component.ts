@@ -8,14 +8,17 @@ import { DataService } from '../data.service';
 })
 export class CarpoolingComponent implements OnInit {
 
-  carpooling$: Object;
+  carpooling: Object;
 
   constructor(private data: DataService) { }
 
   ngOnInit() {
     this.data.getCarpooling().subscribe(
-      data => this.carpooling$ = data
+      data => this.carpooling = data
     )
   }
 
+  getCarpooling(value: string) {
+    alert(value);
+  }
 }

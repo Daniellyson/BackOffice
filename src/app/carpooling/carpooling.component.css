@@ -28,3 +28,9 @@ input {
     margin-left: 15px;
     margin-bottom: 15px; 
 }
+
+button {
+    margin: 10px;
+    border: 1px solid;
+    border-radius: 8px;
+}

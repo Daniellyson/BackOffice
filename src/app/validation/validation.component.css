@@ -33,9 +33,16 @@
     border-top: none;
 } 
 
-.tab button {
-    padding-right: 50px;
-    font-weight: bold;
+button {
+    margin: 10px;
+    border: 1px solid;
+    border-radius: 8px;
+}
+
+label input {
+    border: 1px solid;
+    border-radius: 8px;
+    width: 400px;
 }
 
 .picValidation img {
@@ -47,6 +54,18 @@ ul {
     list-style-type: none;
 }
 
-.picValidation div {
-    display: inline;
+li div {
+    float: left;
+}
+.picValidation {
+    height: 200px;
+}
+
+p {
+    padding: 5px;
+    padding-left: 15px;
+}
+
+span {
+    font-weight: bold;
 }

@@ -2,17 +2,16 @@
   <h1>Carpooling x last days</h1>
   
   <label for="xLastDays">Select a date: </label>
-  <input id="xLastDays" type="date">
+  <input id="xLastDays" type="date" #xLastDays>
+  <button (click)="getCarpooling(xLastDays.value)">Submit</button>
 
   <!--TODO if to print the table with carpooling users-->
   <table >
     <tr>
-      <th>ID</th>
       <th>Name</th>
       <th>Date</th>
     </tr>
-    <tr>
-      <td></td>
+    <tr *ngFor="let car of carpooling">
       <td></td>
       <td></td>
     </tr>
