@@ -8,9 +8,15 @@ import { DataService } from '../data.service';
 })
 export class MainContainerComponent implements OnInit {
 
+  users: Object;
+  totalOfInscriptionToday: string;
+  totalOfInscriptionThisMonth: Number;
+
   constructor(private data: DataService) { }
 
   ngOnInit() {
-    
+    this.data.getUsers().subscribe(
+      data => this.users = data
+    );
   }
 }

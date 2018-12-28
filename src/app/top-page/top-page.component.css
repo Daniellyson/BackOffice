@@ -33,3 +33,17 @@ h1, h2 {
     padding-top: 0px;
 }
 
+#userName{
+    float: left;
+    width: 250px;
+    position: absolute;
+}
+
+#menu {
+    margin-top: 22px;
+    float: right;
+}
+
+select {
+    border: 0px solid white;
+}
