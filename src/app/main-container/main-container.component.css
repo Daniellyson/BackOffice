@@ -4,12 +4,16 @@
     padding: 30px;
 }
 
-.main-right-container div:first-of-type {
+.main-right-container #left {
     width: 500px;
     float: left;
 }
 
-.main-right-container div:last-of-type {
+.main-right-container #right {
     width: auto;
     float: left;
+}
+
+#chartContainer {
+    width: 500px;
 }

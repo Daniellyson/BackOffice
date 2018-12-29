@@ -32,6 +32,10 @@ export class DataService {
   getPictureValidation() {
     return this.http.get('https://jsonplaceholder.typicode.com/photos');
   }
+
+  getTodos() {
+    return this.http.get('https://jsonplaceholder.typicode.com/todos');
+  }
   
 
   readonly rootUrl = 'https://jsonplaceholder.typicode.com';

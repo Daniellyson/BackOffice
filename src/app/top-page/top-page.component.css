@@ -33,10 +33,11 @@ h1, h2 {
     padding-top: 0px;
 }
 
-#userName{
+#userName {
     float: left;
     width: 250px;
     position: absolute;
+    background-color: white;
 }
 
 #menu {
