@@ -7,10 +7,10 @@
     </div>  
 
     <div id="user-logout">
-        <div id="userName"> <h3> Daniellyson </h3> </div>
+        <div id="userName"> <h3> {{adminName}} </h3> </div>
         <div id="menu">
             <select>
-                <option routerLink=""> Logout </option>
+                <option (click)="logout()"> Logout </option>
             </select>
         </div> 
     </div>

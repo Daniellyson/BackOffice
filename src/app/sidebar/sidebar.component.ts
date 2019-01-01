@@ -16,7 +16,8 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {    
     this.sideBar("dashboard");
-    this.data.currentTitle.subscribe(title => this.title = title);
+    //TODO delete this.data.currentTitle.subscribe(title => this.title = title);
+    //this.data.currentTitle.subscribe(title => this.title = title);
   }
 
   sideBar(id) {

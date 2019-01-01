@@ -10,13 +10,11 @@
       <table *ngIf="apiResponse">
         <tr>
           <th>User Name</th>
-          <th>Role</th>
           <th>E-mail</th>
            <th>Created At</th>
         </tr>
         <tr *ngFor="let user of get_A_User | async">
           <td><strong>{{ user.userName }}</strong></td>
-          <td>{{ user.role }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.createdAt | date:"dd/MM/yy"}}</td>   
           <button (click)="modifyUser(user.id)">Modify</button>
@@ -29,13 +27,11 @@
       <table>
         <tr>
           <th>User Name</th>
-          <th>Role</th>
           <th>E-mail</th>
           <th>Created At</th>
         </tr>
         <tr *ngFor="let user of users">
           <td><strong>{{ user.userName }}</strong></td>
-          <td>{{ user.role }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.createdAt | date:"dd/MM/yy"}}</td>
           

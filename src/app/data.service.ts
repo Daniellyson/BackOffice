@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams  } from '@angular/common/http';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { User } from './users/model';
+import { User } from './users/userModel';
 
 
 
@@ -14,6 +14,9 @@ export class DataService {
 
   private titleSource = new BehaviorSubject<string>("Dashboard");
   currentTitle = this.titleSource.asObservable();
+
+  private adminName = new BehaviorSubject<string>("");
+  currentAdmin = this.adminName.asObservable();
 
   get_A_User: Observable<any>;
 
@@ -27,8 +30,12 @@ export class DataService {
     this.titleSource.next(title);
   }
 
+  changeAdmin(name: string) {
+    this.adminName.next(name);
+  }
+
   userAuthentication(userName: string, password: string) : Observable<any>{
-    let body = {"userName": userName, "password": password};
+    let body = {"userName": userName, "password": password, "role" : "backoffice"};
     let reqHeader = new HttpHeaders( {'Content-Type' : 'application/json'} );
     return this.http.post(this.rootUrl + '/api/Jwt', (body), {headers : reqHeader});
   }

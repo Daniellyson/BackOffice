@@ -1,7 +1,7 @@
 import { Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
 import { DataService } from '../data.service';
 import * as CanvasJS from '../../canvasjs.min';
-import { User } from '../users/model';
+import { User } from '../users/userModel';
 import { DatePipe, formatDate } from '@angular/common';
 
 @Component({
@@ -16,7 +16,11 @@ export class MainContainerComponent implements OnInit {
 	women: number = 0;
 	men: number = 0;
 
+	totalCarpooling: number = 0;
+
 	userMonthCreatedAt: number = 0;
+	carpoolingThisMonth: number = 0;
+
 
 	constructor(private data: DataService) { }
 
@@ -25,20 +29,20 @@ export class MainContainerComponent implements OnInit {
     this.data.getUsers().subscribe(
       data => this.users = data
 		);
-		
+		//TODO
     this.data.getUsers().subscribe(
       (userStat: User[]) => {
 				
-				
-				
-				for(let i = 0; i < userStat.length; i++) {
+				for(var userCount = 0; userCount < userStat.length; userCount++) {
 					var sysMonth = new Date().getMonth();
 					
-					var userCreatedMonth: Date = new Date(userStat[i].createdAt);
+					var userCreatedMonth: Date = new Date(userStat[userCount].createdAt);
 					
 					if(userCreatedMonth.getMonth() == sysMonth) {
 						this.userMonthCreatedAt++;
 					}
+
+					//for(var carpoolingCount = 0; carpoolingCount < userStat[carpoolingCount])
 				}
 				
 

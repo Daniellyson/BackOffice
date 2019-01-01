@@ -6,7 +6,9 @@ import { NgForOf } from '@angular/common';
 import { UsersComponent } from '../users/users.component';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { User } from '../users/model';
+import { User } from '../users/userModel';
+import { TopPageComponent } from '../top-page/top-page.component';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -17,8 +19,9 @@ export class LoginComponent implements OnInit {
 
   isLogin : boolean = true;
 
-  isLoginError: boolean; //test login
+  isLoginError: boolean; //test login TODO
 
+  topPage: TopPageComponent;
 
   constructor(private userService : DataService, private router : Router) { }
 
@@ -39,6 +42,7 @@ export class LoginComponent implements OnInit {
   // TODO error messages
   onSubmit(userName: string, password: string) {
     this.userService.userAuthentication(userName, password).subscribe((data) => {
+      this.userService.changeAdmin(userName);
       localStorage.setItem('userToken', data.access_token);
       this.router.navigate(['mainWindow']);
     },
@@ -46,11 +50,5 @@ export class LoginComponent implements OnInit {
       alert("ERROR HTTP RESPONSE");
       this.isLoginError = true;
     });
-  }
-
-  logout() {
-    //TODO
-    // localStorage.removeItem('userToken');
-    // this.router.navegate(['']);
   }
 }
