@@ -14,6 +14,12 @@ export class DataService {
 
   private titleSource = new BehaviorSubject<string>("Dashboard");
   currentTitle = this.titleSource.asObservable();
+
+  get_A_User: Observable<any>;
+
+  readonly rootUrl = 'https://youngmovapi.azurewebsites.net';
+
+  readonly header =  new HttpHeaders({'Authorization' : 'Bearer ' + localStorage.getItem('userToken')});
  
   constructor(private http: HttpClient) { }
 
@@ -21,9 +27,23 @@ export class DataService {
     this.titleSource.next(title);
   }
 
-  getUsers() {
-    return this.http.get('https://jsonplaceholder.typicode.com/users');
+  userAuthentication(userName: string, password: string) : Observable<any>{
+    let body = {"userName": userName, "password": password};
+    let reqHeader = new HttpHeaders( {'Content-Type' : 'application/json'} );
+    return this.http.post(this.rootUrl + '/api/Jwt', (body), {headers : reqHeader});
   }
+
+  getUsers() {
+    return this.http.get(this.rootUrl + '/api/Users', {headers : this.header});
+  }
+
+  //TODO
+  /*getOneUser(value: string) {
+    //it is necessary the same variable(exemple here username) in API
+    let params = new HttpParams().set('userName', value);
+    this.get_A_User = this.http.get(this.rootUrl + '/api/Users/', { headers : this.header, params});
+    return this.get_A_User;
+  }*/
 
   getCarpooling() {
     return this.http.get('');
@@ -36,18 +56,8 @@ export class DataService {
   getTodos() {
     return this.http.get('https://jsonplaceholder.typicode.com/todos');
   }
+
   
-
-  readonly rootUrl = 'https://jsonplaceholder.typicode.com';
-
-  get_A_User: Observable<any>;
-
-  getOneUser(value: string) {
-    //it is necessary the same variable(exemple here username) in API
-    let params = new HttpParams().set('username', value);
-    this.get_A_User = this.http.get(this.rootUrl + '/users', { params });
-    return this.get_A_User;
-  }
 
   /*userAuthentication(userName: string, password: string) {
     let params = new HttpParams().set('username', userName);
@@ -62,21 +72,28 @@ export class DataService {
       password: user.password,
       email: user.email,
       firstName: user.firstName,
-      lastName: user.lastName
+      lastName: user.lastName,
+      completed: user.completed
     }
     var reqHeader = new HttpHeaders({'No-Auth':'True'});
-    return this.http.post(this.rootUrl + '/api/User/Register', body,{headers : reqHeader});
+    return this.http.post('http://localhost:5000'+'/api/Users/Register', body,{headers : reqHeader});
   }*/
 
-  /*userAuthentication(userName, password) {
-    var data = "username=" + userName + "&password=" + password + "&grant_type=password";
-    var reqHeader = new HttpHeaders({ 'Content-Type': 'application/x-www-urlencoded','No-Auth':'True' });
-    return this.http.post(this.rootUrl + '/token', data, { headers: reqHeader });
+  /*https://youngmovapi.azurewebsites.net/api/Jwt
+  http://localhost:5000/api/Jwt
+   userAuthentication(userName: string, password: string) : Observable<any>{
+    //let body = "userName=" + userName + "&password=" + password;
+    let body = {"userName": userName, "password": password};
+   
+    //let body : string = JSON.stringify({ userName, password });
+    //let params = new HttpParams().set('params', body);
+    //let reqHeader = new HttpHeaders().set('Content-type','application/json');
+
+    //let params = new HttpParams().set('params', body);
+    //x-www-form-urlencoded
+    let reqHeader = new HttpHeaders( {'Content-Type' : 'application/json'} );
+    // Body -> raw in Postman
+    return this.http.post('https://youngmovapi.azurewebsites.net/api/Jwt', (body), {headers : reqHeader});
   }
-
-  getUserClaims(){
-    return  this.http.get(this.rootUrl+'/api/GetUserClaims');
-  }*/
-
-
+  */
 }

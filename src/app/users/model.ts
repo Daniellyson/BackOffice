@@ -1,10 +1,40 @@
 export interface User {
-    id: number;
-    phone: string;
-    name: string;
-    password: string;
-    email: string;
+    
+    //TEST
+    name: string;   
     firstName: string;
     lastName: string;
     completed: boolean;
+    
+    
+    //Our BD
+	id: number;
+	userName: string;
+	password: string;
+	role: string;
+	email: string;
+	emailValidatedAt: Date;
+	gender: string;
+	adresse: string;
+	facePhotoFilename: string;
+	facePhotoSentAt: Date;
+	facePhotoValidatedAt: Date;
+	identityPieceFilename: string;
+	identityPieceSentAt: Date;
+	identityPieceValidatedAt: Date;
+	phone: string;
+	trusted_carpooling_driver_code: string;
+	createdAt: Date;
+	updatedAt: Date;
+	locality: string;
+	postalCode: string;
+	timestamp: string;
+	
+	/*
+        "car": [],
+        "carpooling": [],
+        "privateMessage": [],
+        "trustedCarpoolingDriverCarpoolerNavigation": [],
+		"trustedCarpoolingDriverUserNavigation": []
+	*/
 }

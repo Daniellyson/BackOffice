@@ -2,23 +2,23 @@
   <div class="main-right-container">
     <h2>
       <label>Search <input id="search" placeholder="Enter A VALIDE User Name" #box></label>
-      <button (click)="getOneUser(box.value)">Go</button>
+      <button (click)="test=getOneUser(box.value)">Go</button>
       <button (click)="getAllUsersBack()">Back</button>
     </h2>
     
     <ng-container *ngIf="!allUsers">
       <table *ngIf="apiResponse">
         <tr>
-          <th>Name</th>
           <th>User Name</th>
+          <th>Role</th>
           <th>E-mail</th>
-          <th>Phone Number</th>
+           <th>Created At</th>
         </tr>
         <tr *ngFor="let user of get_A_User | async">
-          <td><strong>{{ user.name }}</strong></td>
-          <td>{{ user.username }}</td>
+          <td><strong>{{ user.userName }}</strong></td>
+          <td>{{ user.role }}</td>
           <td>{{ user.email }}</td>
-          <td>{{ user.phone }}</td>      
+          <td>{{ user.createdAt | date:"dd/MM/yy"}}</td>   
           <button (click)="modifyUser(user.id)">Modify</button>
           <button>Delete</button>
         </tr>
@@ -28,16 +28,16 @@
     <ng-container *ngIf="allUsers">
       <table>
         <tr>
-          <th>Name</th>
           <th>User Name</th>
+          <th>Role</th>
           <th>E-mail</th>
-          <th>Phone Number</th>
+          <th>Created At</th>
         </tr>
         <tr *ngFor="let user of users">
-          <td><strong>{{ user.name }}</strong></td>
-          <td>{{ user.username }}</td>
+          <td><strong>{{ user.userName }}</strong></td>
+          <td>{{ user.role }}</td>
           <td>{{ user.email }}</td>
-          <td>{{ user.phone }}</td>
+          <td>{{ user.createdAt | date:"dd/MM/yy"}}</td>
           
           <button (click)="modifyUser(user.id)">Modify</button>
           <button>Delete</button>

@@ -40,6 +40,10 @@ h1, h2 {
     background-color: white;
 }
 
+h3 {
+    padding-right: 7px;
+}
+
 #menu {
     margin-top: 22px;
     float: right;
