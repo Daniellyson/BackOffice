@@ -13,7 +13,7 @@ import { LoginComponent } from '../login/login.component';
 export class TopPageComponent implements OnInit {
 
   title: string;
-  adminName: string = "Daniellyson";
+  adminName: string;
 
   constructor(private data: DataService, private router: Router){ }
 

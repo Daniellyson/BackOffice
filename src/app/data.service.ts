@@ -15,7 +15,7 @@ export class DataService {
   private titleSource = new BehaviorSubject<string>("Dashboard");
   currentTitle = this.titleSource.asObservable();
 
-  private adminName = new BehaviorSubject<string>("");
+  private adminName = new BehaviorSubject<string>("Admin");
   currentAdmin = this.adminName.asObservable();
 
   get_A_User: Observable<any>;
@@ -34,7 +34,7 @@ export class DataService {
     this.adminName.next(name);
   }
 
-  userAuthentication(userName: string, password: string) : Observable<any>{
+  userAuthentication(userName: string, password: string) : Observable<any> {
     let body = {"userName": userName, "password": password, "role" : "backoffice"};
     let reqHeader = new HttpHeaders( {'Content-Type' : 'application/json'} );
     return this.http.post(this.rootUrl + '/api/Jwt', (body), {headers : reqHeader});
