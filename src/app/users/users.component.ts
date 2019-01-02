@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { User } from './userModel';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -12,7 +13,7 @@ export class UsersComponent implements OnInit {
 
   users: Object;
 
-  get_A_User: Object;
+  get_A_User: User[];
 
   allUsers: boolean = true;
 
@@ -20,50 +21,50 @@ export class UsersComponent implements OnInit {
 
   modify_user: boolean = false;
 
-  constructor(private data: DataService) { }
+  constructor(private data: DataService, private router: Router) { }
 
   ngOnInit() {
     this.data.getUsers().subscribe(
       data => this.users = data
     );
+      //TODO getOneUser(3) 3 : test change name of fonction in data.service
+    this.data.getOneUser(3).subscribe((data: User[]) => {
+        this.get_A_User = data;
+    });
   }
 
   //TODO
-  /*getOneUser(value: string) {
+  getOneUser(value: number) {
     this.apiResponse = false;
     this.allUsers = false;
 
     //this.get_A_User = this.data.getOneUser(value);  
-    alert(value);
     
-    return this.data.getOneUser(value).subscribe(apiRes => {
-      this.get_A_User = apiRes,
-      this.apiResponse = apiRes.userName == value
+    this.data.getUserById(value).subscribe((apiRes) => {
+      
+      //this.get_A_User = apiRes;
+
+      this.apiResponse = true;
     });
-  }*/
 
-  /*getOneUser(value: string) {
-    this.apiResponse = false;
-    this.allUsers = false;
-
-    //this.get_A_User = this.data.getOneUser(value);  
-    
-    this.data.getUsers().subscribe((data : User[]) => {
-      let i = 0;
-      do {
-        alert("TEST"+i);
-        if(data[i].userName == value) {
-          this.get_A_User = data[i];
-          this.apiResponse = true;
-        }
-        i++;
-      } while(i <= data.length && data[i-1].userName != value);
-      alert(this.get_A_User);
-    });    
-  }*/
+  }
 
   modifyUser(id: Number) {
+    
+    localStorage.removeItem("editUserId");
+    localStorage.setItem("editUserId", id.toString());
+    //this.router.navigate(['edit-user']);
+    
     this.modify_user = true;
+  }
+
+  deleteUser(id: number) {
+    if(confirm("Delete User ?")) {
+      this.data.deleteUser(id).subscribe(user =>
+        this.users = this.get_A_User.filter(u => u !== user)
+      );
+      this.router.navigate(['../mainWindow/users'])
+    }    
   }
 
   getAllUsersBack() {

@@ -15,18 +15,18 @@ export interface Carpooling {
     creator: number;
     timestamp: string;
     //TODO
-    carNavigation: {
+    carNavigation: [{
         id: number;
         createdAt: Date;
         validatedAt: Date;
         color: string;
         licensePlateNumber: string;
         carModel: string;
-    };
+    }];
 
-    carpoolingApplicant: {
+    carpoolingApplicant: [{
         carpooling: number;
         user: number;
         hasBeenAccepted: boolean;
-    }
+    }];
 }

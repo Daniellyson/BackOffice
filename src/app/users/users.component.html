@@ -2,28 +2,28 @@
   <div class="main-right-container">
     <h2>
       <label>Search <input id="search" placeholder="Enter A VALIDE User Name" #box></label>
-      <button (click)="test=getOneUser(box.value)">Go</button>
+      <button (click)="getOneUser(box.value)">Go</button>
       <button (click)="getAllUsersBack()">Back</button>
     </h2>
     
-    <ng-container *ngIf="!allUsers">
-      <table *ngIf="apiResponse">
+    <ng-container *ngIf="!allUsers"> <!---->
+      <table *ngIf="apiResponse"> <!-- -->
         <tr>
           <th>User Name</th>
           <th>E-mail</th>
            <th>Created At</th>
         </tr>
-        <tr *ngFor="let user of get_A_User | async">
+        <tr *ngFor="let user of get_A_User | async"> <!-- | async-->
           <td><strong>{{ user.userName }}</strong></td>
           <td>{{ user.email }}</td>
           <td>{{ user.createdAt | date:"dd/MM/yy"}}</td>   
           <button (click)="modifyUser(user.id)">Modify</button>
-          <button>Delete</button>
+          <button (click)="deleteUser(user.id)">Delete</button>
         </tr>
       </table>
     </ng-container>
   
-    <ng-container *ngIf="allUsers">
+    <ng-container *ngIf="allUsers"><!---->
       <table>
         <tr>
           <th>User Name</th>
@@ -36,7 +36,7 @@
           <td>{{ user.createdAt | date:"dd/MM/yy"}}</td>
           
           <button (click)="modifyUser(user.id)">Modify</button>
-          <button>Delete</button>
+          <button (click)="deleteUser(user.id)">Delete</button>
         </tr>
       </table>
     </ng-container>

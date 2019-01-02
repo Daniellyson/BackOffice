@@ -18,7 +18,8 @@ export class DataService {
   private adminName = new BehaviorSubject<string>("Admin");
   currentAdmin = this.adminName.asObservable();
 
-  get_A_User: Observable<any>;
+  //get_A_User: Observable<any>;
+  get_A_User: Object;
 
   readonly rootUrl = 'https://youngmovapi.azurewebsites.net';
 
@@ -45,12 +46,25 @@ export class DataService {
   }
 
   //TODO
-  /*getOneUser(value: string) {
-    //it is necessary the same variable(exemple here username) in API
-    let params = new HttpParams().set('userName', value);
-    this.get_A_User = this.http.get(this.rootUrl + '/api/Users/', { headers : this.header, params});
-    return this.get_A_User;
-  }*/
+  getOneUser(value: number) {
+    //it is necessary the same variable(exemple here userName) in API
+    //let params = new HttpParams().set('id','2');
+    return this.http.get<User[]>(this.rootUrl + '/api/Users', {headers : this.header});
+    
+    //return this.get_A_User;
+  }
+
+  getUserById(id: number) {
+    return this.http.get<User>(this.rootUrl + '/api/Users/' + id, {headers : this.header});
+  }
+
+  updateUser(user: User) {
+    return this.http.put(this.rootUrl + '/api/Users/' + user.id, (user), {headers : this.header});
+  }
+
+  deleteUser(id: number) {
+    return this.http.delete(this.rootUrl + '/api/Users/' + id, {headers : this.header});
+  }
 
   getCarpooling() {
     return this.http.get('');

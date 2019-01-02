@@ -26,14 +26,14 @@ export interface User {
 	identityPieceSentAt: Date;
 	identityPieceValidatedAt: Date;
 	phone: string;
-	trusted_carpooling_driver_code: string;
+	trustedCarpoolingDriverCode: string;
 	createdAt: Date;
 	updatedAt: Date;
 	locality: string;
 	postalCode: string;
 	timestamp: string;
 
-	//carpooling: Carpooling;
+	carpooling: Carpooling;
 	
 	/*
         "car": [],
