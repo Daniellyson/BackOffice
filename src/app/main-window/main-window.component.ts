@@ -11,7 +11,7 @@ export class MainWindowComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    this.router.navigate(['mainWindow']); //TODO take off comment
+    //this.router.navigate(['mainWindow']); //TODO take off comment
   }
 
 }

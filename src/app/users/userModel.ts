@@ -33,7 +33,7 @@ export interface User {
 	postalCode: string;
 	timestamp: string;
 
-	carpooling: Carpooling;
+	carpooling: Carpooling[];
 	
 	/*
         "car": [],

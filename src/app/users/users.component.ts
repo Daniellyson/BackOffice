@@ -30,26 +30,20 @@ export class UsersComponent implements OnInit {
     this.data.getUsers().subscribe(
       data => this.users = data
     );
-      //TODO getOneUser(3) 3 : test change name of fonction in data.service
+    //TODO getOneUser(3) 3 : test change name of fonction in data.service
     /*this.data.getOneUser(3).subscribe((data: User[]) => {
         this.get_A_User = data;
     });*/
   }
 
   getUserByUserName(value: string) {
-    this.apiResponse = false;//false
+    this.apiResponse = false;
     this.allUsers = false;
-
-    //this.get_A_User = this.data.getOneUser(value);  
-    //getUserById
     this.data.getUsers().subscribe((data : User[]) => {
       for(var iUser = 0; iUser < data.length && data[iUser].userName != value; iUser++) { }
-      
-      this.userByUserName = data.filter(uniqueUser => uniqueUser.userName == value);
-      //this.userByUserName = data[iUser];
+      this.apiResponse = (data[iUser].userName == value) 
 
-      alert(this.userByUserName);
-      this.apiResponse = true;
+      this.userByUserName = data.filter(uniqueUser => uniqueUser.userName == value);      
     });
   }
 
@@ -79,15 +73,17 @@ export class UsersComponent implements OnInit {
     
     this.modify_user = true;
   }
+
   //TODO
-  /*deleteUser(id: number) {
+  deleteUser(id: number) {
     if(confirm("Delete User ?")) {
       this.data.deleteUser(id).subscribe(user =>
         this.users = this.userByID.filter(u => u !== user)
       );
-      this.router.navigate(['../mainWindow/users'])
+      //this.router.navigate(['../mainWindow/users'])
+      this.getAllUsersBack();
     }    
-  }*/
+  }
 
   getAllUsersBack() {
     this.allUsers = true;

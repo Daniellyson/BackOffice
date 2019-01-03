@@ -8,18 +8,50 @@
     
     <ng-container *ngIf="!allUsers"> <!---->
       <table *ngIf="apiResponse"> <!-- -->
-        <tr>
-          <th>User Name</th>
-          <th>E-mail</th>
-           <th>Created At</th>
-        </tr>
-        <tr *ngFor="let user of userByUserName"> <!-- | async-->
-          <td><strong>{{ user.userName }}</strong></td>
-          <td>{{ user.email }}</td>
-          <td>{{ user.createdAt | date:"dd/MM/yy"}}</td>   
+        <ng-container *ngFor="let user of userByUserName"> <!-- | async-->
+          <tr>
+            <th>User Name</th>
+            <td>{{ user.userName }}</td>
+          </tr>
+          <tr>
+            <th>E-mail</th>
+            <td>{{ user.email }}</td>
+          </tr>
+          <tr>
+            <th>Gender</th>
+            <td>{{user.gender}}</td>
+          </tr>
+          <tr>
+            <th>Name in ID card</th>
+            <td>{{user.identityPieceFilename}}</td>
+          </tr>
+          <tr>
+            <th>Locality</th>
+            <td>{{user.locality}}</td>
+          </tr>
+          <tr>
+            <th>Postcode</th>
+            <td>{{user.postalCode}}</td>
+          </tr>
+          <tr>
+            <th>Phone</th>
+            <td>{{user.phone}}</td>
+          </tr>
+          <tr>
+            <th>Created At</th>
+            <td>{{ user.createdAt | date:"dd/MM/yy"}}</td>
+          </tr>
+          <tr>
+            <th>Updated At</th>
+            <td>{{ user.updatedAt | date:"dd/MM/yy"}}</td>
+          </tr>
+          <tr>
+            <th>Driver Code</th>
+            <td>{{user.trustedCarpoolingDriverCode}}</td>
+          </tr>
           <button (click)="modifyUser(user.id)">Modify</button>
           <button (click)="deleteUser(user.id)">Delete</button>
-        </tr>
+        </ng-container>
       </table>
     </ng-container>
   

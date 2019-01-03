@@ -19,6 +19,7 @@ export class ModifyUserComponent implements OnInit {
   ngOnInit() {
     let userId = localStorage.getItem("editUserId");
 
+    //TODO take off alert
     alert("TEST USER ID GET ITEM : " + userId);
 
     this.editForm = this.formBuilder.group({

@@ -3,7 +3,7 @@ export interface Carpooling {
     description: string;
     nbPlaces: number;
     placePrice: number;
-    createdAt: DataCue;
+    createdAt: Date;
     updateAt: Date;
     destinationFrom: string;
     destinationTo: string;

@@ -42,7 +42,15 @@ export class MainContainerComponent implements OnInit {
 					this.userMonthCreatedAt++;
 				}
 
-				//for(var carpoolingCount = 0; carpoolingCount < userStat[carpoolingCount])
+				
+				for(var carpoolingCount = 0; carpoolingCount < userStat[userCount].carpooling.length; carpoolingCount++) {
+					this.totalCarpooling++;
+					var carpoolingCreatedMonth: Date = new Date(userStat[userCount].carpooling[carpoolingCount].createdAt);
+
+					if(carpoolingCreatedMonth.getMonth() == sysMonth) {
+						this.carpoolingThisMonth++;
+					}
+				}
 			}
 
 			for(let i = 0; i < userStat.length; i++) {
