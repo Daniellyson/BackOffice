@@ -22,33 +22,26 @@ export class ModifyUserComponent implements OnInit {
   ngOnInit() {
     let userId = localStorage.getItem("editUserId");
 
-    //TODO take off alert
-    alert("TEST USER ID GET ITEM : " + userId);
-
     this.editForm = this.formBuilder.group({
-      //id: [],
       userName: ['', Validators.required],
       email: ['', Validators.required],
       phone: ['', Validators.required],
       locality: ['', Validators.required],
       postalCode: ['', Validators.required],
     	trustedCarpoolingDriverCode: ['', Validators.required]
-
     });
-    //parseInt(userId)
+    
     this.userService.getUsers().subscribe((data: User[]) => {
-      
-      //for(var iUser = 0; iUser < data.length && data[iUser].id != parseInt(userId); iUser++) { } 
 
       this.newFormUser = data.filter(uniqueUser => uniqueUser.id == parseInt(userId));      
       
       this.form =  {
-        "userName" : data[0].userName,
-        "email": data[0].email,
-        "phone": data[0].phone,
-        "locality": data[0].locality,
-        "postalCode": data[0].postalCode,
-        "trustedCarpoolingDriverCode": data[0].trustedCarpoolingDriverCode
+        "userName" : this.newFormUser[0].userName,
+        "email": this.newFormUser[0].email,
+        "phone": this.newFormUser[0].phone,
+        "locality": this.newFormUser[0].locality,
+        "postalCode": this.newFormUser[0].postalCode,
+        "trustedCarpoolingDriverCode": this.newFormUser[0].trustedCarpoolingDriverCode
       };
 
       this.editForm.setValue(this.form);
