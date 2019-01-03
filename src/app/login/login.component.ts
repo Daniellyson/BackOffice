@@ -41,9 +41,11 @@ export class LoginComponent implements OnInit {
   
   // TODO error messages
   onSubmit(userName: string, password: string) {
-    this.userService.userAuthentication(userName, password).subscribe((data) => {
+    this.userService.userAuthentication(userName, password).subscribe((data : any) => {
       this.userService.changeAdmin(userName);
+
       localStorage.setItem('userToken', data.access_token);
+
       this.router.navigate(['mainWindow']);
     },
     (err : HttpErrorResponse) => {

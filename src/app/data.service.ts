@@ -15,6 +15,7 @@ export class DataService {
   private titleSource = new BehaviorSubject<string>("Dashboard");
   currentTitle = this.titleSource.asObservable();
 
+
   private adminName = new BehaviorSubject<string>("Admin");
   currentAdmin = this.adminName.asObservable();
 
@@ -22,8 +23,10 @@ export class DataService {
   get_A_User: Object;
 
   readonly rootUrl = 'https://youngmovapi.azurewebsites.net';
+  
+  
+  header =  new HttpHeaders({'Content-Type' : 'application/json', 'Authorization' : 'Bearer ' + localStorage.getItem('userToken')});
 
-  readonly header =  new HttpHeaders({'Authorization' : 'Bearer ' + localStorage.getItem('userToken')});
  
   constructor(private http: HttpClient) { }
 
@@ -46,16 +49,20 @@ export class DataService {
   }
 
   //TODO
-  getOneUser(value: number) {
+  getOneUser(value: number) : Observable<any> {
     //it is necessary the same variable(exemple here userName) in API
     //let params = new HttpParams().set('id','2');
-    return this.http.get<User[]>(this.rootUrl + '/api/Users', {headers : this.header});
+    return this.http.get<User[]>(this.rootUrl + '/api/Users/' + value, {headers : this.header});
     
     //return this.get_A_User;
   }
 
-  getUserById(id: number) {
-    return this.http.get<User>(this.rootUrl + '/api/Users/' + id, {headers : this.header});
+  getUserById(id: number){
+    return this.http.get(this.rootUrl + '/api/Users/' + id, {headers : this.header});
+  }
+
+  getUserByUserName(userName: string) {
+    return this.http.get(this.rootUrl + '/api/Users/' + userName, {headers : this.header});
   }
 
   updateUser(user: User) {

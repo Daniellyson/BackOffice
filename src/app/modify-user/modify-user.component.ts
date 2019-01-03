@@ -38,7 +38,7 @@ export class ModifyUserComponent implements OnInit {
 
   onSubmit() {
     this.userService.updateUser(this.editForm.value)
-      //.pipe(first())
+      .pipe(first())
       .subscribe(
         data => {
           this.router.navigate(['../mainWindow/users']);

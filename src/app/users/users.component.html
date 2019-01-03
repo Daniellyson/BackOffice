@@ -2,7 +2,7 @@
   <div class="main-right-container">
     <h2>
       <label>Search <input id="search" placeholder="Enter A VALIDE User Name" #box></label>
-      <button (click)="getOneUser(box.value)">Go</button>
+      <button (click)="getUserByUserName(box.value)">Go</button>
       <button (click)="getAllUsersBack()">Back</button>
     </h2>
     
@@ -13,7 +13,7 @@
           <th>E-mail</th>
            <th>Created At</th>
         </tr>
-        <tr *ngFor="let user of get_A_User | async"> <!-- | async-->
+        <tr *ngFor="let user of userByUserName"> <!-- | async-->
           <td><strong>{{ user.userName }}</strong></td>
           <td>{{ user.email }}</td>
           <td>{{ user.createdAt | date:"dd/MM/yy"}}</td>   
