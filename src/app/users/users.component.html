@@ -49,13 +49,13 @@
             <th>Driver Code</th>
             <td>{{user.trustedCarpoolingDriverCode}}</td>
           </tr>
-          <button (click)="modifyUser(user.id)">Modify</button>
+          <button (click)="modifyUser(user, user.id)">Modify</button>
           <button (click)="deleteUser(user.id)">Delete</button>
         </ng-container>
       </table>
     </ng-container>
   
-    <ng-container *ngIf="allUsers"><!---->
+    <ng-container *ngIf="allUsers">
       <table>
         <tr>
           <th>User Name</th>
@@ -67,8 +67,9 @@
           <td>{{ user.email }}</td>
           <td>{{ user.createdAt | date:"dd/MM/yy"}}</td>
           
-          <button (click)="modifyUser(user.id)">Modify</button>
+          <button (click)="modifyUser(user, user.id)">Modify</button>
           <button (click)="deleteUser(user.id)">Delete</button>
+          <button (click)="getUserById(user.id)">TEST User By ID</button>
         </tr>
       </table>
     </ng-container>

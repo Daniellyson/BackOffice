@@ -1,3 +1,5 @@
+import { User } from "../users/userModel";
+
 export interface Carpooling {
     id: number;
     description: string;
@@ -29,4 +31,6 @@ export interface Carpooling {
         user: number;
         hasBeenAccepted: boolean;
     }];
+
+    user: User;
 }

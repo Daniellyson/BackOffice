@@ -4,6 +4,7 @@ import { User } from './userModel';
 import { Router } from '@angular/router';
 import { forEach } from '@angular/router/src/utils/collection';
 import { CurrencyIndex } from '@angular/common/src/i18n/locale_data';
+import { ModifyUserComponent } from '../modify-user/modify-user.component';
 
 @Component({
   selector: 'app-users',
@@ -24,7 +25,7 @@ export class UsersComponent implements OnInit {
 
   modify_user: boolean = false;
 
-  constructor(private data: DataService, private router: Router) { }
+  constructor(private data: DataService, private router: Router) {  }
 
   ngOnInit() {
     this.data.getUsers().subscribe(
@@ -48,24 +49,19 @@ export class UsersComponent implements OnInit {
   }
 
   //TODO
-  /*getOneUser(value: number) {
-    this.apiResponse = false;//false
-    this.allUsers = false;
+  getUserById(value: number) {
 
-    //this.get_A_User = this.data.getOneUser(value);  
-    //getUserById
-    this.data.getUserById(value).subscribe(apiRes => {
-      
-      this.userByID = apiRes;
-      //alert(this.get_A_User)
-      this.apiResponse = true;
-      alert(this.userByID);
-    
+    alert("TEST 1 : "+value);
+
+    this.data.getUsers().subscribe(apiRes => {
+      alert("TEST 2 : "+value);
+      alert(apiRes);
     });
-    alert(this.userByID);
-  }*/
+  }
 
-  modifyUser(id: Number) {
+  modifyUser(user: User, id: Number) {
+
+    
     
     localStorage.removeItem("editUserId");
     localStorage.setItem("editUserId", id.toString());

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
+import { Carpooling } from './carpoolingModel';
 
 @Component({
   selector: 'app-carpooling',
@@ -8,17 +9,31 @@ import { DataService } from '../data.service';
 })
 export class CarpoolingComponent implements OnInit {
 
-  carpooling: Object;
+  carpooling: any[];
+  newCarpooling: any[];
 
   constructor(private data: DataService) { }
 
-  ngOnInit() {
-    this.data.getCarpooling().subscribe(
-      data => this.carpooling = data
-    )
-  }
+  ngOnInit() { }
 
-  getCarpooling(value: string) {
-    alert(value);
+  getCarpooling(value: Date) {
+
+    this.data.getCarpooling().subscribe((car : Carpooling[]) =>  {  
+      
+      this.carpooling = car;
+      //var dateSystem = new Date().getDate();
+      for(var carCount = 0; carCount < car.length; carCount++) {
+        
+        if(car[carCount].createdAt >= value) {
+          this.newCarpooling.push({
+            "userName": car[carCount].user.userName,
+            "date": car[carCount].createdAt
+          });
+        }
+      }
+    });
+    if(this.newCarpooling == null) {
+      alert("No carpooling in the data base");
+    }
   }
 }

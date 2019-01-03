@@ -74,14 +74,10 @@ export class DataService {
   }
 
   getCarpooling() {
-    return this.http.get('');
+    return this.http.get(this.rootUrl + '/api/Carpoolings', {headers : this.header});
   }
 
   getPictureValidation() {
     return this.http.get('https://jsonplaceholder.typicode.com/photos');
-  }
-
-  getTodos() {
-    return this.http.get('https://jsonplaceholder.typicode.com/todos');
   }
 }
