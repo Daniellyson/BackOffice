@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsersComponent } from '../users/users.component';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators, NgForm} from "@angular/forms";
 import { DataService } from '../data.service';
 import {first} from "rxjs/operators";
 import { User } from '../users/userModel';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-modify-user',
@@ -16,6 +17,7 @@ export class ModifyUserComponent implements OnInit {
   editForm: FormGroup;
   newFormUser: User[];
   form: Object;
+  
 
   constructor(private formBuilder: FormBuilder, private router: Router, private user: UsersComponent, private userService: DataService) { }
 
@@ -48,16 +50,16 @@ export class ModifyUserComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    this.userService.updateUser(this.editForm.value)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.router.navigate(['../mainWindow/users']);
-        },
-        error => {
-          alert("error: update");
-        });
+  onSubmit(form: NgForm) {
+    let userId = localStorage.getItem("editUserId");
+                                                          //pipe(first())
+    this.userService.updateUser(parseInt(userId), form.value).subscribe(data => {
+      alert("TEST");
+      this.router.navigate(['../mainWindow/users']);
+    },
+    (err : HttpErrorResponse) => {
+      alert("ERROR HTTP RESPONSE");
+    });
   }
 
   backToAllUsers() {

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DataService } from '../data.service';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-main-window',
@@ -8,10 +10,35 @@ import { Router } from '@angular/router';
 })
 export class MainWindowComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  //TODO block access main page throw url
+  showMainPage: boolean = false;
+
+  constructor(private router: Router, private dataService: DataService) { }
 
   ngOnInit() {
-    //this.router.navigate(['mainWindow']); //TODO take off comment
-  }
+    
+    this.dataService.showPage.subscribe((show: boolean) => {
+    
+      this.showMainPage = show;
 
+      let admin = localStorage.getItem('administrator');
+      this.dataService.changeAdmin(admin);
+      
+      if(localStorage.getItem('logged') == 'true') {
+        
+        this.showMainPage = true;
+      }
+      else {
+        alert("LOGIN FIRST TO GET ACCESS INTO THE BACK OFFICE");
+      }
+
+      if(this.showMainPage) {
+        this.router.navigate(['mainWindow']);
+      }
+      else {
+        this.router.navigate(['']);
+      }
+      
+    });
+  }
 }

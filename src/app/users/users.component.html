@@ -22,10 +22,6 @@
             <td>{{user.gender}}</td>
           </tr>
           <tr>
-            <th>Name in ID card</th>
-            <td>{{user.identityPieceFilename}}</td>
-          </tr>
-          <tr>
             <th>Locality</th>
             <td>{{user.locality}}</td>
           </tr>
@@ -38,11 +34,11 @@
             <td>{{user.phone}}</td>
           </tr>
           <tr>
-            <th>Created At</th>
+            <th>Created On</th>
             <td>{{ user.createdAt | date:"dd/MM/yy"}}</td>
           </tr>
           <tr>
-            <th>Updated At</th>
+            <th>Updated On</th>
             <td>{{ user.updatedAt | date:"dd/MM/yy"}}</td>
           </tr>
           <tr>
@@ -60,7 +56,7 @@
         <tr>
           <th>User Name</th>
           <th>E-mail</th>
-          <th>Created At</th>
+          <th>Created On</th>
         </tr>
         <tr *ngFor="let user of users">
           <td><strong>{{ user.userName }}</strong></td>
@@ -69,7 +65,6 @@
           
           <button (click)="modifyUser(user, user.id)">Modify</button>
           <button (click)="deleteUser(user.id)">Delete</button>
-          <button (click)="getUserById(user.id)">TEST User By ID</button>
         </tr>
       </table>
     </ng-container>

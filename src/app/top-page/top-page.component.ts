@@ -28,6 +28,8 @@ export class TopPageComponent implements OnInit {
 
   logout() {
     localStorage.removeItem('userToken');
+    localStorage.removeItem('logged');
+    localStorage.removeItem('administrator');
     this.router.navigate(['']);
   }
 }

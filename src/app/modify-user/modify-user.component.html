@@ -1,6 +1,6 @@
 <div class="col-md-6">
   <h2 class="text-center">Edit User</h2>
-  <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="editForm" (ngSubmit)="onSubmit(editForm)">
     <div class="form-group">
       <label for="name">User Name:</label>
       <input type="text" formControlName="userName" placeholder="User Name" name="username" class="form-control" id="userName">

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter, Output } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams  } from '@angular/common/http';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable, BehaviorSubject } from 'rxjs';
@@ -15,20 +15,21 @@ export class DataService {
   private titleSource = new BehaviorSubject<string>("Dashboard");
   currentTitle = this.titleSource.asObservable();
 
-
   private adminName = new BehaviorSubject<string>("Admin");
   currentAdmin = this.adminName.asObservable();
 
-  //get_A_User: Observable<any>;
-  get_A_User: Object;
+  private showMainPageEmitter = new BehaviorSubject<boolean>(false);
+  showPage = this.showMainPageEmitter.asObservable();
 
   readonly rootUrl = 'https://youngmovapi.azurewebsites.net';
   
-  
   header =  new HttpHeaders({'Content-Type' : 'application/json', 'Authorization' : 'Bearer ' + localStorage.getItem('userToken')});
-
  
   constructor(private http: HttpClient) { }
+
+  setEventEmit(logged: boolean) {
+    this.showMainPageEmitter.next(logged);
+  }
 
   changeTitle(title: string) {
     this.titleSource.next(title);
@@ -53,11 +54,9 @@ export class DataService {
     //it is necessary the same variable(exemple here userName) in API
     //let params = new HttpParams().set('id','2');
     return this.http.get<User[]>(this.rootUrl + '/api/Users/' + value, {headers : this.header});
-    
-    //return this.get_A_User;
   }
 
-  getUserById(id: number){
+  getUserById(id: number) {
     return this.http.get(this.rootUrl + '/api/Users/' + id, {headers : this.header});
   }
 
@@ -65,8 +64,8 @@ export class DataService {
     return this.http.get(this.rootUrl + '/api/Users/' + userName, {headers : this.header});
   }
 
-  updateUser(user: User) {
-    return this.http.put(this.rootUrl + '/api/Users/' + user.id, (user), {headers : this.header});
+  updateUser(id: number, user: User) {
+    return this.http.put(this.rootUrl + '/api/Users/' + id, (user), {headers : this.header});
   }
 
   deleteUser(id: number) {

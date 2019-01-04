@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { DataService } from '../data.service';
 import { NgForm } from '@angular/forms';
 import { forEach } from '@angular/router/src/utils/collection';
@@ -28,28 +28,26 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
   
-  /*onSubmit(name: string, password: string) {
-    
-    this.userService.getOneUser(name).subscribe(data => {
-      this.isLogin = (data[0].username == name && data[0].username == password);
-    });
-
-    if(this.isLogin) {
-      this.router.navigate(['mainWindow']);
-    }
-  }*/
-  
   // TODO error messages
   onSubmit(userName: string, password: string) {
+    
     this.userService.userAuthentication(userName, password).subscribe((data : any) => {
+
       this.userService.changeAdmin(userName);
 
+      localStorage.setItem('administrator', userName);
+
       localStorage.setItem('userToken', data.access_token);
+
+      localStorage.setItem('logged', 'true');
+      
+      this.userService.setEventEmit(true);
 
       this.router.navigate(['mainWindow']);
     },
     (err : HttpErrorResponse) => {
       alert("ERROR HTTP RESPONSE");
+      this.userService.setEventEmit(false);
       this.isLoginError = true;
     });
   }
