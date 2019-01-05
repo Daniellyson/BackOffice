@@ -17,9 +17,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class LoginComponent implements OnInit {
 
-  isLogin : boolean = true;
-
-  isLoginError: boolean; //test login TODO
+  isLogin: boolean = true; 
 
   topPage: TopPageComponent;
 
@@ -44,11 +42,11 @@ export class LoginComponent implements OnInit {
       this.userService.setEventEmit(true);
 
       this.router.navigate(['mainWindow']);
+      
     },
     (err : HttpErrorResponse) => {
-      alert("ERROR HTTP RESPONSE");
       this.userService.setEventEmit(false);
-      this.isLoginError = true;
-    });
+      this.isLogin = false;
+    });    
   }
 }

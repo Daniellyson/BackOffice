@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams  } from '@angular/common/http';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { User } from './users/userModel';
 
@@ -64,7 +64,8 @@ export class DataService {
     return this.http.get(this.rootUrl + '/api/Users/' + userName, {headers : this.header});
   }
 
-  updateUser(id: number, user: User) {
+  updateUser(id: number, user: User) : Observable<any> {
+    alert(id + " " + user);
     return this.http.put(this.rootUrl + '/api/Users/' + id, (user), {headers : this.header});
   }
 

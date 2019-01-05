@@ -52,6 +52,7 @@ export class ModifyUserComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     let userId = localStorage.getItem("editUserId");
+    
                                                           //pipe(first())
     this.userService.updateUser(parseInt(userId), form.value).subscribe(data => {
       alert("TEST");
