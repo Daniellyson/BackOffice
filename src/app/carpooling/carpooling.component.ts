@@ -10,7 +10,7 @@ import { Carpooling } from './carpoolingModel';
 export class CarpoolingComponent implements OnInit {
 
   carpooling: any[];
-  newCarpooling: any[];
+  newCarpooling: any;
 
   constructor(private data: DataService) { }
 
@@ -25,15 +25,17 @@ export class CarpoolingComponent implements OnInit {
       for(var carCount = 0; carCount < car.length; carCount++) {
         
         if(car[carCount].createdAt >= value) {
-          this.newCarpooling.push({
+
+          this.newCarpooling.push(car[carCount].createdAt);
+          /*this.newCarpooling.push({
             "userName": car[carCount].user.userName,
             "date": car[carCount].createdAt
-          });
+          });*/
         }
       }
     });
-    if(this.newCarpooling == null) {
+    /*if(this.newCarpooling == null) {
       alert("No carpooling in the data base");
-    }
+    }*/
   }
 }

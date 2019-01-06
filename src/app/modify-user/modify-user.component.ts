@@ -53,7 +53,6 @@ export class ModifyUserComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     let userId = localStorage.getItem("editUserId");    
-                                                          //pipe(first())
 
     this.newFormUser[0].userName = form.value.userName;
     this.newFormUser[0].email = form.value.email;
@@ -63,16 +62,16 @@ export class ModifyUserComponent implements OnInit {
     this.newFormUser[0].postalCode = form.value.postalCode;
     this.newFormUser[0].trustedCarpoolingDriverCode = form.value.trustedCarpoolingDriverCode;
 
-
     this.userService.updateUser(parseInt(userId), this.newFormUser[0]).subscribe(data => {
-      this.router.navigate(['../mainWindow/users']);
+      this.backToAllUsers();
     },
     (err : HttpErrorResponse) => {
       alert(err.status + " : " + err.message);
-    });
+    }); 
   }
 
   backToAllUsers() {
+    this.user.ngOnInit();
     this.user.modify_user = false;
     this.router.navigate(['../mainWindow/users']);
   }  

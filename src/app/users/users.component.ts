@@ -17,7 +17,7 @@ export class UsersComponent implements OnInit {
   users: Object;
 
   userByID: User[];
-  userByUserName: any;
+  userByUserName: any;//TODO verify any
 
   allUsers: boolean = true;
 
@@ -31,10 +31,6 @@ export class UsersComponent implements OnInit {
     this.data.getUsers().subscribe(
       data => this.users = data
     );
-    //TODO getOneUser(3) 3 : test change name of fonction in data.service
-    /*this.data.getOneUser(3).subscribe((data: User[]) => {
-        this.get_A_User = data;
-    });*/
   }
 
   getUserByUserName(value: string) {
@@ -50,11 +46,7 @@ export class UsersComponent implements OnInit {
 
   //TODO
   getUserById(value: number) {
-
-    alert("TEST 1 : "+value);
-
     this.data.getUsers().subscribe(apiRes => {
-      alert("TEST 2 : "+value);
       alert(apiRes);
     });
   }
@@ -63,21 +55,25 @@ export class UsersComponent implements OnInit {
     localStorage.removeItem("editUserId");
     localStorage.setItem("editUserId", id.toString());
     
+    //alert(id); TODO delete
+
     this.modify_user = true;
   }
 
   //TODO
   deleteUser(id: number) {
     if(confirm("Delete User ?")) {
-      this.data.deleteUser(id).subscribe(user =>
-        this.users = this.userByID.filter(u => u !== user)
-      );
+      this.data.deleteUser(id).subscribe(user => {
+        this.users = this.userByID.filter(u => u !== user);
+      });
       //this.router.navigate(['../mainWindow/users'])
       this.getAllUsersBack();
     }    
+    this.getAllUsersBack();
   }
 
   getAllUsersBack() {
+    this.ngOnInit();
     this.allUsers = true;
     this.modify_user = false;
   }

@@ -28,9 +28,6 @@ export class MainWindowComponent implements OnInit {
         
         this.showMainPage = true;
       }
-      else {
-        alert("LOGIN FIRST TO GET ACCESS INTO THE BACK OFFICE");
-      }
 
       if(this.showMainPage) {
         this.router.navigate(['mainWindow']);

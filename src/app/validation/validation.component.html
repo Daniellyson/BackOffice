@@ -7,14 +7,14 @@
 
 <div id="profilePicture" class="tabcontent">
   <h1>Picture</h1>
-  <ul class="picFrame" *ngFor= "let pic of pictures$ | slice:0:10; let i=index">
+  <ul class="picFrame" *ngFor= "let pic of pictures">
     <li class="picValidation">
       <div>
-        <img src="{{pic.url}}"/>
+        <img src="{{pic.facePhotoFilename}}"/>
       </div>
       <div>
-          <button class="validationButton">Validate</button>
-          <button class="validationButton">Refuse</button>
+          <button class="validationButton" (click)="validatePictures()">Validate</button>
+          <button class="validationButton" (click)="refusePictures()">Refuse</button>
       </div>
 
     </li>
@@ -23,15 +23,15 @@
 
 <div id="idCard" class="tabcontent">
   <h1>ID card</h1>
-  <ul class="picFrame" *ngFor="let pic of pictures$ | slice:0:10; let i=index">
+  <ul class="picFrame" *ngFor="let pic of pictures">
     <li class="picValidation">
 
       <div>
-          <img src="{{pic.url}}"/>
+          <img src="{{pic.identityPieceFilename}}"/>
       </div>
       <div>
-        <button class="validationButton">Validate</button>
-        <button class="validationButton">Refuse</button>
+        <button class="validationButton" (click)="validatePictures()">Validate</button>
+        <button class="validationButton" (click)="refusePictures()">Refuse</button>
       </div>
 
     </li>
@@ -40,21 +40,18 @@
 
 <div id="vehicle" class="tabcontent">
   <h1>Vehicle</h1>
-  <ul class="picFrame" *ngFor="let pic of pictures$ | slice:0:10; let i=index">
+  <ul class="picFrame" *ngFor="let car of cars"><!-- | slice:0:10; let i=index-->
     <li class="picValidation">
-
       <div>
-        <img src="{{pic.url}}"/>
-      </div>  
-      <div>
-        <p><span>Brand:</span> asdfasdfsafd</p>
-        <p><span>Model:</span> asdfsadfsafd</p>
-        <p><span>Licence plate:</span> asdfasdfsaf</p>
+        <p><span>Owner:</span> {{user}}</p>
+        <p><span>Model:</span> {{car.carModel}}</p>
+        <p><span>Color:</span> {{car.color}}</p>
+        <p><span>Licence plate:</span> {{car.licensePlateNumber}}</p>
       </div>
       <div id="block">
-        <button class="validationButton">Validate</button>
-        <button class="validationButton">Refuse</button>
+        <button class="validationButton" (click)="validatePictures()">Validate</button>
+        <button class="validationButton" (click)="refusePictures()">Refuse</button>
       </div>
     </li>
-  </ul> 
+  </ul>
 </div>
