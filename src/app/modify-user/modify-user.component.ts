@@ -17,7 +17,6 @@ export class ModifyUserComponent implements OnInit {
   editForm: FormGroup;
   newFormUser: User[];
   form: Object;
-  
 
   constructor(private formBuilder: FormBuilder, private router: Router, private user: UsersComponent, private userService: DataService) { }
 
@@ -28,6 +27,7 @@ export class ModifyUserComponent implements OnInit {
       userName: ['', Validators.required],
       email: ['', Validators.required],
       phone: ['', Validators.required],
+      adresse: ['', Validators.required],
       locality: ['', Validators.required],
       postalCode: ['', Validators.required],
     	trustedCarpoolingDriverCode: ['', Validators.required]
@@ -41,6 +41,7 @@ export class ModifyUserComponent implements OnInit {
         "userName" : this.newFormUser[0].userName,
         "email": this.newFormUser[0].email,
         "phone": this.newFormUser[0].phone,
+        "adresse": this.newFormUser[0].adresse,
         "locality": this.newFormUser[0].locality,
         "postalCode": this.newFormUser[0].postalCode,
         "trustedCarpoolingDriverCode": this.newFormUser[0].trustedCarpoolingDriverCode
@@ -51,15 +52,23 @@ export class ModifyUserComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    let userId = localStorage.getItem("editUserId");
-    
+    let userId = localStorage.getItem("editUserId");    
                                                           //pipe(first())
-    this.userService.updateUser(parseInt(userId), form.value).subscribe(data => {
-      alert("TEST");
+
+    this.newFormUser[0].userName = form.value.userName;
+    this.newFormUser[0].email = form.value.email;
+    this.newFormUser[0].phone = form.value.phone;
+    this.newFormUser[0].adresse = form.value.adresse;
+    this.newFormUser[0].locality = form.value.locality;
+    this.newFormUser[0].postalCode = form.value.postalCode;
+    this.newFormUser[0].trustedCarpoolingDriverCode = form.value.trustedCarpoolingDriverCode;
+
+
+    this.userService.updateUser(parseInt(userId), this.newFormUser[0]).subscribe(data => {
       this.router.navigate(['../mainWindow/users']);
     },
     (err : HttpErrorResponse) => {
-      alert("ERROR HTTP RESPONSE");
+      alert(err.status + " : " + err.message);
     });
   }
 

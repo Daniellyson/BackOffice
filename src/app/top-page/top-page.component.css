@@ -33,15 +33,15 @@ h1, h2 {
     padding-top: 0px;
 }
 
+h3 {
+    padding-right: 7px;
+}
+
 #userName {
     float: left;
     width: 250px;
     position: absolute;
     background-color: white;
-}
-
-h3 {
-    padding-right: 7px;
 }
 
 #menu {

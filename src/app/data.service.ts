@@ -49,13 +49,6 @@ export class DataService {
     return this.http.get(this.rootUrl + '/api/Users', {headers : this.header});
   }
 
-  //TODO
-  getOneUser(value: number) : Observable<any> {
-    //it is necessary the same variable(exemple here userName) in API
-    //let params = new HttpParams().set('id','2');
-    return this.http.get<User[]>(this.rootUrl + '/api/Users/' + value, {headers : this.header});
-  }
-
   getUserById(id: number) {
     return this.http.get(this.rootUrl + '/api/Users/' + id, {headers : this.header});
   }
@@ -64,8 +57,8 @@ export class DataService {
     return this.http.get(this.rootUrl + '/api/Users/' + userName, {headers : this.header});
   }
 
-  updateUser(id: number, user: User) : Observable<any> {
-    alert(id + " " + user);
+  updateUser(id: number, user: Object) : Observable<any> {
+    
     return this.http.put(this.rootUrl + '/api/Users/' + id, (user), {headers : this.header});
   }
 
