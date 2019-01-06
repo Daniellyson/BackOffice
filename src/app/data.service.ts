@@ -4,8 +4,6 @@ import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { User } from './users/userModel';
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -52,27 +50,6 @@ export class DataService {
   getUserById(id: number) : Observable<any>{
     return this.http.get(this.rootUrl + '/api/Users/' + id, {headers : this.header});
   }
-
-  /*
-    getItems(): Observable<Item[]> 
-  {
-    return this.http.get<Item[]>(this.itemsUrl)
-      .pipe(
-        map(items => {
-          let castedItems: Item[] = [];
-
-          for(let rawItem of items)
-            castedItems.push(ItemMapper.mapToItem(rawItem));
-
-          return castedItems;
-        }),
-        catchError(this.errorService.handleError('l'obtention des objets', null, []))
-      );
-      */
-  /*TODO delete
-  getUserByUserName(userName: string) {
-    return this.http.get(this.rootUrl + '/api/Users/' + userName, {headers : this.header});
-  }*/
 
   updateUser(id: number, user: Object) : Observable<any> {
     return this.http.put(this.rootUrl + '/api/Users/' + id, (user), {headers : this.header});

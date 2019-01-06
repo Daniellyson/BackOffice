@@ -13,10 +13,10 @@ import { injectArgs } from '@angular/core/src/di/injector';
 })
 export class ValidationComponent implements OnInit {
 
-  cars: Car[];
-  vehicle: any[];
-  
+  pictures: Object;
+  cars: Car[];  
   user: any;
+  newFormUser: User[];
 
   constructor(private dataService: DataService) { }
 
@@ -26,9 +26,12 @@ export class ValidationComponent implements OnInit {
 
       this.dataService.getUsers().subscribe((data : User[]) => {
 
+        this.pictures = data;
+
         for(var iCar = 0; iCar < this.cars.length; iCar++) {
           for(var iUser = 0; iUser < data.length && data[iUser].id != this.cars[iCar].owner; iUser++) {  }
 
+          this.newFormUser = data.filter(uniqueUser => uniqueUser.id == this.cars[iCar].owner); 
           this.user = data.filter(uniqueUser => uniqueUser.id == this.cars[iCar].owner).map(name => name.userName);
         }
       });
@@ -53,11 +56,58 @@ export class ValidationComponent implements OnInit {
     evt.currentTarget.className += " active";
   } 
 
-  validatePictures() {
-    
+  
+  validateProfilePicture(id: number) {
+
+    var sysDate = new Date();
+
+    this.newFormUser[0].facePhotoValidatedAt = sysDate;
+
+    this.dataService.updateUser(id, this.newFormUser[0]).subscribe(data => {
+      
+    },
+    (err : HttpErrorResponse) => {
+      alert(err.status + " : " + err.message);
+    });    
   }
 
-  refusePictures() {
+  refuseProfilePicture() {
+
+  }
+
+  validateIdCard(id: number) {
+
+    var sysDate = new Date();
+
+    this.newFormUser[0].facePhotoValidatedAt = sysDate;
+
+    this.dataService.updateUser(id, this.newFormUser[0]).subscribe(data => {
+      
+    },
+    (err : HttpErrorResponse) => {
+      alert(err.status + " : " + err.message);
+    });    
+  }
+
+  refuseIdCard() {
+
+  }
+
+  validaVehicle(id: number) {
+
+    var sysDate = new Date();
+
+    this.newFormUser[0].facePhotoValidatedAt = sysDate;
+
+    this.dataService.updateUser(id, this.newFormUser[0]).subscribe(data => {
+      
+    },
+    (err : HttpErrorResponse) => {
+      alert(err.status + " : " + err.message);
+    });    
+  }
+
+  refuseVehicle() {
 
   }
 }
