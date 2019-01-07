@@ -9,7 +9,7 @@ export interface User {
 	email: string;
 	emailValidatedAt: Date;
 	gender: string;
-	adresse: string;
+	address: string;
 	facePhotoFilename: string;
 	facePhotoSentAt: Date;
 	facePhotoValidatedAt: Date;

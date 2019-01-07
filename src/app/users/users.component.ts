@@ -18,7 +18,7 @@ export class UsersComponent implements OnInit {
   users: Object;
 
   userByID: User[];
-  userByUserName: any;//TODO verify any
+  userByUserName: any;
 
   allUsers: boolean = true;
 
@@ -66,8 +66,6 @@ export class UsersComponent implements OnInit {
     localStorage.removeItem("editUserId");
     localStorage.setItem("editUserId", id);
 
-    alert(id);
-
     this.modify_user = true;
   }
 
@@ -80,7 +78,6 @@ export class UsersComponent implements OnInit {
       //this.router.navigate(['../mainWindow/users'])
       this.getAllUsersBack();
     }    
-    this.getAllUsersBack();
   }
 
   getAllUsersBack() {

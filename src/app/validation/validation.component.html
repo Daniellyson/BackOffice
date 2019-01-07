@@ -24,7 +24,7 @@
 <div id="idCard" class="tabcontent">
   <h1>ID card</h1>
   <ul class="picFrame" *ngFor="let pic of pictures; let i=index">
-    <li class="picValidation" > <!--*ngIf="pic.identityPieceFilename != null"-->
+    <li class="picValidation" *ngIf="pic.identityPieceFilename != null"> <!---->
 
       <div>
           <img src="{{pic.identityPieceFilename}}"/>

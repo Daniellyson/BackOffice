@@ -28,7 +28,7 @@ export class ModifyUserComponent implements OnInit {
       userName: ['', Validators.required],
       email: ['', Validators.required],
       phone: ['', Validators.required],
-      adresse: ['', Validators.required],
+      address: ['', Validators.required],
       locality: ['', Validators.required],
       postalCode: ['', Validators.required],
     	trustedCarpoolingDriverCode: ['', Validators.required]
@@ -42,7 +42,7 @@ export class ModifyUserComponent implements OnInit {
         "userName" : this.newFormUser[0].userName,
         "email": this.newFormUser[0].email,
         "phone": this.newFormUser[0].phone,
-        "adresse": this.newFormUser[0].adresse,
+        "address": this.newFormUser[0].address,
         "locality": this.newFormUser[0].locality,
         "postalCode": this.newFormUser[0].postalCode,
         "trustedCarpoolingDriverCode": this.newFormUser[0].trustedCarpoolingDriverCode
@@ -58,7 +58,7 @@ export class ModifyUserComponent implements OnInit {
     this.newFormUser[0].userName = form.value.userName;
     this.newFormUser[0].email = form.value.email;
     this.newFormUser[0].phone = form.value.phone;
-    this.newFormUser[0].adresse = form.value.adresse;
+    this.newFormUser[0].address = form.value.adresse;
     this.newFormUser[0].locality = form.value.locality;
     this.newFormUser[0].postalCode = form.value.postalCode;
     this.newFormUser[0].trustedCarpoolingDriverCode = form.value.trustedCarpoolingDriverCode;
