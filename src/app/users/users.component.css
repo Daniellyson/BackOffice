@@ -34,3 +34,12 @@ div h3 {
     text-align: center;
     color :rgba(255, 0, 0, 0.849);
 }
+
+#infos {
+    width: 1000px;
+}
+
+div div.userInfo {
+    float: left;
+    margin-right: 25px;
+}

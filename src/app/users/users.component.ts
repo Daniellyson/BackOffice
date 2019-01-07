@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { forEach } from '@angular/router/src/utils/collection';
 import { CurrencyIndex } from '@angular/common/src/i18n/locale_data';
 import { ModifyUserComponent } from '../modify-user/modify-user.component';
+import { Car } from '../validation/carModel';
 
 @Component({
   selector: 'app-users',
@@ -25,10 +26,13 @@ export class UsersComponent implements OnInit {
 
   modify_user: boolean = false;
 
-  constructor(private data: DataService, private router: Router) {  }
+  cars: Car[];
+  userCar: any;
+
+  constructor(private dataService: DataService, private router: Router) {  }
 
   ngOnInit() {
-    this.data.getUsers().subscribe(
+    this.dataService.getUsers().subscribe(
       data => this.users = data
     );
   }
@@ -36,26 +40,33 @@ export class UsersComponent implements OnInit {
   getUserByUserName(value: string) {
     this.apiResponse = false;
     this.allUsers = false;
-    this.data.getUsers().subscribe((data : User[]) => {
+    this.dataService.getUsers().subscribe((data : User[]) => {
       for(var iUser = 0; iUser < data.length && data[iUser].userName != value; iUser++) { }
       this.apiResponse = (data[iUser].userName == value) 
 
-      this.userByUserName = data.filter(uniqueUser => uniqueUser.userName == value);      
+      this.userByUserName = data.filter(uniqueUser => uniqueUser.userName == value);   
+      
+      this.dataService.getCar().subscribe((car : Car[]) => { 
+        this.cars = car  
+        //for(var iCar = 0; iCar < this.cars.length &&  data[iUser].id != this.cars[iCar].owner; iCar++) {  }
+
+        this.userCar = this.cars.filter(uniqueCarUser => uniqueCarUser.owner == data[iUser].id); 
+      });
     });
   }
 
   //TODO
-  getUserById(value: number) {
-    this.data.getUsers().subscribe(apiRes => {
+  getUserById(value: string) {
+    this.dataService.getUsers().subscribe(apiRes => {
       alert(apiRes);
     });
   }
 
-  modifyUser(id: Number) { 
+  modifyUser(id: string) { 
     localStorage.removeItem("editUserId");
-    localStorage.setItem("editUserId", id.toString());
-    
-    //alert(id); TODO delete
+    localStorage.setItem("editUserId", id);
+
+    alert(id);
 
     this.modify_user = true;
   }
@@ -63,7 +74,7 @@ export class UsersComponent implements OnInit {
   //TODO
   deleteUser(id: number) {
     if(confirm("Delete User ?")) {
-      this.data.deleteUser(id).subscribe(user => {
+      this.dataService.deleteUser(id).subscribe(user => {
         this.users = this.userByID.filter(u => u !== user);
       });
       //this.router.navigate(['../mainWindow/users'])

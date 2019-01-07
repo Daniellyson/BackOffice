@@ -23,6 +23,7 @@ export class ModifyUserComponent implements OnInit {
   ngOnInit() {
     let userId = localStorage.getItem("editUserId");
 
+    //TODO test required
     this.editForm = this.formBuilder.group({
       userName: ['', Validators.required],
       email: ['', Validators.required],
@@ -35,7 +36,7 @@ export class ModifyUserComponent implements OnInit {
     
     this.userService.getUsers().subscribe((data: User[]) => {
 
-      this.newFormUser = data.filter(uniqueUser => uniqueUser.id == parseInt(userId));      
+      this.newFormUser = data.filter(uniqueUser => uniqueUser.id == userId);      
       
       this.form =  {
         "userName" : this.newFormUser[0].userName,
@@ -62,11 +63,11 @@ export class ModifyUserComponent implements OnInit {
     this.newFormUser[0].postalCode = form.value.postalCode;
     this.newFormUser[0].trustedCarpoolingDriverCode = form.value.trustedCarpoolingDriverCode;
 
-    this.userService.updateUser(parseInt(userId), this.newFormUser[0]).subscribe(data => {
+    this.userService.updateUser(userId, this.newFormUser[0]).subscribe(data => {
       this.backToAllUsers();
     },
     (err : HttpErrorResponse) => {
-      alert(err.status + " : " + err.message);
+      alert(err.status + "  " + err.message);
     }); 
   }
 

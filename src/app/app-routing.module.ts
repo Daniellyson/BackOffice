@@ -44,7 +44,15 @@ const routes: Routes = [
         path: 'validation',
         component: ValidationComponent
       },
+      {
+        path: '**',    
+        redirectTo: 'dashboard', 
+      },
     ]
+  },
+  {
+    path: '**',    
+    redirectTo: '', 
   },
 ];
 

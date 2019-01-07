@@ -30,7 +30,7 @@ export class MainContainerComponent implements OnInit {
 			data => this.users = data
 		);
 	  	
-			//TODO
+		//TODO
 		this.data.getUsers().subscribe((userStat: User[]) => {
 			
 			for(var userCount = 0; userCount < userStat.length; userCount++) {

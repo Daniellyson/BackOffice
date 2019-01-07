@@ -1,17 +1,8 @@
 import { Carpooling } from "../carpooling/carpoolingModel";
 
 export interface User {
-    
-	//TEST
-	/*
-    name: string;   
-    firstName: string;
-    lastName: string;
-    completed: boolean;
-    */
-    
-    //Our BD
-	id: number;
+     
+	id: string;
 	userName: string;
 	password: string;
 	role: string;

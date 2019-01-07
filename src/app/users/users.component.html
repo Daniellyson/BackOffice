@@ -5,55 +5,102 @@
       <button (click)="getUserByUserName(box.value)">Go</button>
       <button (click)="getAllUsersBack()">Back</button>
     </h2>
+
+
+    <div id="infos">
+      <div  class="userInfo" *ngIf="!allUsers"> 
+        <table *ngIf="apiResponse"> 
+          <ng-container *ngFor="let user of userByUserName"> <!-- | async-->
+            <tr>
+              <th>User Name</th>
+              <td>{{ user.userName }}</td>
+            </tr>
+            <tr>
+              <th>E-mail</th>
+              <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+              <th>Gender</th>
+              <td>{{user.gender}}</td>
+            </tr>
+            <tr>
+              <th>Address</th>
+              <td>{{user.address}}</td>
+            </tr>
+            <tr>
+              <th>Locality</th>
+              <td>{{user.locality}}</td>
+            </tr>
+            <tr>
+              <th>Postcode</th>
+              <td>{{user.postalCode}}</td>
+            </tr>
+            <tr>
+              <th>Phone</th>
+              <td>{{user.phone}}</td>
+            </tr>
+            <tr>
+              <th>Created On</th>
+              <td>{{ user.createdAt | date:"dd/MM/yy"}}</td>
+            </tr>
+            <tr>
+              <th>Updated On</th>
+              <td>{{ user.updatedAt | date:"dd/MM/yy"}}</td>
+            </tr>
+            <tr>
+              <th>Driver Code</th>
+              <td>{{user.trustedCarpoolingDriverCode}}</td>
+            </tr>
+            <tr>
+              <th>Face Photo Sent On</th>
+              <td>{{ user.facePhotoSentAt | date:"dd/MM/yy"}}</td>
+            </tr>
+            <tr>
+              <th>Face Photo Validatet On</th>
+              <td>{{ user.facePhotoValidatedAt | date:"dd/MM/yy"}}</td>
+            </tr>
+            <tr>
+              <th>Identity Card Photo Sent On</th>
+              <td>{{ user.identityPieceSentAt | date:"dd/MM/yy"}}</td>
+            </tr>
+            <tr>
+              <th>Identity Card Photo Validated On</th>
+              <td>{{ user.identityPieceValidatedAt | date:"dd/MM/yy"}}</td>
+            </tr>
+            <button (click)="modifyUser(user, user.id)">Modify</button>
+            <button (click)="deleteUser(user.id)">Delete</button>
+          </ng-container>
+        </table>
+      </div>
     
-    <ng-container *ngIf="!allUsers"> <!---->
-      <table *ngIf="apiResponse"> <!-- -->
-        <ng-container *ngFor="let user of userByUserName"> <!-- | async-->
-          <tr>
-            <th>User Name</th>
-            <td>{{ user.userName }}</td>
-          </tr>
-          <tr>
-            <th>E-mail</th>
-            <td>{{ user.email }}</td>
-          </tr>
-          <tr>
-            <th>Gender</th>
-            <td>{{user.gender}}</td>
-          </tr>
-          <tr>
-            <th>Address</th>
-            <td>{{user.adresse}}</td>
-          </tr>
-          <tr>
-            <th>Locality</th>
-            <td>{{user.locality}}</td>
-          </tr>
-          <tr>
-            <th>Postcode</th>
-            <td>{{user.postalCode}}</td>
-          </tr>
-          <tr>
-            <th>Phone</th>
-            <td>{{user.phone}}</td>
-          </tr>
-          <tr>
-            <th>Created On</th>
-            <td>{{ user.createdAt | date:"dd/MM/yy"}}</td>
-          </tr>
-          <tr>
-            <th>Updated On</th>
-            <td>{{ user.updatedAt | date:"dd/MM/yy"}}</td>
-          </tr>
-          <tr>
-            <th>Driver Code</th>
-            <td>{{user.trustedCarpoolingDriverCode}}</td>
-          </tr>
-          <button (click)="modifyUser(user, user.id)">Modify</button>
-          <button (click)="deleteUser(user.id)">Delete</button>
-        </ng-container>
-      </table>
-    </ng-container>
+      <div  class="userInfo" *ngIf="!allUsers"> 
+        <table *ngIf="apiResponse"> 
+          <ng-container *ngFor="let car of userCar"> <!-- | async-->
+            <tr>
+              <th>Car Model</th>
+              <td>{{ car.carModel }}</td>
+            </tr>
+            <tr>
+              <th>Color</th>
+              <td>{{ car.color }}</td>
+            </tr>
+            <tr>
+              <th>License Plate Number</th>
+              <td>{{car.licensePlateNumber}}</td>
+            </tr>
+            <tr>
+              <th>Created On</th>
+              <td>{{car.createdAt | date:"dd/MM/yy"}}</td>
+            </tr>
+            <tr>
+              <th>Validated On</th>
+              <td>{{car.validatedAt | date:"dd/MM/yy"}}</td>
+            </tr>
+          </ng-container>
+        </table>
+      </div>
+    </div>
+
   
     <ng-container *ngIf="allUsers">
       <table>

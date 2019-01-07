@@ -10,7 +10,6 @@ import { LoginComponent } from '../login/login.component';
 })
 export class MainWindowComponent implements OnInit {
 
-  //TODO block access main page throw url
   showMainPage: boolean = false;
 
   constructor(private router: Router, private dataService: DataService) { }

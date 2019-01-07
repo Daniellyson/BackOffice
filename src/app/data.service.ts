@@ -40,7 +40,7 @@ export class DataService {
   userAuthentication(userName: string, password: string) : Observable<any> {
     let body = {"userName": userName, "password": password, "role" : "backoffice"};
     let reqHeader = new HttpHeaders( {'Content-Type' : 'application/json'} );
-    return this.http.post(this.rootUrl + '/api/Jwt', (body), {headers : reqHeader});
+    return this.http.post(this.rootUrl + '/api/Jwt/Login', (body), {headers : reqHeader});
   }
 
   getUsers() {
@@ -51,7 +51,7 @@ export class DataService {
     return this.http.get(this.rootUrl + '/api/Users/' + id, {headers : this.header});
   }
 
-  updateUser(id: number, user: Object) : Observable<any> {
+  updateUser(id: string, user: Object) : Observable<any> {
     return this.http.put(this.rootUrl + '/api/Users/' + id, (user), {headers : this.header});
   }
 
@@ -65,5 +65,13 @@ export class DataService {
 
   getCar() {
     return this.http.get(this.rootUrl + '/api/Cars', {headers : this.header});
+  }
+
+  updateCar(id: number, car: Object) : Observable<any> {
+    return this.http.put(this.rootUrl + '/api/Cars/' + id, (car), {headers : this.header});
+  }
+
+  deleteCar(id: number) {
+    return this.http.delete(this.rootUrl + '/api/Cars/' + id, {headers : this.header});
   }
 }

@@ -12,7 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { DataService } from './data.service';
 
-import { FormsModule } from '@angular/forms'; //TEST
+import { FormsModule } from '@angular/forms'; 
 
 
 @NgModule({
@@ -27,7 +27,7 @@ import { FormsModule } from '@angular/forms'; //TEST
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule //TEST
+    FormsModule 
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

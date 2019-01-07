@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
-import { Car } from './carModel';
+import { Car, Cars } from './carModel';
 import { forEach } from '@angular/router/src/utils/collection';
 import { User } from '../users/userModel';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -13,9 +13,10 @@ import { injectArgs } from '@angular/core/src/di/injector';
 })
 export class ValidationComponent implements OnInit {
 
-  pictures: Object;
+  pictures: User[];
   cars: Car[];  
   user: any;
+  updateCar: Cars[];
   newFormUser: User[];
 
   constructor(private dataService: DataService) { }
@@ -33,6 +34,8 @@ export class ValidationComponent implements OnInit {
 
           this.newFormUser = data.filter(uniqueUser => uniqueUser.id == this.cars[iCar].owner); 
           this.user = data.filter(uniqueUser => uniqueUser.id == this.cars[iCar].owner).map(name => name.userName);
+
+          this.cars[iCar].ownerName = this.user;
         }
       });
     });
@@ -56,58 +59,75 @@ export class ValidationComponent implements OnInit {
     evt.currentTarget.className += " active";
   } 
 
-  
-  validateProfilePicture(id: number) {
-
+  validatePictures(id: string, index: number, callFrom: string) {
     var sysDate = new Date();
 
-    this.newFormUser[0].facePhotoValidatedAt = sysDate;
+    if(callFrom == "face") {
+      this.pictures[index].facePhotoValidatedAt =  sysDate;
+    }
 
-    this.dataService.updateUser(id, this.newFormUser[0]).subscribe(data => {
-      
+    if (callFrom == "idCard") {
+      this.pictures[index].identityPieceValidatedAt =  sysDate;
+    }
+
+    this.updateUserPhotos(id, index, callFrom);
+  }
+
+  refusePictures(id: string, index: number, callFrom: string) {
+    if(callFrom == "face") {
+      this.pictures[index].facePhotoFilename = null;
+      this.pictures[index].facePhotoSentAt = null;
+    }
+
+    if (callFrom == "idCard") {
+      this.pictures[index].identityPieceFilename = null;
+      this.pictures[index].identityPieceSentAt = null;
+    }
+
+    this.updateUserPhotos(id, index, callFrom);
+  }
+
+  updateUserPhotos(id: string, index: number, callFrom: string) {
+    this.dataService.updateUser(id, this.pictures[index]).subscribe(data => {
+      this.pictures = this.pictures.filter(u => u !== data);
+      this.ngOnInit();
+      this. validations('button', callFrom);
     },
     (err : HttpErrorResponse) => {
       alert(err.status + " : " + err.message);
-    });    
+    });
   }
 
-  refuseProfilePicture() {
+  validaVehicle(id: number, index: number) {
 
+    this.dataService.getCar().subscribe((data: Cars[]) => {
+      this.updateCar = data;
+
+      var sysDate = new Date();
+
+      this.updateCar[index].validatedAt = sysDate;
+
+      alert( this.updateCar[index].validatedAt)
+
+      this.dataService.updateCar(id, this.updateCar[index]).subscribe(data => {
+        this.ngOnInit();
+        this. validations('button', 'vehicle');
+      },
+      (err : HttpErrorResponse) => {
+        alert(err.status + " : " + err.message);
+      });
+    }); 
   }
 
-  validateIdCard(id: number) {
+  refuseVehicle(id: number) {
 
-    var sysDate = new Date();
-
-    this.newFormUser[0].facePhotoValidatedAt = sysDate;
-
-    this.dataService.updateUser(id, this.newFormUser[0]).subscribe(data => {
-      
+    this.dataService.deleteCar(id).subscribe(data => {
+      this.cars = this.cars.filter(u => u !== data);
+      this.ngOnInit();
+      this. validations('button', 'vehicle');
     },
     (err : HttpErrorResponse) => {
       alert(err.status + " : " + err.message);
-    });    
-  }
-
-  refuseIdCard() {
-
-  }
-
-  validaVehicle(id: number) {
-
-    var sysDate = new Date();
-
-    this.newFormUser[0].facePhotoValidatedAt = sysDate;
-
-    this.dataService.updateUser(id, this.newFormUser[0]).subscribe(data => {
-      
-    },
-    (err : HttpErrorResponse) => {
-      alert(err.status + " : " + err.message);
-    });    
-  }
-
-  refuseVehicle() {
-
+    });
   }
 }
