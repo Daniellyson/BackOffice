@@ -18,6 +18,8 @@ export interface Carpooling {
     postalCodeTo: string;
     postalCodeFrom: string;
 
+    userName: string;
+
     //TODO
     /*carNavigation: [{
         id: number;
@@ -34,5 +36,4 @@ export interface Carpooling {
         hasBeenAccepted: boolean;
     }];
     */
-    user: User;
 }

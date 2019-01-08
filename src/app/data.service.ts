@@ -67,8 +67,8 @@ export class DataService {
     return this.http.get(this.rootUrl + '/api/Cars', {headers : this.header});
   }
 
-  updateCar(carId: number, isAccepted: boolean) {
-    return this.http.put(this.rootUrl + '/api/ValidCars/' + carId, (isAccepted), {headers : this.header});
+  updateCar(carId: number, isValid: boolean) {
+    return this.http.put(this.rootUrl + '/api/ValidCars/' + carId, {isValid}, {headers : this.header});
   }
 
   deleteCar(id: number) {

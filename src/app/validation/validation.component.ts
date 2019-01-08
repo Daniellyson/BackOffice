@@ -100,7 +100,7 @@ export class ValidationComponent implements OnInit {
   validateVehicle(id: number) {   
 
     this.dataService.updateCar(id, true).subscribe(data => {
-      this.ngOnInit();
+      //this.ngOnInit();
       this.validations('button', 'vehicle');
     },
     (err : HttpErrorResponse) => {
@@ -110,7 +110,7 @@ export class ValidationComponent implements OnInit {
 
   refuseVehicle(id: number) {
 
-    this.dataService.updateCar(id, false).subscribe(data => {
+    this.dataService.deleteCar(id).subscribe(data => {
       this.ngOnInit();
       this.validations('button', 'vehicle');
     },
