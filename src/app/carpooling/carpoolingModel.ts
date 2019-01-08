@@ -17,23 +17,9 @@ export interface Carpooling {
     localityTo: string;
     postalCodeTo: string;
     postalCodeFrom: string;
+}
 
+export interface Carpoolings {
     userName: string;
-
-    //TODO
-    /*carNavigation: [{
-        id: number;
-        createdAt: Date;
-        validatedAt: Date;
-        color: string;
-        licensePlateNumber: string;
-        carModel: string;
-    }];
-
-    carpoolingApplicant: [{
-        carpooling: number;
-        user: number;
-        hasBeenAccepted: boolean;
-    }];
-    */
+    createdAt: Date;
 }

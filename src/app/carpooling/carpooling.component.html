@@ -1,19 +1,14 @@
 <div class="main-right-container">
-  <h1>Carpooling x last days</h1>
-  
-  <label for="xLastDays">Select a date: </label>
-  <input id="xLastDays" type="date" #xLastDays>
-  <button (click)="getCarpooling(xLastDays.value)">Submit</button>
+  <h1>Carpoolings and its User</h1>
 
-  <!--TODO if to print the table with carpooling users-->
   <table >
     <tr>
       <th>Name</th>
       <th>Date</th>
     </tr>
-    <tr *ngFor="let carp of carpooling">
-      <td></td>
-      <td></td> <!--"-->
+    <tr *ngFor="let carp of newCarpooling">
+      <td>{{carp.userName}}</td>
+      <td>{{carp.createdAt  | date:"dd/MM/yy"}}</td> 
     </tr>
   </table> 
 </div>
