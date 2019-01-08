@@ -23,20 +23,14 @@ export class CarpoolingComponent implements OnInit {
       this.users = data;
 
       this.dataService.getCarpooling().subscribe((car : Carpooling[]) => {       
+        this.newCarpooling = car;
         this.carpooling = car;
 
-        for(var carCount = 0; carCount < this.carpooling.length; carCount++) {
-          for(var iUser = 0; iUser < this.users.length && this.users[iUser].id != this.carpooling[carCount].creator; iUser++) {  }
+        for(var carCount = 0; carCount < this.newCarpooling.length; carCount++) {
 
-          this.userName = this.carpooling.filter(car => car.creator == this.users[iUser].id).map(user => this.users[iUser].userName);
+          this.userName = this.users.filter(user => user.id == this.carpooling[carCount].creator).map(user => user.userName);
           
-
-          this.newCarpooling[carCount].userName = this.userName;
-          this.newCarpooling[carCount].createdAt = this.carpooling[carCount].createdAt;
-          
-        }
-        if(this.newCarpooling == null) {
-          alert("No carpooling in the data base");
+          this.newCarpooling[carCount].userName = this.userName;            
         }
       });
     });

@@ -17,6 +17,7 @@ export interface Carpooling {
     localityTo: string;
     postalCodeTo: string;
     postalCodeFrom: string;
+    userName: string;
 }
 
 export interface Carpoolings {
