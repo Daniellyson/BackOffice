@@ -9,7 +9,7 @@ import { Carpooling } from './carpoolingModel';
 })
 export class CarpoolingComponent implements OnInit {
 
-  carpooling: any[];
+  carpooling: Carpooling[];
   newCarpooling: any;
 
   constructor(private data: DataService) { }
@@ -17,6 +17,8 @@ export class CarpoolingComponent implements OnInit {
   ngOnInit() { }
 
   getCarpooling(value: Date) {
+
+    alert(value);
 
     this.data.getCarpooling().subscribe((car : Carpooling[]) =>  {  
       
@@ -27,10 +29,7 @@ export class CarpoolingComponent implements OnInit {
         if(car[carCount].createdAt >= value) {
 
           this.newCarpooling.push(car[carCount].createdAt);
-          /*this.newCarpooling.push({
-            "userName": car[carCount].user.userName,
-            "date": car[carCount].createdAt
-          });*/
+          
         }
       }
     });

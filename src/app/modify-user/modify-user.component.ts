@@ -58,7 +58,7 @@ export class ModifyUserComponent implements OnInit {
     this.newFormUser[0].userName = form.value.userName;
     this.newFormUser[0].email = form.value.email;
     this.newFormUser[0].phone = form.value.phone;
-    this.newFormUser[0].address = form.value.adresse;
+    this.newFormUser[0].address = form.value.address;
     this.newFormUser[0].locality = form.value.locality;
     this.newFormUser[0].postalCode = form.value.postalCode;
     this.newFormUser[0].trustedCarpoolingDriverCode = form.value.trustedCarpoolingDriverCode;

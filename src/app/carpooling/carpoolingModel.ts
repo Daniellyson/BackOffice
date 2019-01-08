@@ -5,19 +5,21 @@ export interface Carpooling {
     description: string;
     nbPlaces: number;
     placePrice: number;
+    car: number;
+    creator: string;
     createdAt: Date;
     updateAt: Date;
+    dateStart: Date;
+    dateEnd: Date;
     destinationFrom: string;
     destinationTo: string;
     localityFrom: string;
     localityTo: string;
     postalCodeTo: string;
     postalCodeFrom: string;
-    car: number;
-    creator: number;
-    timestamp: string;
+
     //TODO
-    carNavigation: [{
+    /*carNavigation: [{
         id: number;
         createdAt: Date;
         validatedAt: Date;
@@ -31,6 +33,6 @@ export interface Carpooling {
         user: number;
         hasBeenAccepted: boolean;
     }];
-
+    */
     user: User;
 }

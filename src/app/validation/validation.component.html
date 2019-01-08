@@ -13,8 +13,8 @@
         <img src="{{pic.facePhotoFilename}}"/>
       </div>
       <div>
-          <button class="validationButton" (click)="validatePictures(pic.id, i, 'profilePicture')">Validate</button>
-          <button class="validationButton" (click)="refusePictures(pic.id, i, 'profilePicture')">Refuse</button>
+          <button class="validationButton" (click)="validatePictures(pic.id, 'profilePicture')">Validate</button>
+          <button class="validationButton" (click)="refusePictures(pic.id, 'profilePicture')">Refuse</button>
       </div>
 
     </li>
@@ -30,8 +30,8 @@
           <img src="{{pic.identityPieceFilename}}"/>
       </div>
       <div>
-        <button class="validationButton" (click)="validatePictures(pic.id, i, 'idCard')">Validate</button>
-        <button class="validationButton" (click)="refusePictures(pic.id, i, 'idCard')">Refuse</button>
+        <button class="validationButton" (click)="validatePictures(pic.id, 'idCard')">Validate</button>
+        <button class="validationButton" (click)="refusePictures(pic.id, 'idCard')">Refuse</button>
       </div>
 
     </li>
@@ -40,7 +40,7 @@
 
 <div id="vehicle" class="tabcontent">
   <h1>Vehicle</h1>
-  <ul class="picFrame" *ngFor="let car of cars; let i=index"><!-- | slice:0:10; let i=index-->
+  <ul class="picFrame" *ngFor="let car of cars; let i=index">
     <li class="picValidation">
       <div>
         <p><span>Owner:</span> {{car.ownerName}}</p>
@@ -49,7 +49,7 @@
         <p><span>Licence plate:</span> {{car.licensePlateNumber}}</p>
       </div>
       <div id="block">
-        <button class="validationButton" (click)="validaVehicle(car.id, i)">Validate</button>
+        <button class="validationButton" (click)="validateVehicle(car.id)">Validate</button>
         <button class="validationButton" (click)="refuseVehicle(car.id)">Refuse</button>
       </div>
     </li>

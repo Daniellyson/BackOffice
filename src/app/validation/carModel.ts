@@ -1,5 +1,5 @@
 export interface Car {
-    ownerNavigation: string;
+    ownerNavigation: string,
     id: number,
     createdAt: Date,
     validatedAt: Date,

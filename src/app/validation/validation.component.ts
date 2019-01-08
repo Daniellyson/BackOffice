@@ -59,72 +59,60 @@ export class ValidationComponent implements OnInit {
     evt.currentTarget.className += " active";
   } 
 
-  validatePictures(id: string, index: number, callFrom: string) {
-    var sysDate = new Date();
-
+  validatePictures(id: string, callFrom: string) {
     if(callFrom == "face") {
-      this.pictures[index].facePhotoValidatedAt =  sysDate;
+      this.updateFacePhoto(id, true, callFrom);
     }
-
     if (callFrom == "idCard") {
-      this.pictures[index].identityPieceValidatedAt =  sysDate;
+      this.updateIdCardPhoto(id, true, callFrom);
     }
-
-    this.updateUserPhotos(id, index, callFrom);
   }
 
-  refusePictures(id: string, index: number, callFrom: string) {
+  refusePictures(id: string, callFrom: string) {
     if(callFrom == "face") {
-      this.pictures[index].facePhotoFilename = null;
-      this.pictures[index].facePhotoSentAt = null;
+      this.updateFacePhoto(id, false, callFrom);
     }
-
     if (callFrom == "idCard") {
-      this.pictures[index].identityPieceFilename = null;
-      this.pictures[index].identityPieceSentAt = null;
+      this.updateIdCardPhoto(id, false, callFrom);
     }
-
-    this.updateUserPhotos(id, index, callFrom);
   }
 
-  updateUserPhotos(id: string, index: number, callFrom: string) {
-    this.dataService.updateUser(id, this.pictures[index]).subscribe(data => {
-      this.pictures = this.pictures.filter(u => u !== data);
+  updateFacePhoto(id: string, isAccepted: boolean, callFrom: string) {
+    this.dataService.updateUserFacePhoto(id, isAccepted).subscribe(data => {
       this.ngOnInit();
-      this. validations('button', callFrom);
+      this.validations('button', callFrom);
     },
     (err : HttpErrorResponse) => {
       alert(err.status + " : " + err.message);
     });
   }
 
-  validaVehicle(id: number, index: number) {
+  updateIdCardPhoto(id: string, isAccepted: boolean, callFrom: string) {
+    this.dataService.updateUserIdCardPhoto(id, isAccepted).subscribe(data => {
+      this.ngOnInit();
+      this.validations('button', callFrom);
+    },
+    (err : HttpErrorResponse) => {
+      alert(err.status + " : " + err.message);
+    });
+  }
 
-    this.dataService.getCar().subscribe((data: Cars[]) => {
-      this.updateCar = data;
+  validateVehicle(id: number) {   
 
-      var sysDate = new Date();
-
-      this.updateCar[index].validatedAt = sysDate;
-
-      alert( this.updateCar[index].validatedAt)
-
-      this.dataService.updateCar(id, this.updateCar[index]).subscribe(data => {
-        this.ngOnInit();
-        this. validations('button', 'vehicle');
-      },
-      (err : HttpErrorResponse) => {
-        alert(err.status + " : " + err.message);
-      });
-    }); 
+    this.dataService.updateCar(id, true).subscribe(data => {
+      this.ngOnInit();
+      this.validations('button', 'vehicle');
+    },
+    (err : HttpErrorResponse) => {
+      alert(err.status + " : " + err.message);
+    });
   }
 
   refuseVehicle(id: number) {
 
-    this.dataService.deleteCar(id).subscribe(data => {
-      this.cars = this.cars.filter(u => u !== data);
+    this.dataService.updateCar(id, false).subscribe(data => {
       this.ngOnInit();
-      this. validations('button', 'vehicle');
+      this.validations('button', 'vehicle');
     },
     (err : HttpErrorResponse) => {
       alert(err.status + " : " + err.message);
