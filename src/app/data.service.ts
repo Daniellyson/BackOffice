@@ -73,11 +73,11 @@ export class DataService {
     return this.http.delete(this.rootUrl + '/api/Cars/' + id, {headers : this.header});
   }
 
-  updateUserFacePhoto(id: string, isAccepted: boolean) : Observable<any> {
-    return this.http.put(this.rootUrl + '/api/Images/ValidFacePhoto/' + id, (isAccepted), {headers : this.header});
+  updateUserFacePhoto(id: string, isAccepted: boolean) {
+    return this.http.put(this.rootUrl + '/api/Images/ValidFacePhoto/' + id, {isAccepted}, {headers : this.header});
   }
 
-  updateUserIdCardPhoto(id: string, isAccepted: boolean) : Observable<any> {
-    return this.http.put(this.rootUrl + '/api/Images/ValideIdentityPiecePhoto/' + id, (isAccepted), {headers : this.header});
+  updateUserIdCardPhoto(id: string, isAccepted: boolean) {
+    return this.http.put(this.rootUrl + '/api/Images/ValideIdentityPiecePhoto/' + id, {isAccepted}, {headers : this.header});
   }
 }

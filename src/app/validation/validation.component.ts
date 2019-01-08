@@ -58,7 +58,7 @@ export class ValidationComponent implements OnInit {
   } 
 
   validatePictures(id: string, callFrom: string) {
-    if(callFrom == "face") {
+    if(callFrom == "profilePicture") {
       this.updateFacePhoto(id, true, callFrom);
     }
     if (callFrom == "idCard") {
@@ -67,7 +67,7 @@ export class ValidationComponent implements OnInit {
   }
 
   refusePictures(id: string, callFrom: string) {
-    if(callFrom == "face") {
+    if(callFrom == "profilePicture") {
       this.updateFacePhoto(id, false, callFrom);
     }
     if (callFrom == "idCard") {
