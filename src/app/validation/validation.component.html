@@ -9,9 +9,10 @@
   <h1>Picture</h1>
   <ul class="picFrame" *ngFor= "let pic of pictures">
     <li class="picValidation" *ngIf="pic.facePhotoFilename != null">
+      
       <div>
-       <span>{{pic.userName}}</span>
         <img src="{{pic.facePhotoFilename}}"/>
+        <span>{{ pic.userName}}</span>
       </div>
       <div>
   
@@ -27,10 +28,10 @@
   <h1>ID card</h1>
   <ul class="picFrame" *ngFor="let pic of pictures; let i=index">
     <li class="picValidation" *ngIf="pic.identityPieceFilename != null"> <!---->
-
+      
       <div>
-          <span>{{pic.userName}}</span>
           <img src="{{pic.identityPieceFilename}}"/>
+          <span>{{ pic.userName}}</span>
       </div>
       <div>
         <button class="validationButton" (click)="validatePictures(pic.id, 'idCard')">Validate</button>
