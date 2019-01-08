@@ -1,6 +1,4 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
-import { identifierModuleUrl } from '@angular/compiler';
-import { TopPageComponent } from '../top-page/top-page.component';
+import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
   
 @Component({
@@ -16,8 +14,6 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {    
     this.sideBar("dashboard");
-    //TODO delete this.data.currentTitle.subscribe(title => this.title = title);
-    //this.data.currentTitle.subscribe(title => this.title = title);
   }
 
   sideBar(id) {

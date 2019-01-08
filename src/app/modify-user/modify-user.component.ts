@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { UsersComponent } from '../users/users.component';
 import {FormBuilder, FormGroup, Validators, NgForm} from "@angular/forms";
 import { DataService } from '../data.service';
-import {first} from "rxjs/operators";
 import { User } from '../users/userModel';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -23,7 +22,6 @@ export class ModifyUserComponent implements OnInit {
   ngOnInit() {
     let userId = localStorage.getItem("editUserId");
 
-    //TODO test required
     this.editForm = this.formBuilder.group({
       userName: ['', Validators.required],
       email: ['', Validators.required],

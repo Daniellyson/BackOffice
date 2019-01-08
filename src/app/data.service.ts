@@ -1,8 +1,6 @@
-import { Injectable, EventEmitter, Output } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams  } from '@angular/common/http';
-import { FormControl, FormGroup, NgForm } from '@angular/forms';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { User } from './users/userModel';
 
 @Injectable({
   providedIn: 'root'

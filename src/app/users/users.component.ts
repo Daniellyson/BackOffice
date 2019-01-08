@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { User } from './userModel';
 import { Router } from '@angular/router';
-import { forEach } from '@angular/router/src/utils/collection';
-import { CurrencyIndex } from '@angular/common/src/i18n/locale_data';
-import { ModifyUserComponent } from '../modify-user/modify-user.component';
 import { Car } from '../validation/carModel';
 
 @Component({
@@ -48,17 +45,9 @@ export class UsersComponent implements OnInit {
       
       this.dataService.getCar().subscribe((car : Car[]) => { 
         this.cars = car  
-        //for(var iCar = 0; iCar < this.cars.length &&  data[iUser].id != this.cars[iCar].owner; iCar++) {  }
 
         this.userCar = this.cars.filter(uniqueCarUser => uniqueCarUser.owner == data[iUser].id); 
       });
-    });
-  }
-
-  //TODO
-  getUserById(value: string) {
-    this.dataService.getUsers().subscribe(apiRes => {
-      alert(apiRes);
     });
   }
 
@@ -69,13 +58,13 @@ export class UsersComponent implements OnInit {
     this.modify_user = true;
   }
 
-  //TODO
+  
   deleteUser(id: number) {
     if(confirm("Delete User ?")) {
       this.dataService.deleteUser(id).subscribe(user => {
         this.users = this.userByID.filter(u => u !== user);
       });
-      //this.router.navigate(['../mainWindow/users'])
+      
       this.getAllUsersBack();
     }    
   }

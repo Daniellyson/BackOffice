@@ -1,4 +1,3 @@
-import { User } from "../users/userModel";
 
 export interface Carpooling {
     id: number;

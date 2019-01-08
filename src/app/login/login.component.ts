@@ -1,14 +1,8 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
-import { NgForm } from '@angular/forms';
-import { forEach } from '@angular/router/src/utils/collection';
-import { NgForOf } from '@angular/common';
-import { UsersComponent } from '../users/users.component';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { User } from '../users/userModel';
 import { TopPageComponent } from '../top-page/top-page.component';
-import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +20,6 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
   
-  // TODO error messages
   onSubmit(userName: string, password: string) {
     
     this.userService.userAuthentication(userName, password).subscribe((data : any) => {

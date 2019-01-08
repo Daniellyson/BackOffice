@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { Car, Cars } from './carModel';
-import { forEach } from '@angular/router/src/utils/collection';
 import { User } from '../users/userModel';
 import { HttpErrorResponse } from '@angular/common/http';
-import { injectArgs } from '@angular/core/src/di/injector';
 
 @Component({
   selector: 'app-validation',
