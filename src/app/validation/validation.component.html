@@ -10,6 +10,7 @@
   <ul class="picFrame" *ngFor= "let pic of pictures">
     <li class="picValidation" *ngIf="pic.facePhotoFilename != null">
       <div>
+       <span>{{pic.userName}}</span>
         <img src="{{pic.facePhotoFilename}}"/>
       </div>
       <div>
@@ -28,6 +29,7 @@
     <li class="picValidation" *ngIf="pic.identityPieceFilename != null"> <!---->
 
       <div>
+          <span>{{pic.userName}}</span>
           <img src="{{pic.identityPieceFilename}}"/>
       </div>
       <div>
