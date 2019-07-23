@@ -62,14 +62,14 @@ export class UsersComponent implements OnInit {
   deleteUser(id: number) {
     if(confirm("Delete User ?")) {
       this.dataService.deleteUser(id).subscribe(user => {
+        this.getAllUsersBack();
         this.users = this.userByID.filter(u => u !== user);
       });
-      
-      this.getAllUsersBack();
-    }    
+    } 
   }
 
   getAllUsersBack() {
+    
     this.ngOnInit();
     this.allUsers = true;
     this.modify_user = false;

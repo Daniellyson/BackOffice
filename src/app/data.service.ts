@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { User } from './users/userModel';
 
 @Injectable({
   providedIn: 'root'
@@ -35,22 +36,22 @@ export class DataService {
     this.adminName.next(name);
   }
 
-  userAuthentication(userName: string, password: string) : Observable<any> {
+  userAuthentication(userName: string, password: string) : Observable<User> {
     let body = {"userName": userName, "password": password, "role" : "backoffice"};
     let reqHeader = new HttpHeaders( {'Content-Type' : 'application/json'} );
-    return this.http.post(this.rootUrl + '/api/Jwt/Login', (body), {headers : reqHeader});
+    return this.http.post<User>(this.rootUrl + '/api/Jwt/Login', (body), {headers : reqHeader});
   }
 
   getUsers() {
     return this.http.get(this.rootUrl + '/api/Users', {headers : this.header});
   }
 
-  getUserById(id: number) : Observable<any>{
-    return this.http.get(this.rootUrl + '/api/Users/' + id, {headers : this.header});
+  getUserById(id: string) : Observable<User> {
+    return (this.http.get<User>(this.rootUrl + '/api/Users/' + id, {headers : this.header}));
   }
 
-  updateUser(id: string, user: Object) : Observable<any> {
-    return this.http.put(this.rootUrl + '/api/Users/' + id, (user), {headers : this.header});
+  updateUser(id: string, user: Object) : Observable<User> {
+    return this.http.put<User>(this.rootUrl + '/api/Users/' + id, (user), {headers : this.header});
   }
 
   deleteUser(id: number) {

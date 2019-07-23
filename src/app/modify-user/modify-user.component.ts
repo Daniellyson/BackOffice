@@ -14,13 +14,14 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class ModifyUserComponent implements OnInit {
 
   editForm: FormGroup;
-  newFormUser: User[];
+  newFormUser: User;
   form: Object;
+  userId: string;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private user: UsersComponent, private userService: DataService) { }
 
   ngOnInit() {
-    let userId = localStorage.getItem("editUserId");
+    this.userId = localStorage.getItem("editUserId");
 
     this.editForm = this.formBuilder.group({
       userName: ['', Validators.required],
@@ -31,37 +32,45 @@ export class ModifyUserComponent implements OnInit {
       postalCode: ['', Validators.required],
     	trustedCarpoolingDriverCode: ['', Validators]
     });
-    
-    this.userService.getUsers().subscribe((data: User[]) => {
 
-      this.newFormUser = data.filter(uniqueUser => uniqueUser.id == userId);      
+    this.userService.getUserById(this.userId).subscribe(data => {
+
+      this.newFormUser = data;
       
       this.form =  {
-        "userName" : this.newFormUser[0].userName,
-        "email": this.newFormUser[0].email,
-        "phone": this.newFormUser[0].phone,
-        "address": this.newFormUser[0].address,
-        "locality": this.newFormUser[0].locality,
-        "postalCode": this.newFormUser[0].postalCode,
-        "trustedCarpoolingDriverCode": this.newFormUser[0].trustedCarpoolingDriverCode
+        "userName" : this.newFormUser.userName,
+        "email": this.newFormUser.email,
+        "phone": this.newFormUser.phone,
+        "address": this.newFormUser.address,
+        "locality": this.newFormUser.locality,
+        "postalCode": this.newFormUser.postalCode,
+        "trustedCarpoolingDriverCode": this.newFormUser.trustedCarpoolingDriverCode
       };
+
+      //TODO
+      alert(this.newFormUser.role);
+
+      if(this.newFormUser.role == "backoffice") {
+        alert("test");
+        document.getElementById("userName").setAttribute("readonly", "true");
+      }
 
       this.editForm.setValue(this.form);
     });
   }
 
   onSubmit(form: NgForm) {
-    let userId = localStorage.getItem("editUserId");    
+    this.userId = localStorage.getItem("editUserId");    
 
-    this.newFormUser[0].userName = form.value.userName;
-    this.newFormUser[0].email = form.value.email;
-    this.newFormUser[0].phone = form.value.phone;
-    this.newFormUser[0].address = form.value.address;
-    this.newFormUser[0].locality = form.value.locality;
-    this.newFormUser[0].postalCode = form.value.postalCode;
-    this.newFormUser[0].trustedCarpoolingDriverCode = form.value.trustedCarpoolingDriverCode;
+    this.newFormUser.userName = form.value.userName;
+    this.newFormUser.email = form.value.email;
+    this.newFormUser.phone = form.value.phone;
+    this.newFormUser.address = form.value.address;
+    this.newFormUser.locality = form.value.locality;
+    this.newFormUser.postalCode = form.value.postalCode;
+    this.newFormUser.trustedCarpoolingDriverCode = form.value.trustedCarpoolingDriverCode;
 
-    this.userService.updateUser(userId, this.newFormUser[0]).subscribe(data => {
+    this.userService.updateUser(this.userId, this.newFormUser).subscribe(() => {
       this.backToAllUsers();
     },
     (err : HttpErrorResponse) => {
@@ -72,7 +81,7 @@ export class ModifyUserComponent implements OnInit {
           
         if(inputs[inp].required && inputs[inp].value == "") {
             
-            inputs[inp].style.cssText = "border: 1px solid red";
+            inputs[inp].style.cssText = "border: 2px solid red";
         }
         else {
           inputs[inp].style.cssText = "none";

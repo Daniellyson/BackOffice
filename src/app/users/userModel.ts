@@ -1,6 +1,6 @@
 import { Carpooling } from "../carpooling/carpoolingModel";
 
-export interface User {
+export class User {
      
 	id: string;
 	userName: string;
@@ -25,12 +25,4 @@ export interface User {
 	timestamp: string;
 
 	carpooling: Carpooling[];
-	
-	/*
-        "car": [],
-        "carpooling": [],
-        "privateMessage": [],
-        "trustedCarpoolingDriverCarpoolerNavigation": [],
-		"trustedCarpoolingDriverUserNavigation": []
-	*/
 }

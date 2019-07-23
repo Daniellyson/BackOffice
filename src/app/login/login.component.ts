@@ -26,17 +26,6 @@ export class LoginComponent implements OnInit {
   }
   
   onSubmit(userName: string, password: string) {
-
-    /*this.userService.changeAdmin(userName);
-
-    localStorage.setItem('administrator', userName);
-
-    localStorage.setItem('logged', 'true');
-    
-    this.userService.setEventEmit(true);
-
-    this.router.navigate(['mainWindow']);*/
-
     
     this.userService.userAuthentication(userName, password).subscribe((data : any) => {
 
