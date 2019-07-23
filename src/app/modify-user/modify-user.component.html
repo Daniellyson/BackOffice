@@ -2,37 +2,37 @@
   <h2 class="text-center">Edit User</h2>
   <form [formGroup]="editForm" (ngSubmit)="onSubmit(editForm)">
     <div class="form-group">
-      <label for="userName">User Name:</label>
-      <input type="text" formControlName="userName" placeholder="User Name" name="userName" class="form-control" id="userName">
+      <label for="userName">User Name<span>*</span></label>
+      <input type="text" required formControlName="userName" placeholder="User Name" name="userName" class="form-control" id="userName">
     </div>
 
     <div class="form-group">
-      <label for="email">Email address:</label>
-      <input type="email" formControlName="email" placeholder="Email" name="email" class="form-control" id="email">
+      <label for="email">Email address<span>*</span></label>
+      <input type="email" required formControlName="email" placeholder="Email" name="email" class="form-control" id="email">
     </div>
 
     <div class="form-group">
-      <label for="phone">Phone Number:</label>
+      <label for="phone">Phone Number</label>
       <input formControlName="phone" placeholder="Phone Number" name="phone" class="form-control" id="phone">
     </div>
 
     <div class="form-group">
-      <label for="address">Address:</label>
-      <input formControlName="address" placeholder="Address" name="address" class="form-control" id="address">
+      <label for="address">Address<span>*</span></label>
+      <input formControlName="address" required placeholder="Address" name="address" class="form-control" id="address">
     </div>
 
     <div class="form-group">
-      <label for="locality">Locality:</label>
-      <input formControlName="locality" placeholder="Locality" name="locality" class="form-control" id="locality">
+      <label for="locality">Locality<span>*</span></label>
+      <input formControlName="locality" required placeholder="Locality" name="locality" class="form-control" id="locality">
     </div>
 
     <div class="form-group">
-      <label for="postalCode">Postcode:</label>
-      <input formControlName="postalCode" placeholder="Postcode" name="postalCode" class="form-control" id="postalCode">
+      <label for="postalCode">Postcode<span>*</span></label>
+      <input formControlName="postalCode" required placeholder="Postcode" name="postalCode" class="form-control" id="postalCode">
     </div>
 
     <div class="form-group">
-      <label for="trustedCarpoolingDriverCode">Trusted carpooling driver code:</label>
+      <label for="trustedCarpoolingDriverCode">Trusted carpooling driver code</label>
       <input formControlName="trustedCarpoolingDriverCode" placeholder="Driver Code" name="trustedCarpoolingDriverCode" class="form-control" id="trustedCarpoolingDriverCode">
     </div>
 

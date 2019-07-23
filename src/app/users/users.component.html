@@ -73,8 +73,8 @@
         </table>
       </div>
     
-      <div  class="userInfo" *ngIf="!allUsers"> 
-        <table *ngIf="apiResponse"> 
+      <div class="userInfo" *ngIf="!allUsers"> 
+        <table id="car" *ngIf="apiResponse"> 
           <ng-container *ngFor="let car of userCar"> <!-- | async-->
             <tr>
               <th>Car Model</th>

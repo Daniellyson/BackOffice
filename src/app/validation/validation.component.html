@@ -1,25 +1,21 @@
 <div class="tab">
-  <button class="tablinks" (click) = "validations(event, 'profilePicture')">Profile picture</button>
-  <button class="tablinks" (click) = "validations(event, 'idCard')">ID card</button>
-  <button class="tablinks" (click) = "validations(event, 'vehicle')">Vehicle</button>
+  <button class="tablinks" (click) = "validations('profilePicture')">Profile picture</button>
+  <button class="tablinks" (click) = "validations('idCard')">ID card</button>
+  <button class="tablinks" (click) = "validations('vehicle')">Vehicle</button>
 </div>
-
 
 <div id="profilePicture" class="tabcontent">
   <h1>Picture</h1>
   <ul class="picFrame" *ngFor= "let pic of pictures">
-    <li class="picValidation" *ngIf="pic.facePhotoFilename != null">
-      
-      <div>
+    <li class="picValidation" *ngIf="pic.facePhotoFilename != null">    
+      <div *ngIf="(pic.validatedAt == null)">
         <img src="{{pic.facePhotoFilename}}"/>
-        <span>{{ pic.userName}}</span>
+        <span>{{ pic.userName }}</span>
       </div>
       <div>
-  
         <button class="validationButton" (click)="validatePictures(pic.id, 'profilePicture')">Validate</button>
         <button class="validationButton" (click)="refusePictures(pic.id, 'profilePicture')">Refuse</button>
       </div>
-
     </li>
   </ul>
 </div>
@@ -29,9 +25,9 @@
   <ul class="picFrame" *ngFor="let pic of pictures; let i=index">
     <li class="picValidation" *ngIf="pic.identityPieceFilename != null"> <!---->
       
-      <div>
+      <div *ngIf="(pic.validatedAt == null)">
           <img src="{{pic.identityPieceFilename}}"/>
-          <span>{{ pic.userName}}</span>
+          <span>{{ pic.userName }}</span>
       </div>
       <div>
         <button class="validationButton" (click)="validatePictures(pic.id, 'idCard')">Validate</button>
@@ -45,7 +41,7 @@
 <div id="vehicle" class="tabcontent">
   <h1>Vehicle</h1>
   <ul class="picFrame" *ngFor="let car of cars; let i=index">
-    <li class="picValidation">
+    <li class="picValidation" *ngIf="(car.validatedAt == null)">
       <div>
         <p><span>Owner:</span> {{car.ownerName}}</p>
         <p><span>Model:</span> {{car.carModel}}</p>

@@ -15,12 +15,28 @@ export class LoginComponent implements OnInit {
 
   topPage: TopPageComponent;
 
+  incorrectLogin: string = "Username or password incorrect";
+
   constructor(private userService : DataService, private router : Router) { }
 
   ngOnInit() {
+    if(localStorage.getItem('logged') == 'true') {
+      this.router.navigate(['mainWindow']);
+    }
   }
   
   onSubmit(userName: string, password: string) {
+
+    /*this.userService.changeAdmin(userName);
+
+    localStorage.setItem('administrator', userName);
+
+    localStorage.setItem('logged', 'true');
+    
+    this.userService.setEventEmit(true);
+
+    this.router.navigate(['mainWindow']);*/
+
     
     this.userService.userAuthentication(userName, password).subscribe((data : any) => {
 
@@ -40,6 +56,8 @@ export class LoginComponent implements OnInit {
     (err : HttpErrorResponse) => {
       this.userService.setEventEmit(false);
       this.isLogin = false;
-    });    
+
+      alert(this.incorrectLogin);
+    });
   }
 }

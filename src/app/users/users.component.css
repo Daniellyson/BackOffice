@@ -1,13 +1,14 @@
 .main-right-container {
-    width: auto;
     float: left;
     padding: 30px;
+    border: 1px solid black;
 }
 
 table, th, td { 
     border: 1px solid black;
     border-collapse: collapse;
     text-align: center;
+
 }
 
 th, td {
@@ -42,4 +43,8 @@ div h3 {
 div div.userInfo {
     float: left;
     margin-right: 25px;
+}
+
+table#car {
+    border: 1px solid yellow;
 }

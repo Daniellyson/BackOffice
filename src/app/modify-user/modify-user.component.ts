@@ -25,11 +25,11 @@ export class ModifyUserComponent implements OnInit {
     this.editForm = this.formBuilder.group({
       userName: ['', Validators.required],
       email: ['', Validators.required],
-      phone: ['', Validators.required],
+      phone: ['', Validators],
       address: ['', Validators.required],
       locality: ['', Validators.required],
       postalCode: ['', Validators.required],
-    	trustedCarpoolingDriverCode: ['', Validators.required]
+    	trustedCarpoolingDriverCode: ['', Validators]
     });
     
     this.userService.getUsers().subscribe((data: User[]) => {
@@ -65,7 +65,19 @@ export class ModifyUserComponent implements OnInit {
       this.backToAllUsers();
     },
     (err : HttpErrorResponse) => {
-      alert(err.status + "  " + err.message);
+
+      var inputs = document.querySelectorAll("input");
+      
+      for(let inp = 0; inp < inputs.length; inp++) {
+          
+        if(inputs[inp].required && inputs[inp].value == "") {
+            
+            inputs[inp].style.cssText = "border: 1px solid red";
+        }
+        else {
+          inputs[inp].style.cssText = "none";
+        }
+      }
     }); 
   }
 

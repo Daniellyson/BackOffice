@@ -21,13 +21,13 @@ export class MainWindowComponent implements OnInit {
       this.showMainPage = show;
 
       let admin = localStorage.getItem('administrator');
-      this.dataService.changeAdmin(admin);
+      this.dataService.changeAdmin(admin);      
       
       if(localStorage.getItem('logged') == 'true') {
         
         this.showMainPage = true;
       }
-
+      //TODO
       if(this.showMainPage) {
         this.router.navigate(['mainWindow']);
       }

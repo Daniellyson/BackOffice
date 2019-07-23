@@ -37,11 +37,11 @@ export class ValidationComponent implements OnInit {
         }
       });
     });
-    this.validations('button', 'profilePicture');
+    this.validations('profilePicture');
   }
 
-  validations(evt, validation) {
-    let tabcontent, tablinks;
+  validations(validation) {
+    var tabcontent, tablinks;
 
     tabcontent = document.getElementsByClassName("tabcontent");
     for (let i = 0; i < tabcontent.length; i++) {
@@ -54,7 +54,7 @@ export class ValidationComponent implements OnInit {
     }
 
     document.getElementById(validation).style.display = "block";
-    evt.currentTarget.className += " active";
+    //evt.currentTarget.className += " active";
   } 
 
   validatePictures(id: string, callFrom: string) {
@@ -78,7 +78,7 @@ export class ValidationComponent implements OnInit {
   updateFacePhoto(id: string, isAccepted: boolean, callFrom: string) {
     this.dataService.updateUserFacePhoto(id, isAccepted).subscribe(data => {
       this.ngOnInit();
-      this.validations('button', callFrom);
+      this.validations(callFrom);
     },
     (err : HttpErrorResponse) => {
       alert(err.status + " : " + err.message);
@@ -88,7 +88,7 @@ export class ValidationComponent implements OnInit {
   updateIdCardPhoto(id: string, isAccepted: boolean, callFrom: string) {
     this.dataService.updateUserIdCardPhoto(id, isAccepted).subscribe(data => {
       this.ngOnInit();
-      this.validations('button', callFrom);
+      this.validations(callFrom);
     },
     (err : HttpErrorResponse) => {
       alert(err.status + " : " + err.message);
@@ -99,7 +99,7 @@ export class ValidationComponent implements OnInit {
 
     this.dataService.updateCar(id, true).subscribe(data => {
       //this.ngOnInit();
-      this.validations('button', 'vehicle');
+      this.validations('vehicle');
     },
     (err : HttpErrorResponse) => {
       alert(err.status + " : " + err.message);
@@ -110,7 +110,7 @@ export class ValidationComponent implements OnInit {
 
     this.dataService.deleteCar(id).subscribe(data => {
       this.ngOnInit();
-      this.validations('button', 'vehicle');
+      this.validations('vehicle');
     },
     (err : HttpErrorResponse) => {
       alert(err.status + " : " + err.message);
