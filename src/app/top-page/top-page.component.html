@@ -12,6 +12,8 @@
             <select>
                 <option> </option>
                 <option (click)="logout()"> Logout </option>
+                <option routerLink="changeInfoAdmin" id="changeInfoAdmin" (click)="changeTitle('password')"> Change Password </option>
+                <option routerLink="add-admin" id="add-admin" (click)="changeTitle('Add')"> Add a new Admin </option>
             </select>
         </div> 
     </div>

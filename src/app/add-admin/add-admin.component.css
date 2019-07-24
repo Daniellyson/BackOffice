@@ -1,0 +1,39 @@
+h2 {
+    padding-left: 300px;
+    padding-right: 300px;
+}
+
+form {
+    padding-left: 300px;
+    padding-right: 300px;
+}
+
+label, input {
+    display: block;
+}
+
+label {
+    padding-top: 20px;
+    padding-bottom: 5px;
+}
+
+input {
+    width: 500px;
+}
+
+button {
+    margin-top: 20px;
+    margin-right: 10px;
+    border: 1px solid;
+    border-radius: 8px;
+}
+
+input {
+    border: 1px solid;
+    border-radius: 8px;
+    width: 400px;
+}
+
+span {
+    color: red;
+}

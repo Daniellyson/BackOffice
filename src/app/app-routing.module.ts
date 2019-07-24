@@ -8,6 +8,8 @@ import { ValidationComponent } from './validation/validation.component';
 import { LoginComponent } from './login/login.component';
 import { MainWindowComponent } from './main-window/main-window.component';
 import { ModifyUserComponent } from './modify-user/modify-user.component';
+import { ChangeInfoAdminComponent } from './change-info-admin/change-info-admin.component';
+import { AddAdminComponent } from './add-admin/add-admin.component';
 
 
 const routes: Routes = [
@@ -26,7 +28,7 @@ const routes: Routes = [
       },
       {
         path: 'dashboard',
-        component: MainContainerComponent
+        component: MainContainerComponent,
       },
       {
         path: 'users',
@@ -34,15 +36,23 @@ const routes: Routes = [
       },
       {
         path: 'carpooling',
-        component: CarpoolingComponent
+        component: CarpoolingComponent,
       },
       {
         path: 'api-stat',
-        component: ApiStatComponent
+        component: ApiStatComponent,
       },
       {
         path: 'validation',
-        component: ValidationComponent
+        component: ValidationComponent,
+      },
+      {
+        path: 'changeInfoAdmin',
+        component: ChangeInfoAdminComponent,
+      },
+      {
+        path: 'add-admin',
+        component: AddAdminComponent,
       },
       {
         path: '**',    
@@ -73,5 +83,7 @@ export const routingComponents = [
   ValidationComponent,
   LoginComponent,
   MainWindowComponent,
-  ModifyUserComponent
+  ModifyUserComponent,
+  ChangeInfoAdminComponent,
+  AddAdminComponent,
 ];

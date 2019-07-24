@@ -3,6 +3,7 @@ import { DataService } from '../data.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TopPageComponent } from '../top-page/top-page.component';
+import { User } from '../users/userModel';
 
 @Component({
   selector: 'app-login',

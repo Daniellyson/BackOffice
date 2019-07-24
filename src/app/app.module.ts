@@ -12,7 +12,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { DataService } from './data.service';
 
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
+import { ChangeInfoAdminComponent } from './change-info-admin/change-info-admin.component';
+import { AddAdminComponent } from './add-admin/add-admin.component'; 
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     SidebarComponent,
     TopPageComponent,
-    routingComponents
+    routingComponents,
+    ChangeInfoAdminComponent,
+    AddAdminComponent,
   ],
   imports: [
     BrowserModule,

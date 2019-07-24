@@ -26,6 +26,11 @@ export class TopPageComponent implements OnInit {
     return this.title.toUpperCase();
   }
 
+  //TODO
+  changeTitle(title: string) {
+    this.data.changeTitle("");
+  }
+
   logout() {
     localStorage.removeItem('userToken');
     localStorage.removeItem('logged');

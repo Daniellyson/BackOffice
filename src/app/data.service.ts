@@ -75,12 +75,20 @@ export class DataService {
   }
 
   updateUserFacePhoto(id: string, isValid: boolean) {
-  
     return this.http.put(this.rootUrl + '/api/Images/ValidFacePhoto/' + id, {isValid}, {headers : this.header});
   }
 
   updateUserIdCardPhoto(id: string, isValid: boolean) {
-  
     return this.http.put(this.rootUrl + '/api/Images/ValideIdentityPiecePhoto/' + id, {isValid}, {headers : this.header});
+  }
+
+  addNewAdm(body: User) : Observable<User> {
+    let reqHeader = new HttpHeaders( {'Content-Type' : 'application/json'} );
+    return this.http.post<User>(this.rootUrl + '/api/Jwt/Register', (body), {headers : reqHeader});
+  }
+
+  updatePassword(id: string, actualPassword: string, newPassword: string) {
+    let body = {"id": id, "actualPassword": actualPassword, "newPassword" : newPassword};
+    return this.http.put(this.rootUrl + '/api/Password/' + id, (body), {headers : this.header});
   }
 }

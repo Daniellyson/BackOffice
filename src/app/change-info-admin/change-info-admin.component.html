@@ -1,0 +1,15 @@
+<div class="login-page">
+  <h2 class="text-center">Change Password</h2>
+  <div class="form">
+    <form class="login-form">
+       
+      <input type="password" #old_Password required placeholder="Old password" name="old_Password" class="form-control" id="old_Password">
+      
+      <input type="password" #new_Password required placeholder="New password (Min length 6, alphanumeric, special char: password0$)" name="new_Password" class="form-control" id="new_Password">
+      
+      <input type="password" #confirm_new_password required placeholder="Confirm new password" name="confirm_new_password" class="form-control" id="confirm_new_password">
+      
+      <button (click)="onSubmit(old_Password.value, new_Password.value, confirm_new_password.value)">Update passoword</button>
+    </form>
+  </div>
+</div>

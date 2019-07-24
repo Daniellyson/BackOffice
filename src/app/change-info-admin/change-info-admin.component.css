@@ -1,0 +1,28 @@
+h2 {
+    padding-left: 300px;
+    padding-right: 300px;
+}
+
+form {
+    padding-left: 300px;
+    padding-right: 300px;
+}
+
+input {
+    width: 500px;
+}
+
+button {
+    margin-top: 20px;
+    margin-right: 10px;
+    border: 1px solid;
+    border-radius: 8px;
+}
+
+input {
+    display: block;
+    border: 1px solid;
+    border-radius: 8px;
+    width: 420px;
+    margin-bottom: 10px;
+}

@@ -24,7 +24,7 @@ export class ModifyUserComponent implements OnInit {
     this.userId = localStorage.getItem("editUserId");
 
     this.editForm = this.formBuilder.group({
-      userName: ['', Validators.required],
+      //userName: ['', Validators.required],
       email: ['', Validators.required],
       phone: ['', Validators],
       address: ['', Validators.required],
@@ -38,7 +38,7 @@ export class ModifyUserComponent implements OnInit {
       this.newFormUser = data;
       
       this.form =  {
-        "userName" : this.newFormUser.userName,
+        //"userName" : this.newFormUser.userName,
         "email": this.newFormUser.email,
         "phone": this.newFormUser.phone,
         "address": this.newFormUser.address,
@@ -47,14 +47,6 @@ export class ModifyUserComponent implements OnInit {
         "trustedCarpoolingDriverCode": this.newFormUser.trustedCarpoolingDriverCode
       };
 
-      //TODO
-      alert(this.newFormUser.role);
-
-      if(this.newFormUser.role == "backoffice") {
-        alert("test");
-        document.getElementById("userName").setAttribute("readonly", "true");
-      }
-
       this.editForm.setValue(this.form);
     });
   }
@@ -62,7 +54,7 @@ export class ModifyUserComponent implements OnInit {
   onSubmit(form: NgForm) {
     this.userId = localStorage.getItem("editUserId");    
 
-    this.newFormUser.userName = form.value.userName;
+    //this.newFormUser.userName = form.value.userName;
     this.newFormUser.email = form.value.email;
     this.newFormUser.phone = form.value.phone;
     this.newFormUser.address = form.value.address;

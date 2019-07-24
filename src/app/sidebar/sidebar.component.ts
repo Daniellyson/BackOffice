@@ -16,7 +16,7 @@ export class SidebarComponent implements OnInit {
     this.sideBar("dashboard");
   }
 
-  sideBar(id) {
+  sideBar(id: string) {
 
     this.data.changeTitle(id);
 
