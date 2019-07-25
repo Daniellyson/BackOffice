@@ -1,0 +1,51 @@
+.online {
+    background-color: green;
+    color: #ffffff;
+    padding: 10px;
+    text-align: center;
+
+    position: fixed;
+    bottom: 7px;
+    left: 0%;
+    width: 100%;
+    
+    
+    animation:online-response 0.5s 1;
+      -webkit-animation:online-response 0.5s 1;
+      animation-fill-mode: forwards;
+  
+      animation-delay:3s;
+      -webkit-animation-delay:2s; 
+      -webkit-animation-fill-mode: forwards;
+  }
+  
+  .offline {
+    background-color: red;
+    color: #ffffff;
+    padding: 10px;
+    text-align: center;
+    
+    position: fixed;
+    bottom: 7px;
+    left: 0%;
+    width: 100%;
+    
+    animation:online-response 0.5s 1;
+        -webkit-animation:online-response 0.5s 1;
+        animation-fill-mode: forwards;
+
+        animation-delay:3s;
+        -webkit-animation-delay:2s;
+        -webkit-animation-fill-mode: forwards;
+  }
+  
+  
+  @keyframes online-response{
+      from {opacity :1;}
+      to {opacity :0;}
+  }
+  
+  @-webkit-keyframes online-response{
+      from {opacity :1;}
+      to {opacity :0;}
+  }

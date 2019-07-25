@@ -11,10 +11,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { DataService } from './data.service';
+import { AuthInterceptorService } from './auth-interceptor.service';
 
 import { FormsModule } from '@angular/forms';
 import { ChangeInfoAdminComponent } from './change-info-admin/change-info-admin.component';
-import { AddAdminComponent } from './add-admin/add-admin.component'; 
+import { AddAdminComponent } from './add-admin/add-admin.component';
+import { OnlineStatusComponent } from './online-status/online-status.component'; 
+
+
 
 
 @NgModule({
@@ -25,6 +29,7 @@ import { AddAdminComponent } from './add-admin/add-admin.component';
     routingComponents,
     ChangeInfoAdminComponent,
     AddAdminComponent,
+    OnlineStatusComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +38,7 @@ import { AddAdminComponent } from './add-admin/add-admin.component';
     ReactiveFormsModule,
     FormsModule 
   ],
-  providers: [DataService],
+  providers: [DataService, AuthInterceptorService],
   bootstrap: [AppComponent]
 })
 

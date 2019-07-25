@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { User } from './users/userModel';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class DataService {
   
   header =  new HttpHeaders({'Content-Type' : 'application/json', 'Authorization' : 'Bearer ' + localStorage.getItem('userToken')});
  
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   setEventEmit(logged: boolean) {
     this.showMainPageEmitter.next(logged);
@@ -34,6 +35,13 @@ export class DataService {
 
   changeAdmin(name: string) {
     this.adminName.next(name);
+  }
+
+  logout() {
+    localStorage.removeItem('userToken');
+    localStorage.removeItem('logged');
+    localStorage.removeItem('administrator');
+    this.router.navigate(['']);
   }
 
   userAuthentication(userName: string, password: string) : Observable<User> {

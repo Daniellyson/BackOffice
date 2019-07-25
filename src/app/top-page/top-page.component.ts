@@ -31,10 +31,12 @@ export class TopPageComponent implements OnInit {
     this.data.changeTitle("");
   }
 
+  
   logout() {
-    localStorage.removeItem('userToken');
+    this.data.logout();
+    /*localStorage.removeItem('userToken');
     localStorage.removeItem('logged');
     localStorage.removeItem('administrator');
-    this.router.navigate(['']);
+    this.router.navigate(['']);*/
   }
 }
