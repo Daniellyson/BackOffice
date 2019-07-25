@@ -90,9 +90,8 @@ export class DataService {
     return this.http.put(this.rootUrl + '/api/Images/ValideIdentityPiecePhoto/' + id, {isValid}, {headers : this.header});
   }
 
-  addNewAdm(body: User) : Observable<User> {
-    let reqHeader = new HttpHeaders( {'Content-Type' : 'application/json'} );
-    return this.http.post<User>(this.rootUrl + '/api/Jwt/Register', (body), {headers : reqHeader});
+  addNewAdm(body: Object) : Observable<User> {    
+    return this.http.post<User>(this.rootUrl + '/api/Users', (body), {headers : this.header});
   }
 
   updatePassword(id: string, actualPassword: string, newPassword: string) {

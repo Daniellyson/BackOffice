@@ -16,20 +16,24 @@ export class AddAdminComponent implements OnInit {
   //TODO
   readonly backoffice = "backoffice";
   addForm: FormGroup;
-  newFormUser: User;
+  newFormUser: User = new User;
   form: Object;
-  userId: string;
-  myPassword: string;
-  myPasswordRepeat: string;
+  users: User[];
 
   constructor(private formBuilder: FormBuilder, private router: Router, private userService: DataService) { }
   
   ngOnInit() { 
-    //TODO
+
+    this.userService.getUsers().subscribe(
+      (data : User[]) =>  {
+        this.users = data;
+    });
+
     this.addForm = new FormGroup({
       userName :  new FormControl('', Validators.required),
       password : new FormControl('', Validators.required),
       passwordConfirm : new FormControl('', Validators.required),
+      gender : new FormControl('', Validators.required),
       email : new FormControl('', Validators.required),
       phone : new FormControl('', null),
       address : new FormControl('', Validators.required),
@@ -38,32 +42,50 @@ export class AddAdminComponent implements OnInit {
     });
   }
 
+  //TODO
+
   onSubmit(form: NgForm) {
 
-    this.myPassword = document.getElementById("password").nodeValue;
-    this.myPasswordRepeat = document.getElementById("passwordRepeat").nodeValue;
-
-    if(this.myPassword != this.myPasswordRepeat) {
-      this.myPassword = "0";
-      this.myPasswordRepeat = "0";
+    if(form.value.password != form.value.passwordConfirm) {
+      form.value.password = "";
+      form.value.passwordConfirm = "";
       alert("Your password is not correct");
     }
 
-    this.newFormUser.userName = form.value.userName;
-    this.newFormUser.password = form.value.password
     this.newFormUser.role = this.backoffice;
+    this.newFormUser.password = form.value.password;
+    this.newFormUser.userName = form.value.userName;
     this.newFormUser.email = form.value.email;
-    this.newFormUser.phone = form.value.phone;
-    this.newFormUser.address = form.value.address;
+    this.newFormUser.gender = form.value.gender;
+    this.newFormUser.address = form.value.address;    
+    this.newFormUser.phone = form.value.phone;    
     this.newFormUser.locality = form.value.locality;
     this.newFormUser.postalCode = form.value.postalCode;
-
-    
 
     this.userService.addNewAdm(this.newFormUser).subscribe(() => {
       this.backToAllUsers();
     },
     (err : HttpErrorResponse) => {
+
+      for(var iUser = 0; iUser < this.users.length && this.users[iUser].userName != this.newFormUser.userName; iUser++) { }
+      for(var iMail = 0; iMail < this.users.length && this.users[iMail].email != this.newFormUser.email; iMail++) { }
+      for(var iPhone = 0; iPhone < this.users.length && this.users[iPhone].phone != this.newFormUser.phone; iPhone++) { 
+        alert(this.users[iPhone].phone);
+      }
+
+      if(this.users[iUser].userName == this.newFormUser.userName) {
+        alert("User name already used \n\n Please choose another User name");
+      }
+      if(this.users[iMail].email == this.newFormUser.email) {
+        alert("Email not valid \n\n Please check your e-mail");
+      }
+      if(this.users[iPhone].phone == this.newFormUser.phone && iPhone < this.users.length) {
+        alert("Phone number not valid \n\n Please check your phone number");
+      }
+
+      if(form.value.gender == "") {
+        alert("Please select your gender");
+      }
 
       var inputs = document.querySelectorAll("input");
       
@@ -81,7 +103,7 @@ export class AddAdminComponent implements OnInit {
   }
 
   backToAllUsers() {
-    
+    alert("backToAllUsers");
     this.router.navigate(['../mainWindow/users']);
   }
 }

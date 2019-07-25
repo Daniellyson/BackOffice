@@ -21,6 +21,16 @@ input {
     width: 500px;
 }
 
+#gender .labelGender {
+    display: inline;
+    clear: none;
+    padding: 2px 1em 0 0;
+}
+  
+#gender .radioGender {
+    width: 10px;
+}
+
 button {
     margin-top: 20px;
     margin-right: 10px;

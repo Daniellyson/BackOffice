@@ -4,17 +4,25 @@
     
     <div class="form-group">
       <label for="userName">User Name<span>*</span></label>
-      <input type="text" required readonly formControlName="userName" placeholder="User Name" name="userName" class="form-control" id="userName">
+      <input type="text" required formControlName="userName" placeholder="User Name" name="userName" class="form-control" id="userName">
     </div>
 
     <div class="form-group">
-      <label for="userName">Password<span>*</span></label>
-      <input type="password" required readonly formControlName="password" placeholder="Min length 6, number, spicial char, ex: password0$" name="password" class="form-control" id="password">
+      <label for="password">Password<span>*</span></label>
+      <input type="password" required  formControlName="password" placeholder="Min length 6, number, spicial char, ex: password0$" name="password" class="form-control" id="password">
     </div>
 
     <div class="form-group">
-      <label for="userName">Repeat password<span>*</span></label>
-      <input type="password" required readonly formControlName="passwordConfirm" placeholder="The same password as above" name="passwordConfirm" class="form-control" id="passwordConfirm">
+      <label for="passwordConfirm">Confirm password<span>*</span></label>
+      <input type="password" required formControlName="passwordConfirm" placeholder="The same password as above" name="passwordConfirm" class="form-control" id="passwordConfirm">
+    </div>
+
+    <div id="gender" class="form-group">
+      <label for="gender">Gender<span>*</span></label>
+      <input class="radioGender" type="radio" formControlName="gender" name="gender" value="f" required checked>
+      <label class="labelGender">Female</label>
+      <input class="radioGender" type="radio" formControlName="gender" name="gender" value="m" required>
+      <label class="labelGender">Male</label>
     </div>
 
     <div class="form-group">
