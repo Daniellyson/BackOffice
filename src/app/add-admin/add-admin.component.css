@@ -44,6 +44,10 @@ input {
     width: 400px;
 }
 
-span {
+span, p {
     color: red;
+}
+
+P {
+    font-size: 75%;
 }

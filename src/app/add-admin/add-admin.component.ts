@@ -20,6 +20,10 @@ export class AddAdminComponent implements OnInit {
   form: Object;
   users: User[];
 
+  wrongName: boolean = false;
+  wrongEmail: boolean = false;
+  wrongPhone: boolean = false;
+
   constructor(private formBuilder: FormBuilder, private router: Router, private userService: DataService) { }
   
   ngOnInit() { 
@@ -67,21 +71,29 @@ export class AddAdminComponent implements OnInit {
     },
     (err : HttpErrorResponse) => {
 
-      for(var iUser = 0; iUser < this.users.length && this.users[iUser].userName != this.newFormUser.userName; iUser++) { }
-      for(var iMail = 0; iMail < this.users.length && this.users[iMail].email != this.newFormUser.email; iMail++) { }
-      for(var iPhone = 0; iPhone < this.users.length && this.users[iPhone].phone != this.newFormUser.phone; iPhone++) { 
-        alert(this.users[iPhone].phone);
+      if(this.newFormUser.userName != "") {
+        for(var iUser = 0; iUser < this.users.length && this.users[iUser].userName != this.newFormUser.userName; iUser++) { }
+        if(iUser < this.users.length && this.users[iUser].userName == this.newFormUser.userName) {
+          document.getElementById("userName").style.cssText = "border: 2px solid red";
+          this.wrongName = true;
+          alert("User name already used \n\n Please choose another User name");
+        }
       }
-
-      if(this.users[iUser].userName == this.newFormUser.userName) {
-        alert("User name already used \n\n Please choose another User name");
+      
+      if(this.newFormUser.email != "") {
+        for(var iMail = 0; iMail < this.users.length && this.users[iMail].email != this.newFormUser.email; iMail++) { }
+        if(iMail < this.users.length && this.users[iMail].email == this.newFormUser.email) {
+          alert("Email not valid \n\n Please check your e-mail");
+        }
       }
-      if(this.users[iMail].email == this.newFormUser.email) {
-        alert("Email not valid \n\n Please check your e-mail");
-      }
-      if(this.users[iPhone].phone == this.newFormUser.phone && iPhone < this.users.length) {
-        alert("Phone number not valid \n\n Please check your phone number");
-      }
+      
+     
+      if(this.newFormUser.phone != "") {
+        for(var iPhone = 0; iPhone < this.users.length && this.users[iPhone].phone != this.newFormUser.phone; iPhone++) { }
+        if(iPhone < this.users.length && this.users[iPhone].phone == this.newFormUser.phone && iPhone < this.users.length) {
+          alert("Phone number not valid \n\n Please check your phone number");
+        }
+      }      
 
       if(form.value.gender == "") {
         alert("Please select your gender");
