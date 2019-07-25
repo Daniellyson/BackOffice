@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, NgForm, FormControl } from '@angular/forms';
 import { User } from '../users/userModel';
 import { Router } from '@angular/router';
 import { UsersComponent } from '../users/users.component';
@@ -24,7 +24,19 @@ export class AddAdminComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private router: Router, private userService: DataService) { }
   
-  ngOnInit() {  }
+  ngOnInit() { 
+    //TODO
+    this.addForm = new FormGroup({
+      userName :  new FormControl('', Validators.required),
+      password : new FormControl('', Validators.required),
+      passwordConfirm : new FormControl('', Validators.required),
+      email : new FormControl('', Validators.required),
+      phone : new FormControl('', null),
+      address : new FormControl('', Validators.required),
+      locality : new FormControl('', Validators.required),
+      postalCode : new FormControl('', Validators.required)
+    });
+  }
 
   onSubmit(form: NgForm) {
 
@@ -46,7 +58,9 @@ export class AddAdminComponent implements OnInit {
     this.newFormUser.locality = form.value.locality;
     this.newFormUser.postalCode = form.value.postalCode;
 
-    this.userService.updateUser(this.userId, this.newFormUser).subscribe(() => {
+    
+
+    this.userService.addNewAdm(this.newFormUser).subscribe(() => {
       this.backToAllUsers();
     },
     (err : HttpErrorResponse) => {

@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class AuthInterceptorService implements HttpInterceptor {
 
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
@@ -24,6 +24,7 @@ export class AuthInterceptorService implements HttpInterceptor {
       return next.handle(cloned);
     }
     else {
+      this.dataService.logout();
       return next.handle(req);
     }
     //throw new Error("Method not implemented.");
