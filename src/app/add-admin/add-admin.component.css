@@ -46,6 +46,8 @@ span, p {
 }
 
 P {
+    margin: 1px;
+    padding: 1px;
     font-size: 80%;
 }
 

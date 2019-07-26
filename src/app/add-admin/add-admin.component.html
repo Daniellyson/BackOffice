@@ -5,22 +5,22 @@
     <div class="form-group">
       <label for="userName">User Name<span>*</span></label>
       <input type="text" required formControlName="userName" placeholder="User Name" name="userName" class="form-control" id="userName">
-      <p *ngIf="wrongName">User name already exist. Please, choose another User name</p>
+      <p *ngIf="takenName">User name already exist. Please, choose another User name</p>
       <p *ngIf="notValidName">Name not valid</p>
     </div>
 
     <div class="form-group">
       <label for="password">Password<span>*</span></label>
       <input type="password" required  formControlName="password" placeholder="Minimun length = 6" name="password" class="form-control" id="password">
+      <p *ngIf="passwordNotMatching">Password not matching</p>
+      <p *ngIf="notValidPassword">Password not valid. Minimun length 6</p>
     </div>
 
     <div class="form-group">
       <label for="passwordConfirm">Confirm password<span>*</span></label>
       <input type="password" required formControlName="passwordConfirm" placeholder="The same password as above" name="passwordConfirm" class="form-control" id="passwordConfirm">
-      <p>
-        <span *ngIf="wrongPassword">Minimum length = 6 &nbsp; </span>
-        <span *ngIf="passwordNotMatching">Password not matching</span>
-      </p>
+      <p *ngIf="passwordNotMatching">Password not matching</p>
+      <p *ngIf="notValidPassword">Password not valid. Minimun length 6</p>
     </div>
 
     <div id="gender" class="form-group">
@@ -37,28 +37,33 @@
     <div class="form-group">
       <label for="email">Email address<span>*</span></label>
       <input type="email" required formControlName="email" placeholder="Email" name="email" class="form-control" id="email">
-      <p *ngIf="wrongEmail">Email already used</p>
+      <p *ngIf="takenEmail">Email already used</p>
+      <p *ngIf="notValidEmail">Email not valid</p>
     </div>
 
     <div class="form-group">
       <label for="phone">Phone Number</label>
       <input formControlName="phone" placeholder="Phone Number" name="phone" class="form-control" id="phone">
-      <p *ngIf="wrongPhone">Phone number already used</p>
+      <p *ngIf="takenPhone">Phone number already used</p>
+      <p *ngIf="notValidPhone">Phone number not valid</p>
     </div>
 
     <div class="form-group">
       <label for="address">Address<span>*</span></label>
       <input formControlName="address" required placeholder="Address" name="address" class="form-control" id="address">
+      <p *ngIf="notValidAddress">Address not valid</p>
     </div>
 
     <div class="form-group">
       <label for="locality">Locality<span>*</span></label>
       <input formControlName="locality" required placeholder="Locality" name="locality" class="form-control" id="locality">
+      <p *ngIf="notValidLocality">Locality not valid</p>
     </div>
 
     <div class="form-group">
       <label for="postalCode">Postcode<span>*</span></label>
       <input formControlName="postalCode" required placeholder="Postcode" name="postalCode" class="form-control" id="postalCode">
+      <p *ngIf="notValidPostalCode">Postalcode not valid</p>
     </div>
 
     <button class="btn btn-success">Add admin</button>

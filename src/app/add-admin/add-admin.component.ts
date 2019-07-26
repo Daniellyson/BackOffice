@@ -168,19 +168,25 @@ export class AddAdminComponent implements OnInit {
         }
       }
 
-      if(!regexAddress.test(this.newFormUser.address)) {
-        this.notValidAddress = true;
-        //alert("not a valid address");
+      if(this.newFormUser.address != "") {
+        if(!regexAddress.test(this.newFormUser.address)) {
+          this.notValidAddress = true;
+          //alert("not a valid address");
+        }
       }
 
-      if(!regexLocality.test(this.newFormUser.locality)) {
-        this.notValidAddress = true;
-        //alert("not a valid locality");
+      if(this.newFormUser.locality != "") {
+        if(!regexLocality.test(this.newFormUser.locality)) {
+          this.notValidAddress = true;
+          //alert("not a valid locality");
+        }
       }
       
-      if(!regexPostalCode.test(this.newFormUser.postalCode)) {
-        this.notValidPostalCode = true;
-        //alert("not a valid postalcode");
+      if(this.newFormUser.postalCode != "") {
+        if(!regexPostalCode.test(this.newFormUser.postalCode)) {
+          this.notValidPostalCode = true;
+          //alert("not a valid postalcode");
+        }
       }
 
       if(form.value.gender == "") {
