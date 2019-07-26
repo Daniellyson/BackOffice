@@ -31,16 +31,23 @@ export class AddAdminComponent implements OnInit {
   form: Object;
   users: User[];
 
-  wrongName: boolean;
-  wrongPassword: boolean;
+  takenName: boolean;
+  notValidName: boolean;
+
   passwordNotMatching: boolean;
+  notValidPassword: boolean;
+
   noGender: boolean;
-  wrongEmail: boolean;
-  wrongPhone: boolean;
-  wrongAddress: boolean;
-  wrongLocality: boolean;
-  wrongPostalCode: boolean;
-  
+
+  takenEmail: boolean;
+  notValidEmail: boolean;
+
+  takenPhone: boolean;
+  notValidPhone: boolean;
+
+  notValidAddress: boolean;
+  notValidLocality: boolean;
+  notValidPostalCode: boolean;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private userService: DataService) { }
   
@@ -67,17 +74,25 @@ export class AddAdminComponent implements OnInit {
   //TODO
 
   onSubmit(form: NgForm) {
-    this.wrongName = false;
-    this.wrongPassword = false;
+    this.takenName = false;
+    this.notValidName = false;
+
+    this.notValidPassword = false;
     this.passwordNotMatching = false;
+
     this.noGender = false;
-    this.wrongEmail = false;
-    this.wrongPhone = false;
-    this.wrongAddress = false;
-    this.wrongLocality = false;
-    this.wrongPostalCode = false;
 
+    this.takenEmail = false;
+    this.notValidEmail = false;
 
+    this.takenPhone = false;
+    this.notValidPhone = false;
+
+    this.notValidAddress = false;
+    this.notValidLocality = false;
+    this.notValidPostalCode = false;
+
+    //TODO see if it is necessary
     this.form = form;
 
     this.newFormUser.role = this.backoffice;
@@ -97,62 +112,75 @@ export class AddAdminComponent implements OnInit {
 
       if(this.newFormUser.userName != "") {
         if(!regexUserName.test(this.newFormUser.userName)) {
-          alert("Not a valid user name");
+          this.notValidName = true;
+          //alert("Not a valid user name");
         } 
         else {
           for(var iUser = 0; iUser < this.users.length && this.users[iUser].userName != this.newFormUser.userName; iUser++) { }
           if(iUser < this.users.length && this.users[iUser].userName == this.newFormUser.userName) {
-            document.getElementById("userName").style.cssText = "border: 2px solid red";
-            this.wrongName = true;
-            alert("User name already used \n\n Please choose another User name");
+            //document.getElementById("userName").style.cssText = "border: 2px solid red";
+            this.takenName = true;
+            //alert("User name already used \n\n Please choose another User name");
           }
         }
       }
 
       if(this.newFormUser.password != "") {
         if(!regexPassword.test(this.newFormUser.password)){
-          this.wrongPassword = true;
+          this.notValidPassword = true;
         }
+      }
+      if(form.value.password != form.value.passwordConfirm) {
+        /*form.value.password = "";
+        form.value.passwordConfirm = "";*/
+        this.passwordNotMatching = true;
+        /*getElementById("password").style.cssText = "border: 2px solid red";
+        document.getElementById("passwordConfirm").style.cssText = "border: 2px solid red";*/
       }
       
       if(this.newFormUser.email != "") {
         if(!regexEmail.test(this.newFormUser.email)) {
-          alert("not a valid email");
+          this.notValidEmail = true;
+          //alert("not a valid email");
         }
         else {
           for(var iMail = 0; iMail < this.users.length && this.users[iMail].email != this.newFormUser.email; iMail++) { }
           if(iMail < this.users.length && this.users[iMail].email == this.newFormUser.email) {
-            document.getElementById("email").style.cssText = "border: 2px solid red";
-            this.wrongEmail = true;
-            alert("Email not valid \n\n Please check your e-mail");
+            //document.getElementById("email").style.cssText = "border: 2px solid red";
+            this.takenEmail = true;
+            //alert("Email not valid \n\n Please check your e-mail");
           }
         }      
       }      
      
       if(this.newFormUser.phone != "") {
         if(!regexPhone.test(this.newFormUser.phone)) {
-          alert("not a valid phone");
+          this.notValidPhone = true;
+          //alert("not a valid phone");
         }
         else {
           for(var iPhone = 0; iPhone < this.users.length && this.users[iPhone].phone != this.newFormUser.phone; iPhone++) { }
           if(iPhone < this.users.length && this.users[iPhone].phone == this.newFormUser.phone && iPhone < this.users.length) {
-            document.getElementById("phone").style.cssText = "border: 2px solid red";
-            this.wrongPhone = true;
-            alert("Phone number not valid \n\n Please check your phone number");
+            //document.getElementById("phone").style.cssText = "border: 2px solid red";
+            this.takenPhone = true;
+            //alert("Phone number not valid \n\n Please check your phone number");
           }
         }
       }
 
       if(!regexAddress.test(this.newFormUser.address)) {
-        alert("not a valid address");
+        this.notValidAddress = true;
+        //alert("not a valid address");
       }
 
       if(!regexLocality.test(this.newFormUser.locality)) {
-        alert("not a valid locality");
+        this.notValidAddress = true;
+        //alert("not a valid locality");
       }
       
       if(!regexPostalCode.test(this.newFormUser.postalCode)) {
-        alert("not a valid postalcode");
+        this.notValidPostalCode = true;
+        //alert("not a valid postalcode");
       }
 
       if(form.value.gender == "") {
@@ -172,13 +200,7 @@ export class AddAdminComponent implements OnInit {
         }
       }
 
-      if(form.value.password != form.value.passwordConfirm) {
-        /*form.value.password = "";
-        form.value.passwordConfirm = "";*/
-        this.passwordNotMatching = true;
-        document.getElementById("password").style.cssText = "border: 2px solid red";
-        document.getElementById("passwordConfirm").style.cssText = "border: 2px solid red";
-      }
+      
     }); 
   }
 
