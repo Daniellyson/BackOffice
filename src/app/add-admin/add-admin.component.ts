@@ -11,7 +11,8 @@ const regexUserName : RegExp = new RegExp("^[a-zA-Z''-'\s]{1,40}$");
 const regexPassword : RegExp = new RegExp(".{6,}");
 const regexEmail : RegExp = new RegExp("[^@]+@[^\.]+\..+");
 const regexPhone : RegExp = new RegExp("^[0-9\-\+]{9,15}$");
-const regexAddress : RegExp = new RegExp("[a-zA-Z]+(\,)? (\d{1,})?");
+//TODO
+const regexAddress : RegExp = new RegExp("[a-zA-Z]+ (\\,)? (\d{1,})?");
 const regexLocality : RegExp = new RegExp("^[A-z,' -]+$");
 const regexPostalCode : RegExp = new RegExp("\\d{4,5}$");
 
@@ -24,7 +25,6 @@ const regexPostalCode : RegExp = new RegExp("\\d{4,5}$");
 
 export class AddAdminComponent implements OnInit {
 
-  //TODO
   readonly backoffice = "backoffice";
   addForm: FormGroup;
   newFormUser: User = new User;
@@ -71,7 +71,6 @@ export class AddAdminComponent implements OnInit {
     });
   }
 
-  //TODO
 
   onSubmit(form: NgForm) {
     this.takenName = false;
@@ -113,14 +112,11 @@ export class AddAdminComponent implements OnInit {
       if(this.newFormUser.userName != "") {
         if(!regexUserName.test(this.newFormUser.userName)) {
           this.notValidName = true;
-          //alert("Not a valid user name");
         } 
         else {
           for(var iUser = 0; iUser < this.users.length && this.users[iUser].userName != this.newFormUser.userName; iUser++) { }
           if(iUser < this.users.length && this.users[iUser].userName == this.newFormUser.userName) {
-            //document.getElementById("userName").style.cssText = "border: 2px solid red";
             this.takenName = true;
-            //alert("User name already used \n\n Please choose another User name");
           }
         }
       }
@@ -131,24 +127,17 @@ export class AddAdminComponent implements OnInit {
         }
       }
       if(form.value.password != form.value.passwordConfirm) {
-        /*form.value.password = "";
-        form.value.passwordConfirm = "";*/
         this.passwordNotMatching = true;
-        /*getElementById("password").style.cssText = "border: 2px solid red";
-        document.getElementById("passwordConfirm").style.cssText = "border: 2px solid red";*/
       }
       
       if(this.newFormUser.email != "") {
         if(!regexEmail.test(this.newFormUser.email)) {
           this.notValidEmail = true;
-          //alert("not a valid email");
         }
         else {
           for(var iMail = 0; iMail < this.users.length && this.users[iMail].email != this.newFormUser.email; iMail++) { }
           if(iMail < this.users.length && this.users[iMail].email == this.newFormUser.email) {
-            //document.getElementById("email").style.cssText = "border: 2px solid red";
             this.takenEmail = true;
-            //alert("Email not valid \n\n Please check your e-mail");
           }
         }      
       }      
@@ -156,14 +145,11 @@ export class AddAdminComponent implements OnInit {
       if(this.newFormUser.phone != "") {
         if(!regexPhone.test(this.newFormUser.phone)) {
           this.notValidPhone = true;
-          //alert("not a valid phone");
         }
         else {
           for(var iPhone = 0; iPhone < this.users.length && this.users[iPhone].phone != this.newFormUser.phone; iPhone++) { }
           if(iPhone < this.users.length && this.users[iPhone].phone == this.newFormUser.phone && iPhone < this.users.length) {
-            //document.getElementById("phone").style.cssText = "border: 2px solid red";
             this.takenPhone = true;
-            //alert("Phone number not valid \n\n Please check your phone number");
           }
         }
       }
@@ -171,21 +157,18 @@ export class AddAdminComponent implements OnInit {
       if(this.newFormUser.address != "") {
         if(!regexAddress.test(this.newFormUser.address)) {
           this.notValidAddress = true;
-          //alert("not a valid address");
         }
       }
 
       if(this.newFormUser.locality != "") {
         if(!regexLocality.test(this.newFormUser.locality)) {
           this.notValidAddress = true;
-          //alert("not a valid locality");
         }
       }
       
       if(this.newFormUser.postalCode != "") {
         if(!regexPostalCode.test(this.newFormUser.postalCode)) {
           this.notValidPostalCode = true;
-          //alert("not a valid postalcode");
         }
       }
 
