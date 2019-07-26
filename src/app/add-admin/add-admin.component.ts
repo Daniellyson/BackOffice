@@ -6,11 +6,22 @@ import { UsersComponent } from '../users/users.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DataService } from '../data.service';
 
+
+const regexUserName : RegExp = new RegExp("^[a-zA-Z''-'\s]{1,40}$");
+const regexPassword : RegExp = new RegExp(".{6,}");
+const regexEmail : RegExp = new RegExp("[^@]+@[^\.]+\..+");
+const regexPhone : RegExp = new RegExp("^[0-9\-\+]{9,15}$");
+const regexAddress : RegExp = new RegExp("[a-zA-Z]+(\,)? (\d{1,})?");
+const regexLocality : RegExp = new RegExp("^[A-z,' -]+$");
+const regexPostalCode : RegExp = new RegExp("\\d{4,5}$");
+
+
 @Component({
   selector: 'app-add-admin',
   templateUrl: './add-admin.component.html',
   styleUrls: ['./add-admin.component.css']
 })
+
 export class AddAdminComponent implements OnInit {
 
   //TODO
@@ -20,10 +31,16 @@ export class AddAdminComponent implements OnInit {
   form: Object;
   users: User[];
 
-  wrongName: boolean = false;
-  wrongEmail: boolean = false;
-  wrongPhone: boolean = false;
-  noGender: boolean = false;
+  wrongName: boolean;
+  wrongPassword: boolean;
+  passwordNotMatching: boolean;
+  noGender: boolean;
+  wrongEmail: boolean;
+  wrongPhone: boolean;
+  wrongAddress: boolean;
+  wrongLocality: boolean;
+  wrongPostalCode: boolean;
+  
 
   constructor(private formBuilder: FormBuilder, private router: Router, private userService: DataService) { }
   
@@ -50,6 +67,16 @@ export class AddAdminComponent implements OnInit {
   //TODO
 
   onSubmit(form: NgForm) {
+    this.wrongName = false;
+    this.wrongPassword = false;
+    this.passwordNotMatching = false;
+    this.noGender = false;
+    this.wrongEmail = false;
+    this.wrongPhone = false;
+    this.wrongAddress = false;
+    this.wrongLocality = false;
+    this.wrongPostalCode = false;
+
 
     this.form = form;
 
@@ -69,31 +96,64 @@ export class AddAdminComponent implements OnInit {
     (err : HttpErrorResponse) => {
 
       if(this.newFormUser.userName != "") {
-        for(var iUser = 0; iUser < this.users.length && this.users[iUser].userName != this.newFormUser.userName; iUser++) { }
-        if(iUser < this.users.length && this.users[iUser].userName == this.newFormUser.userName) {
-          document.getElementById("userName").style.cssText = "border: 2px solid red";
-          this.wrongName = true;
-          alert("User name already used \n\n Please choose another User name");
+        if(!regexUserName.test(this.newFormUser.userName)) {
+          alert("Not a valid user name");
+        } 
+        else {
+          for(var iUser = 0; iUser < this.users.length && this.users[iUser].userName != this.newFormUser.userName; iUser++) { }
+          if(iUser < this.users.length && this.users[iUser].userName == this.newFormUser.userName) {
+            document.getElementById("userName").style.cssText = "border: 2px solid red";
+            this.wrongName = true;
+            alert("User name already used \n\n Please choose another User name");
+          }
+        }
+      }
+
+      if(this.newFormUser.password != "") {
+        if(!regexPassword.test(this.newFormUser.password)){
+          this.wrongPassword = true;
         }
       }
       
       if(this.newFormUser.email != "") {
-        for(var iMail = 0; iMail < this.users.length && this.users[iMail].email != this.newFormUser.email; iMail++) { }
-        if(iMail < this.users.length && this.users[iMail].email == this.newFormUser.email) {
-          document.getElementById("email").style.cssText = "border: 2px solid red";
-          this.wrongEmail = true;
-          alert("Email not valid \n\n Please check your e-mail");
+        if(!regexEmail.test(this.newFormUser.email)) {
+          alert("not a valid email");
         }
+        else {
+          for(var iMail = 0; iMail < this.users.length && this.users[iMail].email != this.newFormUser.email; iMail++) { }
+          if(iMail < this.users.length && this.users[iMail].email == this.newFormUser.email) {
+            document.getElementById("email").style.cssText = "border: 2px solid red";
+            this.wrongEmail = true;
+            alert("Email not valid \n\n Please check your e-mail");
+          }
+        }      
       }      
      
       if(this.newFormUser.phone != "") {
-        for(var iPhone = 0; iPhone < this.users.length && this.users[iPhone].phone != this.newFormUser.phone; iPhone++) { }
-        if(iPhone < this.users.length && this.users[iPhone].phone == this.newFormUser.phone && iPhone < this.users.length) {
-          document.getElementById("phone").style.cssText = "border: 2px solid red";
-          this.wrongPhone = true;
-          alert("Phone number not valid \n\n Please check your phone number");
+        if(!regexPhone.test(this.newFormUser.phone)) {
+          alert("not a valid phone");
         }
-      }      
+        else {
+          for(var iPhone = 0; iPhone < this.users.length && this.users[iPhone].phone != this.newFormUser.phone; iPhone++) { }
+          if(iPhone < this.users.length && this.users[iPhone].phone == this.newFormUser.phone && iPhone < this.users.length) {
+            document.getElementById("phone").style.cssText = "border: 2px solid red";
+            this.wrongPhone = true;
+            alert("Phone number not valid \n\n Please check your phone number");
+          }
+        }
+      }
+
+      if(!regexAddress.test(this.newFormUser.address)) {
+        alert("not a valid address");
+      }
+
+      if(!regexLocality.test(this.newFormUser.locality)) {
+        alert("not a valid locality");
+      }
+      
+      if(!regexPostalCode.test(this.newFormUser.postalCode)) {
+        alert("not a valid postalcode");
+      }
 
       if(form.value.gender == "") {
         this.noGender = true;
@@ -113,9 +173,9 @@ export class AddAdminComponent implements OnInit {
       }
 
       if(form.value.password != form.value.passwordConfirm) {
-        form.value.password = "";
-        form.value.passwordConfirm = "";
-        alert("Your password is not correct");
+        /*form.value.password = "";
+        form.value.passwordConfirm = "";*/
+        this.passwordNotMatching = true;
         document.getElementById("password").style.cssText = "border: 2px solid red";
         document.getElementById("passwordConfirm").style.cssText = "border: 2px solid red";
       }

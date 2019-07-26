@@ -16,6 +16,10 @@
     <div class="form-group">
       <label for="passwordConfirm">Confirm password<span>*</span></label>
       <input type="password" required formControlName="passwordConfirm" placeholder="The same password as above" name="passwordConfirm" class="form-control" id="passwordConfirm">
+      <p>
+        <span *ngIf="wrongPassword">Minimum length = 6 </span>
+        <span *ngIf="passwordNotMatching">Password not matching</span>
+      </p>
     </div>
 
     <div id="gender" class="form-group">
@@ -27,9 +31,7 @@
         <input class="radioGender" type="radio" formControlName="gender" name="gender" value="m" required>
       </div>      
       <div id="paraGender"><p *ngIf="noGender">Please select your gender</p></div>
-    </div>
-    
-    
+    </div>  
 
     <div class="form-group">
       <label for="email">Email address<span>*</span></label>
