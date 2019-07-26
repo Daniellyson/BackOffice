@@ -20,20 +20,24 @@
 
     <div id="gender" class="form-group">
       <label for="gender">Gender<span>*</span></label>
+      <label class="radioGender">Female</label>
       <input class="radioGender" type="radio" formControlName="gender" name="gender" value="f" required checked>
-      <label class="labelGender">Female</label>
+      <label class="radioGender">Male</label>
       <input class="radioGender" type="radio" formControlName="gender" name="gender" value="m" required>
-      <label class="labelGender">Male</label>
     </div>
+    <div id="paraGender"><p *ngIf="noGender">Please select your gender</p></div>
+    
 
     <div class="form-group">
       <label for="email">Email address<span>*</span></label>
       <input type="email" required formControlName="email" placeholder="Email" name="email" class="form-control" id="email">
+      <p *ngIf="wrongEmail">Email already used</p>
     </div>
 
     <div class="form-group">
       <label for="phone">Phone Number</label>
       <input formControlName="phone" placeholder="Phone Number" name="phone" class="form-control" id="phone">
+      <p *ngIf="wrongPhone">Phone number already used</p>
     </div>
 
     <div class="form-group">

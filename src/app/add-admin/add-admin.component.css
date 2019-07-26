@@ -21,14 +21,11 @@ input {
     width: 500px;
 }
 
-#gender .labelGender {
-    display: inline;
-    clear: none;
-    padding: 2px 1em 0 0;
-}
   
 #gender .radioGender {
     width: 10px;
+    margin: 1px;
+    padding: 1px;
 }
 
 button {
@@ -50,4 +47,11 @@ span, p {
 
 P {
     font-size: 75%;
+}
+#gender {
+    width: 100px;
+}
+#paraGender {
+    width: 250px;
+    float: left;
 }
