@@ -51,11 +51,7 @@ export class AddAdminComponent implements OnInit {
 
   onSubmit(form: NgForm) {
 
-    if(form.value.password != form.value.passwordConfirm) {
-      form.value.password = "";
-      form.value.passwordConfirm = "";
-      alert("Your password is not correct");
-    }
+    this.form = form;
 
     this.newFormUser.role = this.backoffice;
     this.newFormUser.password = form.value.password;
@@ -101,7 +97,6 @@ export class AddAdminComponent implements OnInit {
 
       if(form.value.gender == "") {
         this.noGender = true;
-        alert("Please select your gender");
       }
 
       var inputs = document.querySelectorAll("input");
@@ -115,6 +110,14 @@ export class AddAdminComponent implements OnInit {
         else {
           inputs[inp].style.cssText = "none";
         }
+      }
+
+      if(form.value.password != form.value.passwordConfirm) {
+        form.value.password = "";
+        form.value.passwordConfirm = "";
+        alert("Your password is not correct");
+        document.getElementById("password").style.cssText = "border: 2px solid red";
+        document.getElementById("passwordConfirm").style.cssText = "border: 2px solid red";
       }
     }); 
   }

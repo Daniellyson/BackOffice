@@ -20,13 +20,7 @@ export class ChangeInfoAdminComponent implements OnInit {
   new_Password: string;
   confirm_new_Password: string;
 
-  constructor(private router : Router, private dataService: DataService) {
-    /*this.changePasswordForm = formBuilder.group({
-      'old_Password': [null, Validators.required],
-      'new_Password': [null, Validators.required],
-      'confirm_new_password': [null, [Validators.required]] 
-    });*/
-  }
+  constructor(private router : Router, private dataService: DataService) {  }
 
   ngOnInit() {
     this.userName = localStorage.getItem("administrator");
@@ -40,7 +34,6 @@ export class ChangeInfoAdminComponent implements OnInit {
   onSubmit(old_Password: string, new_Password: string, confirm_new_Password: string) {
 
     if(new_Password != confirm_new_Password) {
-      alert("Inside of condition not same password");
       new_Password = "0";
       confirm_new_Password = "0";
     }

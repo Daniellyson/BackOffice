@@ -10,7 +10,7 @@
 
     <div class="form-group">
       <label for="password">Password<span>*</span></label>
-      <input type="password" required  formControlName="password" placeholder="Min length 6, number, spicial char, ex: password0$" name="password" class="form-control" id="password">
+      <input type="password" required  formControlName="password" placeholder="Minimun length = 6" name="password" class="form-control" id="password">
     </div>
 
     <div class="form-group">
@@ -19,13 +19,16 @@
     </div>
 
     <div id="gender" class="form-group">
-      <label for="gender">Gender<span>*</span></label>
-      <label class="radioGender">Female</label>
-      <input class="radioGender" type="radio" formControlName="gender" name="gender" value="f" required checked>
-      <label class="radioGender">Male</label>
-      <input class="radioGender" type="radio" formControlName="gender" name="gender" value="m" required>
+      <div id="genderRadio">
+        <label for="gender">Gender<span>*</span></label>
+        <label class="radioGender">Female</label>
+        <input class="radioGender" type="radio" formControlName="gender" name="gender" value="f" required checked>
+        <label class="radioGender">Male</label>
+        <input class="radioGender" type="radio" formControlName="gender" name="gender" value="m" required>
+      </div>      
+      <div id="paraGender"><p *ngIf="noGender">Please select your gender</p></div>
     </div>
-    <div id="paraGender"><p *ngIf="noGender">Please select your gender</p></div>
+    
     
 
     <div class="form-group">
