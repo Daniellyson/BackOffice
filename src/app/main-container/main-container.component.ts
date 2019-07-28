@@ -5,6 +5,7 @@ import { User } from '../users/userModel';
 import { DatePipe, formatDate } from '@angular/common';
 import { Carpooling } from '../carpooling/carpoolingModel';
 import { HttpErrorResponse } from '@angular/common/http';
+import { delay } from 'q';
 
 @Component({
   selector: 'app-main-container',
@@ -26,10 +27,17 @@ export class MainContainerComponent implements OnInit {
 	constructor(private data: DataService) { }
 
   	ngOnInit() {
-		this.printDashboard();
+		this.printDashboard();	
 	}
 	
 	printDashboard() {
+
+		const firstTime = localStorage.getItem("firstTime");
+		if(firstTime) {
+			localStorage.removeItem("firstTime");
+			location.reload();
+		}
+		
 		this.data.getCarpooling().subscribe((car: Carpooling[]) => {
 			
 			for(var iCar = 0; iCar < car.length; iCar++) {
@@ -87,7 +95,7 @@ export class MainContainerComponent implements OnInit {
 			});
 		},
 		(err : HttpErrorResponse) => {
-			if(err.status == 401) {
+			if(err.status === 401) {
 				console.log("ERROR : " + err.statusText);
 			}
 		});

@@ -30,7 +30,7 @@ export class AuthInterceptorService implements HttpInterceptor {
         },
         (error: HttpErrorResponse) => {
           console.log("ERROR : " + error.status);
-
+          alert("Loggin to refresh your session please");
           this.dataService.logout();
         },
         () => {

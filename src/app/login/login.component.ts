@@ -14,8 +14,6 @@ export class LoginComponent implements OnInit {
 
   isLogin: boolean = true; 
 
-  topPage: TopPageComponent;
-
   incorrectLogin: string = "Username or password incorrect";
 
   constructor(private userService : DataService, private router : Router) { }
@@ -37,10 +35,12 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('userToken', data.access_token);
 
       localStorage.setItem('logged', 'true');
+
+      localStorage.setItem('firstTime', 'true');
       
       this.userService.setEventEmit(true);
 
-      this.router.navigate(['mainWindow']);
+      this.ngOnInit();
       
     },
     (err : HttpErrorResponse) => {
