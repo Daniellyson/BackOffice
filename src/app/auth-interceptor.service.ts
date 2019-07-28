@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { DataService } from './data.service';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { tap } from "rxjs/operators";
 
 
 @Injectable({
@@ -17,16 +18,24 @@ export class AuthInterceptorService implements HttpInterceptor {
 
     if (idToken) {
       const cloned = req.clone({
-          headers: req.headers.set("Authorization",
+          headers : req.headers.set("Authorization",
               "Bearer " + idToken)
       });
 
-      return next.handle(cloned);
     }
-    else {
-      this.dataService.logout();
-      return next.handle(req);
-    }
-    //throw new Error("Method not implemented.");
+    return next.handle(req)
+      .pipe(tap(
+        (response: HttpEvent<any>) => {
+          console.log("REPONSE : " + response.type); 
+        },
+        (error: HttpErrorResponse) => {
+          console.log("ERROR : " + error.status);
+
+          this.dataService.logout();
+        },
+        () => {
+          console.log("completed successfully");
+        }
+      ));    
   }
 }

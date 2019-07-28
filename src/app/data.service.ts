@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { User } from './users/userModel';
 import { Router } from '@angular/router';
+import { AuthInterceptorService } from './auth-interceptor.service';
 
 @Injectable({
   providedIn: 'root'
@@ -73,7 +74,7 @@ export class DataService {
   getCar() {
     return this.http.get(this.rootUrl + '/api/Cars', {headers : this.header});
   }
-
+  
   updateCar(carId: number, isValid: boolean) {
     return this.http.put(this.rootUrl + '/api/ValidCars/' + carId, {isValid}, {headers : this.header});
   }

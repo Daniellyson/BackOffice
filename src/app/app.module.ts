@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { TopPageComponent } from './top-page/top-page.component';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -38,7 +38,13 @@ import { OnlineStatusComponent } from './online-status/online-status.component';
     ReactiveFormsModule,
     FormsModule 
   ],
-  providers: [DataService, AuthInterceptorService],
+  providers: [DataService, 
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptorService,
+    multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 

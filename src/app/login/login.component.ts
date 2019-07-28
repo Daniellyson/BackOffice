@@ -46,7 +46,6 @@ export class LoginComponent implements OnInit {
     (err : HttpErrorResponse) => {
       this.userService.setEventEmit(false);
       this.isLogin = false;
-
       alert(this.incorrectLogin);
     });
   }

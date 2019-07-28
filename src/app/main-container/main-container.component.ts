@@ -4,6 +4,7 @@ import * as CanvasJS from '../../canvasjs.min';
 import { User } from '../users/userModel';
 import { DatePipe, formatDate } from '@angular/common';
 import { Carpooling } from '../carpooling/carpoolingModel';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-main-container',
@@ -22,11 +23,13 @@ export class MainContainerComponent implements OnInit {
 	userMonthCreatedAt: number = 0;
 	carpoolingThisMonth: number = 0;
 
-
 	constructor(private data: DataService) { }
 
   	ngOnInit() {
-
+		this.printDashboard();
+	}
+	
+	printDashboard() {
 		this.data.getCarpooling().subscribe((car: Carpooling[]) => {
 			
 			for(var iCar = 0; iCar < car.length; iCar++) {
@@ -82,8 +85,12 @@ export class MainContainerComponent implements OnInit {
 		
 				chart.render();
 			});
-	  	});
+		},
+		(err : HttpErrorResponse) => {
+			if(err.status == 401) {
+				console.log("ERROR : " + err.statusText);
+			}
+		});
 
-			
-    }
+	}
 }

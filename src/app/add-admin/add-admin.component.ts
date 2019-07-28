@@ -12,7 +12,7 @@ const regexPassword : RegExp = new RegExp(".{6,}");
 const regexEmail : RegExp = new RegExp("[^@]+@[^\.]+\..+");
 const regexPhone : RegExp = new RegExp("^[0-9\-\+]{9,15}$");
 //TODO
-const regexAddress : RegExp = new RegExp("[a-zA-Z]+ (\\,)? (\d{1,})?");
+const regexAddress : RegExp = new RegExp("(^[a-zA-Z\s]+)(\d+)$");
 const regexLocality : RegExp = new RegExp("^[A-z,' -]+$");
 const regexPostalCode : RegExp = new RegExp("\\d{4,5}$");
 
@@ -49,6 +49,8 @@ export class AddAdminComponent implements OnInit {
   notValidLocality: boolean;
   notValidPostalCode: boolean;
 
+  ok: boolean;
+
   constructor(private formBuilder: FormBuilder, private router: Router, private userService: DataService) { }
   
   ngOnInit() { 
@@ -71,7 +73,6 @@ export class AddAdminComponent implements OnInit {
     });
   }
 
-
   onSubmit(form: NgForm) {
     this.takenName = false;
     this.notValidName = false;
@@ -91,8 +92,8 @@ export class AddAdminComponent implements OnInit {
     this.notValidLocality = false;
     this.notValidPostalCode = false;
 
-    //TODO see if it is necessary
-    this.form = form;
+    this.ok = true;
+
 
     this.newFormUser.role = this.backoffice;
     this.newFormUser.password = form.value.password;
@@ -104,84 +105,100 @@ export class AddAdminComponent implements OnInit {
     this.newFormUser.locality = form.value.locality;
     this.newFormUser.postalCode = form.value.postalCode;
 
+
+    if(this.newFormUser.userName != "") {
+      if(!regexUserName.test(this.newFormUser.userName)) {
+        this.notValidName = true;
+        this.ok = false;
+      } 
+      else {
+        for(var iUser = 0; iUser < this.users.length && this.users[iUser].userName != this.newFormUser.userName; iUser++) { }
+        if(iUser < this.users.length && this.users[iUser].userName == this.newFormUser.userName) {
+          this.takenName = true;
+          this.ok = false;
+        }
+      }
+    }
+
+    if(this.newFormUser.password != "") {
+      if(!regexPassword.test(this.newFormUser.password)){
+        this.notValidPassword = true;
+        this.ok = false;
+      }
+    }
+    if(form.value.password != form.value.passwordConfirm) {
+      this.passwordNotMatching = true;
+      this.ok = false;
+    }
+    
+    if(this.newFormUser.email != "") {
+      if(!regexEmail.test(this.newFormUser.email)) {
+        this.notValidEmail = true;
+        this.ok = false;
+      }
+      else {
+        for(var iMail = 0; iMail < this.users.length && this.users[iMail].email != this.newFormUser.email; iMail++) { }
+        if(iMail < this.users.length && this.users[iMail].email == this.newFormUser.email) {
+          this.takenEmail = true;
+          this.ok = false;
+        }
+      }      
+    }      
+   
+    if(this.newFormUser.phone != "") {
+      if(!regexPhone.test(this.newFormUser.phone)) {
+        this.notValidPhone = true;
+        this.ok = false;
+      }
+      else {
+        for(var iPhone = 0; iPhone < this.users.length && this.users[iPhone].phone != this.newFormUser.phone; iPhone++) { }
+        if(iPhone < this.users.length && this.users[iPhone].phone == this.newFormUser.phone && iPhone < this.users.length) {
+          this.takenPhone = true;
+          this.ok = false;
+        }
+      }
+    }
+
+    if(this.newFormUser.address != "") {
+      if(!regexAddress.test(this.newFormUser.address)) {
+        this.notValidAddress = true;
+        this.ok = false;
+        this.newFormUser.address = "";
+      }
+    }
+
+    if(this.newFormUser.locality != "") {
+      if(!regexLocality.test(this.newFormUser.locality)) {
+        this.notValidAddress = true;
+        this.ok = false;
+      }
+    }
+    
+    if(this.newFormUser.postalCode != "") {
+      if(!regexPostalCode.test(this.newFormUser.postalCode)) {
+        this.notValidPostalCode = true;
+        this.ok = false;
+      }
+    }
+
+    if(form.value.gender == "") {
+      this.noGender = true;
+      this.ok = false;
+    }
+
+
     this.userService.addNewAdm(this.newFormUser).subscribe(() => {
+      alert("In subscribe");
       this.backToAllUsers();
     },
     (err : HttpErrorResponse) => {
-
-      if(this.newFormUser.userName != "") {
-        if(!regexUserName.test(this.newFormUser.userName)) {
-          this.notValidName = true;
-        } 
-        else {
-          for(var iUser = 0; iUser < this.users.length && this.users[iUser].userName != this.newFormUser.userName; iUser++) { }
-          if(iUser < this.users.length && this.users[iUser].userName == this.newFormUser.userName) {
-            this.takenName = true;
-          }
-        }
-      }
-
-      if(this.newFormUser.password != "") {
-        if(!regexPassword.test(this.newFormUser.password)){
-          this.notValidPassword = true;
-        }
-      }
-      if(form.value.password != form.value.passwordConfirm) {
-        this.passwordNotMatching = true;
-      }
-      
-      if(this.newFormUser.email != "") {
-        if(!regexEmail.test(this.newFormUser.email)) {
-          this.notValidEmail = true;
-        }
-        else {
-          for(var iMail = 0; iMail < this.users.length && this.users[iMail].email != this.newFormUser.email; iMail++) { }
-          if(iMail < this.users.length && this.users[iMail].email == this.newFormUser.email) {
-            this.takenEmail = true;
-          }
-        }      
-      }      
-     
-      if(this.newFormUser.phone != "") {
-        if(!regexPhone.test(this.newFormUser.phone)) {
-          this.notValidPhone = true;
-        }
-        else {
-          for(var iPhone = 0; iPhone < this.users.length && this.users[iPhone].phone != this.newFormUser.phone; iPhone++) { }
-          if(iPhone < this.users.length && this.users[iPhone].phone == this.newFormUser.phone && iPhone < this.users.length) {
-            this.takenPhone = true;
-          }
-        }
-      }
-
-      if(this.newFormUser.address != "") {
-        if(!regexAddress.test(this.newFormUser.address)) {
-          this.notValidAddress = true;
-        }
-      }
-
-      if(this.newFormUser.locality != "") {
-        if(!regexLocality.test(this.newFormUser.locality)) {
-          this.notValidAddress = true;
-        }
-      }
-      
-      if(this.newFormUser.postalCode != "") {
-        if(!regexPostalCode.test(this.newFormUser.postalCode)) {
-          this.notValidPostalCode = true;
-        }
-      }
-
-      if(form.value.gender == "") {
-        this.noGender = true;
-      }
 
       var inputs = document.querySelectorAll("input");
       
       for(let inp = 0; inp < inputs.length; inp++) {
           
         if(inputs[inp].required && inputs[inp].value == "") {
-            
+            this.ok = false;
             inputs[inp].style.cssText = "border: 2px solid red";
         }
         else {
@@ -189,12 +206,15 @@ export class AddAdminComponent implements OnInit {
         }
       }
 
-      
+      if(err.status == 500 && this.ok) {
+        this.backToAllUsers();
+        alert("In condition HTTP erreur");
+      }
     }); 
   }
 
   backToAllUsers() {
-    alert("backToAllUsers");
+    alert("New administrator added");
     this.router.navigate(['../mainWindow/users']);
   }
 }
