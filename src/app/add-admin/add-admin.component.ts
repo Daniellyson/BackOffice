@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, NgForm, FormControl } from '@angular/forms';
 import { User } from '../users/userModel';
 import { Router } from '@angular/router';
-import { UsersComponent } from '../users/users.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DataService } from '../data.service';
 
@@ -12,7 +11,8 @@ const regexPassword : RegExp = new RegExp(".{6,}");
 const regexEmail : RegExp = new RegExp("[^@]+@[^\.]+\..+");
 const regexPhone : RegExp = new RegExp("^[0-9\-\+]{9,15}$");
 //TODO
-const regexAddress : RegExp = new RegExp("(^[a-zA-Z\s]+)(\d+)$");
+const regexAddress : RegExp = new RegExp("(^[a-zA-Z'\\s]+)(\\d+\\s)?([a-zA-Z'\\s]+)?(\,\\s)(\\d+)");
+
 const regexLocality : RegExp = new RegExp("^[A-z,' -]+$");
 const regexPostalCode : RegExp = new RegExp("\\d{4,5}$");
 
@@ -105,7 +105,6 @@ export class AddAdminComponent implements OnInit {
     this.newFormUser.locality = form.value.locality;
     this.newFormUser.postalCode = form.value.postalCode;
 
-
     if(this.newFormUser.userName != "") {
       if(!regexUserName.test(this.newFormUser.userName)) {
         this.notValidName = true;
@@ -158,7 +157,7 @@ export class AddAdminComponent implements OnInit {
         }
       }
     }
-
+   
     if(this.newFormUser.address != "") {
       if(!regexAddress.test(this.newFormUser.address)) {
         this.notValidAddress = true;
@@ -169,7 +168,7 @@ export class AddAdminComponent implements OnInit {
 
     if(this.newFormUser.locality != "") {
       if(!regexLocality.test(this.newFormUser.locality)) {
-        this.notValidAddress = true;
+        this.notValidLocality = true;
         this.ok = false;
       }
     }
@@ -206,7 +205,7 @@ export class AddAdminComponent implements OnInit {
         }
       }
 
-      if(err.status == 500 && this.ok) {
+      if(error.status == 500 && this.ok) {
         this.backToAllUsers();
       }
     }); 

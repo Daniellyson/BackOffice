@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from '../users/userModel';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { HttpClient } from 'selenium-webdriver/http';
 
 const regexPassword : RegExp = new RegExp(".{6,}");
 const password: string = localStorage.getItem("password");
@@ -50,7 +48,7 @@ export class ChangeInfoAdminComponent implements OnInit {
         this.passwordNotMatching = true;
       }
     }
-    
+
     this.notValidPassword = (!regexPassword.test(new_Password));
     this.notValidPasswordConfirm = (!regexPassword.test(confirm_new_Password));
     this.wrongPassword = (password != old_Password);
