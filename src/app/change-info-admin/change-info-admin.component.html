@@ -4,11 +4,16 @@
     <form class="login-form">
        
       <input type="password" #old_Password required placeholder="Old password" name="old_Password" class="form-control" id="old_Password">
-      
+      <p *ngIf="wrongPassword">Wrong password</p>
+
       <input type="password" #new_Password required placeholder="New password (Minimun length = 6)" name="new_Password" class="form-control" id="new_Password">
-      
+      <p *ngIf="passwordNotMatching">Password not matching</p>
+      <p *ngIf="notValidPassword">Password not valid. Minimun length 6</p>
+
       <input type="password" #confirm_new_password required placeholder="Confirm new password" name="confirm_new_password" class="form-control" id="confirm_new_password">
-      
+      <p *ngIf="passwordNotMatching">Password not matching</p>
+      <p *ngIf="notValidPasswordConfirm">Password not valid. Minimun length 6</p>
+
       <button (click)="onSubmit(old_Password.value, new_Password.value, confirm_new_password.value)">Update passoword</button>
     </form>
   </div>

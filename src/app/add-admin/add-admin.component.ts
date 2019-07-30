@@ -191,8 +191,8 @@ export class AddAdminComponent implements OnInit {
       alert("In subscribe");
       this.backToAllUsers();
     },
-    (err : HttpErrorResponse) => {
-
+    (error : HttpErrorResponse) => {
+      
       var inputs = document.querySelectorAll("input");
       
       for(let inp = 0; inp < inputs.length; inp++) {
@@ -208,7 +208,6 @@ export class AddAdminComponent implements OnInit {
 
       if(err.status == 500 && this.ok) {
         this.backToAllUsers();
-        alert("In condition HTTP erreur");
       }
     }); 
   }

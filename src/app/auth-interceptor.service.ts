@@ -14,7 +14,7 @@ export class AuthInterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    const idToken = localStorage.getItem("userToken");
+    /*const idToken = localStorage.getItem("userToken");
 
     if (idToken) {
       const cloned = req.clone({
@@ -22,16 +22,18 @@ export class AuthInterceptorService implements HttpInterceptor {
               "Bearer " + idToken)
       });
 
-    }
+    }*/
     return next.handle(req)
       .pipe(tap(
         (response: HttpEvent<any>) => {
           console.log("REPONSE : " + response.type); 
         },
         (error: HttpErrorResponse) => {
-          console.log("ERROR : " + error.status);
-          alert("Loggin to refresh your session please");
-          this.dataService.logout();
+          if(localStorage.getItem("logged") && error.status == 401) {
+            console.log("ERROR : " + error.status);
+            alert("Your session has expired. Please login");
+            this.dataService.logout();
+          }   
         },
         () => {
           console.log("completed successfully");

@@ -24,5 +24,13 @@ input {
     border: 1px solid;
     border-radius: 8px;
     width: 420px;
+    margin-top: 10px;
     margin-bottom: 10px;
+}
+
+P {
+    color: red;
+    margin: 1px;
+    padding: 1px;
+    font-size: 80%;
 }

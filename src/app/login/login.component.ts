@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   constructor(private userService : DataService, private router : Router) { }
 
   ngOnInit() {
-    if(localStorage.getItem('logged') == 'true') {
+    if(localStorage.getItem('logged')) {
       this.router.navigate(['mainWindow']);
     }
   }
@@ -37,6 +37,8 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('logged', 'true');
 
       localStorage.setItem('firstTime', 'true');
+
+      localStorage.setItem('passowrd', password);
       
       this.userService.setEventEmit(true);
 

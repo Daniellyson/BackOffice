@@ -15,7 +15,7 @@ export class UsersComponent implements OnInit {
   users: Object;
 
   userByID: User[];
-  userByUserName: any;
+  userByUserName: User[];
 
   allUsers: boolean = true;
 
@@ -39,7 +39,7 @@ export class UsersComponent implements OnInit {
     this.allUsers = false;
     this.dataService.getUsers().subscribe((data : User[]) => {
       for(var iUser = 0; iUser < data.length && data[iUser].userName != value; iUser++) { }
-      this.apiResponse = (data[iUser].userName == value) 
+      this.apiResponse = (data[iUser].userName == value)
 
       this.userByUserName = data.filter(uniqueUser => uniqueUser.userName == value);   
       

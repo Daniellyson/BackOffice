@@ -42,6 +42,7 @@ export class DataService {
     localStorage.removeItem('userToken');
     localStorage.removeItem('logged');
     localStorage.removeItem('administrator');
+    localStorage.removeItem('password');
     this.router.navigate(['']);
   }
 
