@@ -39,16 +39,22 @@ export class UsersComponent implements OnInit {
     this.allUsers = false;
     this.dataService.getUsers().subscribe((data : User[]) => {
       for(var iUser = 0; iUser < data.length && data[iUser].userName != value; iUser++) { }
-      this.apiResponse = (data[iUser].userName == value)
 
-      this.userByUserName = data.filter(uniqueUser => uniqueUser.userName == value);   
-      
+      this.apiResponse = (data[iUser].userName == value);
+      this.userByUserName = data.filter(uniqueUser => uniqueUser.userName == value);  
+            
       this.dataService.getCar().subscribe((car : Car[]) => { 
+        
         this.cars = car  
 
         this.userCar = this.cars.filter(uniqueCarUser => uniqueCarUser.owner == data[iUser].id); 
       });
     });
+    /*if(!this.apiResponse && !this.allUsers) {
+      alert("Please, give a valide User Name");
+      this.apiResponse = true;
+      this.allUsers = true;
+    }*/
   }
 
   modifyUser(id: string) { 
@@ -71,6 +77,7 @@ export class UsersComponent implements OnInit {
   getAllUsersBack() {
     
     this.ngOnInit();
+    this.apiResponse = true;
     this.allUsers = true;
     this.modify_user = false;
   }

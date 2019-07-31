@@ -6,6 +6,8 @@ import { DataService } from '../data.service';
 import { User } from '../users/userModel';
 import { HttpErrorResponse } from '@angular/common/http';
 
+const userId: string = localStorage.getItem("editUserId");
+
 @Component({
   selector: 'app-modify-user',
   templateUrl: './modify-user.component.html',
@@ -16,12 +18,10 @@ export class ModifyUserComponent implements OnInit {
   editForm: FormGroup;
   newFormUser: User;
   form: Object;
-  userId: string;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private user: UsersComponent, private userService: DataService) { }
 
   ngOnInit() {
-    this.userId = localStorage.getItem("editUserId");
 
     this.editForm = this.formBuilder.group({
       //userName: ['', Validators.required],
@@ -33,7 +33,7 @@ export class ModifyUserComponent implements OnInit {
     	trustedCarpoolingDriverCode: ['', Validators]
     });
 
-    this.userService.getUserById(this.userId).subscribe(data => {
+    this.userService.getUserById(userId).subscribe(data => {
 
       this.newFormUser = data;
       
@@ -52,7 +52,7 @@ export class ModifyUserComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    this.userId = localStorage.getItem("editUserId");    
+    //userId = localStorage.getItem("editUserId");    
 
     //this.newFormUser.userName = form.value.userName;
     this.newFormUser.email = form.value.email;
@@ -62,7 +62,7 @@ export class ModifyUserComponent implements OnInit {
     this.newFormUser.postalCode = form.value.postalCode;
     this.newFormUser.trustedCarpoolingDriverCode = form.value.trustedCarpoolingDriverCode;
 
-    this.userService.updateUser(this.userId, this.newFormUser).subscribe(() => {
+    this.userService.updateUser(userId, this.newFormUser).subscribe(() => {
       this.backToAllUsers();
     },
     (err : HttpErrorResponse) => {

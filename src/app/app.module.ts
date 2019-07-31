@@ -18,7 +18,7 @@ import { ChangeInfoAdminComponent } from './change-info-admin/change-info-admin.
 import { AddAdminComponent } from './add-admin/add-admin.component';
 import { OnlineStatusComponent } from './online-status/online-status.component'; 
 
-
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 @NgModule({
@@ -36,7 +36,8 @@ import { OnlineStatusComponent } from './online-status/online-status.component';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule 
+    FormsModule,
+    Ng2SearchPipeModule
   ],
   providers: [DataService, 
     {

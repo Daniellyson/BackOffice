@@ -6,11 +6,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { DataService } from '../data.service';
 
 
-const regexUserName : RegExp = new RegExp("^[a-zA-Z''-'\s]{1,40}$");
+const regexUserName : RegExp = new RegExp("^([a-zA-Z''-'\\s]+)");
 const regexPassword : RegExp = new RegExp(".{6,}");
 const regexEmail : RegExp = new RegExp("[^@]+@[^\.]+\..+");
 const regexPhone : RegExp = new RegExp("^[0-9\-\+]{9,15}$");
-//TODO
 const regexAddress : RegExp = new RegExp("(^[a-zA-Z'\\s]+)(\\d+\\s)?([a-zA-Z'\\s]+)?(\,\\s)(\\d+)");
 
 const regexLocality : RegExp = new RegExp("^[A-z,' -]+$");
