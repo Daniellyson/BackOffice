@@ -48,3 +48,10 @@ div div.userInfo {
 table#car {
     border: 1px solid yellow;
 }
+
+.backoffice {
+    color: blue;
+}
+.client {
+    color: rgb(221, 9, 9);
+}

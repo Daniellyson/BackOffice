@@ -24,7 +24,7 @@ export class MainContainerComponent implements OnInit {
 	userMonthCreatedAt: number = 0;
 	carpoolingThisMonth: number = 0;
 
-	constructor(private data: DataService) { }
+	constructor(private dataService: DataService) { }
 
   	ngOnInit() {
 		this.printDashboard();	
@@ -37,8 +37,8 @@ export class MainContainerComponent implements OnInit {
 			localStorage.removeItem("firstTime");
 			location.reload();
 		}
-		
-		this.data.getCarpooling().subscribe((car: Carpooling[]) => {
+
+		this.dataService.getCarpooling().subscribe((car: Carpooling[]) => {
 			
 			for(var iCar = 0; iCar < car.length; iCar++) {
 				var sysMonth = new Date().getMonth();
@@ -52,11 +52,11 @@ export class MainContainerComponent implements OnInit {
 				this.totalCarpooling++;
 			}
 
-			this.data.getUsers().subscribe(
+			this.dataService.getUsers().subscribe(
 				(data: User[]) => { 
-					
+				
 				this.users = data;
-
+				
 				for(var iUser = 0; iUser < this.users.length; iUser++) {
 					var sysMonth = new Date().getMonth();
 					
@@ -69,11 +69,12 @@ export class MainContainerComponent implements OnInit {
 
 				for(let i = 0; i < this.users.length; i++) {
 					if(this.users[i].gender == 'f') {
-						this.women++;
+						this.women++;						
 					} 
 					else {
 						this.men++;
 					}
+					
 				}
 	
 				let chart = new CanvasJS.Chart("chartContainer", {
@@ -99,6 +100,6 @@ export class MainContainerComponent implements OnInit {
 				console.log("ERROR : " + err.statusText);
 			}
 		});
-
+		
 	}
 }

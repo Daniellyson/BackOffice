@@ -4,6 +4,8 @@ import { User } from './userModel';
 import { Router } from '@angular/router';
 import { Car } from '../validation/carModel';
 
+const pageSize: number = 5;
+
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -12,10 +14,12 @@ import { Car } from '../validation/carModel';
 
 export class UsersComponent implements OnInit {
 
-  users: Object;
+  users: User[];
 
   userByID: User[];
   userByUserName: User[];
+
+  user: User;
 
   allUsers: boolean = true;
 
@@ -26,35 +30,65 @@ export class UsersComponent implements OnInit {
   cars: Car[];
   userCar: any;
 
+  resultPage: number = 0;
+  totalPageUsers: number;
+
   constructor(private dataService: DataService, private router: Router) {  }
 
   ngOnInit() {
-    this.dataService.getUsers().subscribe(
-      data => this.users = data
+
+    this.dataService.getUsers().subscribe((dataUser : User[]) => {
+      this.totalPageUsers = Math.ceil(dataUser.length/pageSize);
+      this.users = dataUser;
+    });
+
+    this.dataService.getUsersPagination(this.resultPage).subscribe(
+      (data : User[]) => {
+        this.users = data;
+      }
     );
+    
+    
+    
+    this.getUsersOtherPage(this.resultPage);
+  }
+  //TODO the see a way to get both option paging and search total
+
+  getUsersOtherPage(value: number) {
+
+    this.resultPage += value;
+    if(this.resultPage >= 0 && this.resultPage <= this.totalPageUsers) {
+      this.dataService.getUsersPagination(this.resultPage).subscribe(
+        (data : User[]) => this.users = data
+      );
+    }
+    
   }
 
   getUserByUserName(value: string) {
+    
     this.apiResponse = false;
     this.allUsers = false;
-    this.dataService.getUsers().subscribe((data : User[]) => {
-      for(var iUser = 0; iUser < data.length && data[iUser].userName != value; iUser++) { }
+    
+    this.dataService.getUserById(value).subscribe((data : User) => {
+      //for(var iUser = 0; iUser < data.length && data[iUser].userName != value; iUser++) { }
 
-      this.apiResponse = (data[iUser].userName == value);
-      this.userByUserName = data.filter(uniqueUser => uniqueUser.userName == value);  
+      this.apiResponse = data.id == value;
+
+      this.user = data;
+
+      console.log(data.userName);
+
+      //this.userByUserName = data.filter(uniqueUser => uniqueUser.userName == value);  
             
       this.dataService.getCar().subscribe((car : Car[]) => { 
         
         this.cars = car  
 
-        this.userCar = this.cars.filter(uniqueCarUser => uniqueCarUser.owner == data[iUser].id); 
+        //this.userCar = this.cars.filter(uniqueCarUser => uniqueCarUser.owner == data[iUser].id); 
+        this.userCar = this.cars.filter(uniqueCarUser => uniqueCarUser.owner == data.id); 
       });
     });
-    /*if(!this.apiResponse && !this.allUsers) {
-      alert("Please, give a valide User Name");
-      this.apiResponse = true;
-      this.allUsers = true;
-    }*/
   }
 
   modifyUser(id: string) { 
@@ -74,8 +108,7 @@ export class UsersComponent implements OnInit {
     } 
   }
 
-  getAllUsersBack() {
-    
+  getAllUsersBack() {    
     this.ngOnInit();
     this.apiResponse = true;
     this.allUsers = true;

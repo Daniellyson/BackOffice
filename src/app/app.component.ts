@@ -42,5 +42,9 @@ export class AppComponent implements OnInit, OnDestroy {
      
       this.subscriptions.forEach(subscription => subscription.unsubscribe());
     }
+
+    reload() {
+      location.reload();
+    }
   }
 

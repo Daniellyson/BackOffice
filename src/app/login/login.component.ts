@@ -5,6 +5,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { TopPageComponent } from '../top-page/top-page.component';
 import { User } from '../users/userModel';
 
+const incorrectLogin: string = "Username or password incorrect";
+const notAdm: string = "You are not a administrator. \nPlease Contact : https://github.com/Daniellyson "
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,8 +16,7 @@ import { User } from '../users/userModel';
 export class LoginComponent implements OnInit {
 
   isLogin: boolean = true; 
-
-  incorrectLogin: string = "Username or password incorrect";
+  backoffice: boolean = false;
 
   constructor(private userService : DataService, private router : Router) { }
 
@@ -42,13 +44,31 @@ export class LoginComponent implements OnInit {
       
       this.userService.setEventEmit(true);
 
-      this.ngOnInit();
-      
+      this.authAdministrator(data);
     },
     (err : HttpErrorResponse) => {
       this.userService.setEventEmit(false);
       this.isLogin = false;
-      alert(this.incorrectLogin);
+      alert(incorrectLogin);
+    });
+  }
+
+  authAdministrator(data : any) {    
+    
+    this.userService.getUserById(data.userId).subscribe((dataUser : User) => {
+
+      this.backoffice = (dataUser.role == "backoffice");
+
+      if(this.backoffice) {
+        alert("Welcome");
+        this.ngOnInit();
+      }
+      else {
+        this.userService.setEventEmit(false);
+        this.isLogin = false;
+        alert(notAdm);
+        this.userService.logout();
+      }
     });
   }
 }

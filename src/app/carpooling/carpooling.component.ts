@@ -18,7 +18,10 @@ export class CarpoolingComponent implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
+    //TODO delete
+		alert(localStorage.getItem("userToken"));
     
+    //TODO paging
     this.dataService.getUsers().subscribe((data: User[]) => {
       this.users = data;
 

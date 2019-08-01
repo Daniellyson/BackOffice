@@ -2,7 +2,7 @@
   <div class="main-right-container">
     <h2>
       <label>Search <input id="search" placeholder="Enter A VALIDE User Name" #box [(ngModel)]="term"></label>
-      <button (click)="getUserByUserName(box.value)">Go</button>
+      <!--<button (click)="getUserByUserName(box.value)">Go</button>-->
       <button (click)="getAllUsersBack()">Back</button>
     </h2>
 
@@ -10,7 +10,8 @@
     <div id="infos">
       <div  class="userInfo" *ngIf="!allUsers"> 
         <table *ngIf="apiResponse"> 
-          <ng-container *ngFor="let user of userByUserName">
+          <!--<ng-container *ngFor="let user of userByUserName">-->
+          <ng-container> 
             <tr>
               <th>User Name</th>
               <td>{{ user.userName }}</td>
@@ -109,8 +110,10 @@
           <th>E-mail</th>
           <th>Created On</th>
         </tr>
-        <tr *ngFor="let user of users | filter:term">
-          <td><strong>{{ user.userName }}</strong></td>
+        <tr *ngFor="let user of users | filter:term" #box>
+          <td (click)="getUserByUserName(user.id)" class={{user.role}} tooltip="Click me">
+            <strong>{{ user.userName }}</strong>
+          </td>
           <td>{{ user.email }}</td>
           <td>{{ user.createdAt | date:"dd/MM/yy"}}</td>
           
@@ -118,6 +121,8 @@
           <button (click)="deleteUser(user.id)">Delete</button>
         </tr>
       </table>
+      <button (click)="getUsersOtherPage(-1)">previous page</button>
+      <button (click)="getUsersOtherPage(+1)">Next page</button>   
     </ng-container>
   
     <div *ngIf="!apiResponse && !allUsers" id="api-res">

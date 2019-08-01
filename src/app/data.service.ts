@@ -4,12 +4,19 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { User } from './users/userModel';
 import { Router } from '@angular/router';
 import { AuthInterceptorService } from './auth-interceptor.service';
+import { map, catchError } from 'rxjs/operators';
+import { AppComponent } from './app.component';
+
+const pageSize: number = 5;
+const token: string = localStorage.getItem('userToken');
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class DataService {
+
+  appComponenet: AppComponent = new AppComponent();
 
   private titleSource = new BehaviorSubject<string>("Dashboard");
   currentTitle = this.titleSource.asObservable();
@@ -22,7 +29,7 @@ export class DataService {
 
   readonly rootUrl = 'https://youngmovapi.azurewebsites.net';
   
-  header =  new HttpHeaders({'Content-Type' : 'application/json', 'Authorization' : 'Bearer ' + localStorage.getItem('userToken')});
+  header =  new HttpHeaders({'Content-Type' : 'application/json', 'Authorization' : 'Bearer ' + token});
  
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -44,6 +51,7 @@ export class DataService {
     localStorage.removeItem('administrator');
     localStorage.removeItem('password');
     this.router.navigate(['']);
+    this.appComponenet.reload();
   }
 
   userAuthentication(userName: string, password: string) : Observable<User> {
@@ -52,8 +60,20 @@ export class DataService {
     return this.http.post<User>(this.rootUrl + '/api/Jwt/Login', (body), {headers : reqHeader});
   }
 
+  getNbUsers() {
+    return this.http.get(`${this.rootUrl}/api/NbUsers`, {headers : this.header});
+  }
+
+  getNbUsersGender(gender: string) {
+    return this.http.get(`${this.rootUrl}/api/NbUsers?gender=${gender}`, {headers : this.header});
+  }
+
   getUsers() {
     return this.http.get(this.rootUrl + '/api/Users', {headers : this.header});
+  }
+
+  getUsersPagination(pageIndex: number) {
+    return this.http.get(`${this.rootUrl}/api/Users?pageSize=${pageSize}&pageIndex=${pageIndex}`, {headers : this.header});
   }
 
   getUserById(id: string) : Observable<User> {
