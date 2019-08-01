@@ -50,8 +50,6 @@ export class DataService {
     localStorage.removeItem('myPassword');
     localStorage.removeItem('firstTime');
     localStorage.removeItem('userId');
-
-    this.appComponenet.reload();
     this.router.navigate(['']);
   }
 

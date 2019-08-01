@@ -17,7 +17,7 @@ export class AppComponent implements OnInit, OnDestroy {
   
     connectionStatusMessage: string;
     connectionStatus: string;
-  
+
     constructor() { }
   
     ngOnInit(): void {
@@ -41,11 +41,6 @@ export class AppComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
      
       this.subscriptions.forEach(subscription => subscription.unsubscribe());
-    }
-
-    reload() {
-      console.log("In app component reload");
-      location.reload();
     }
   }
 
