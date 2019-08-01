@@ -44,6 +44,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     reload() {
+      console.log("In app component reload");
       location.reload();
     }
   }

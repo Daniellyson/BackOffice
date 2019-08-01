@@ -6,7 +6,14 @@ import { TopPageComponent } from '../top-page/top-page.component';
 import { User } from '../users/userModel';
 
 const incorrectLogin: string = "Username or password incorrect";
-const notAdm: string = "You are not a administrator. \nPlease Contact : https://github.com/Daniellyson "
+const notAdm: string = "You are not a administrator. \nPlease Contact : https://github.com/Daniellyson";
+
+const administrator: string = "administrator";
+const userToken: string = "userToken";
+const logged: string = "logged";
+const firstTime: string = "firstTime";
+const myPassword: string = "myPassword";
+const userId: string = "userId";
 
 @Component({
   selector: 'app-login',
@@ -15,16 +22,17 @@ const notAdm: string = "You are not a administrator. \nPlease Contact : https://
 })
 export class LoginComponent implements OnInit {
 
-  isLogin: boolean = true; 
-  backoffice: boolean = false;
+  isLogin: boolean = true;
 
   constructor(private userService : DataService, private router : Router) { }
 
   ngOnInit() {
+    
     if(localStorage.getItem('logged')) {
       this.router.navigate(['mainWindow']);
     }
   }
+  
   
   onSubmit(userName: string, password: string) {
     
@@ -32,43 +40,26 @@ export class LoginComponent implements OnInit {
 
       this.userService.changeAdmin(userName);
 
-      localStorage.setItem('administrator', userName);
+      localStorage.setItem(administrator, userName);
 
-      localStorage.setItem('userToken', data.access_token);
+      localStorage.setItem(userToken, data.access_token);
 
-      localStorage.setItem('logged', 'true');
+      localStorage.setItem(logged, 'true');
 
-      localStorage.setItem('firstTime', 'true');
+      localStorage.setItem(firstTime, 'true');
 
-      localStorage.setItem('passowrd', password);
+      localStorage.setItem(myPassword, password);
+
+      localStorage.setItem(userId, data.userId);
       
-      this.userService.setEventEmit(true);
+      this.userService.setEventEmit(true); 
 
-      this.authAdministrator(data);
+      this.ngOnInit();
     },
     (err : HttpErrorResponse) => {
       this.userService.setEventEmit(false);
       this.isLogin = false;
       alert(incorrectLogin);
-    });
-  }
-
-  authAdministrator(data : any) {    
-    
-    this.userService.getUserById(data.userId).subscribe((dataUser : User) => {
-
-      this.backoffice = (dataUser.role == "backoffice");
-
-      if(this.backoffice) {
-        alert("Welcome");
-        this.ngOnInit();
-      }
-      else {
-        this.userService.setEventEmit(false);
-        this.isLogin = false;
-        alert(notAdm);
-        this.userService.logout();
-      }
     });
   }
 }

@@ -49,9 +49,12 @@ export class DataService {
     localStorage.removeItem('userToken');
     localStorage.removeItem('logged');
     localStorage.removeItem('administrator');
-    localStorage.removeItem('password');
-    this.router.navigate(['']);
+    localStorage.removeItem('myPassword');
+    localStorage.removeItem('firstTime');
+    localStorage.removeItem('userId');
+
     this.appComponenet.reload();
+    this.router.navigate(['']);
   }
 
   userAuthentication(userName: string, password: string) : Observable<User> {
