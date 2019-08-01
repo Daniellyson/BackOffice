@@ -4,7 +4,7 @@ import { DataService } from '../data.service';
 import { LoginComponent } from '../login/login.component';
 import { User } from '../users/userModel';
 
-const notAdm: string = "You are not a administrator. \nPlease Contact : https://github.com/Daniellyson "
+const notAdm: string = "You are not a administrator. \nPlease Contact : https://github.com/Daniellyson";
 
 @Component({
   selector: 'app-main-window',

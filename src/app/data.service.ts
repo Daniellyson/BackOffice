@@ -3,8 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { User } from './users/userModel';
 import { Router } from '@angular/router';
-import { AuthInterceptorService } from './auth-interceptor.service';
-import { map, catchError } from 'rxjs/operators';
 import { AppComponent } from './app.component';
 
 const pageSize: number = 5;

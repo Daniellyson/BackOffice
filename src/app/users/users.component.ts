@@ -37,32 +37,27 @@ export class UsersComponent implements OnInit {
 
   ngOnInit() {
 
-    this.dataService.getUsers().subscribe((dataUser : User[]) => {
+    /*this.dataService.getUsers().subscribe((dataUser : User[]) => {
       this.totalPageUsers = Math.ceil(dataUser.length/pageSize);
       this.users = dataUser;
-    });
+    });*/
 
     this.dataService.getUsersPagination(this.resultPage).subscribe(
       (data : User[]) => {
         this.users = data;
       }
-    );
-    
-    
-    
+    );    
     this.getUsersOtherPage(this.resultPage);
   }
   //TODO the see a way to get both option paging and search total
 
   getUsersOtherPage(value: number) {
-
     this.resultPage += value;
     if(this.resultPage >= 0 && this.resultPage <= this.totalPageUsers) {
       this.dataService.getUsersPagination(this.resultPage).subscribe(
         (data : User[]) => this.users = data
       );
     }
-    
   }
 
   getUserByUserName(value: string) {
@@ -71,21 +66,16 @@ export class UsersComponent implements OnInit {
     this.allUsers = false;
     
     this.dataService.getUserById(value).subscribe((data : User) => {
-      //for(var iUser = 0; iUser < data.length && data[iUser].userName != value; iUser++) { }
 
       this.apiResponse = data.id == value;
 
       this.user = data;
 
       console.log(data.userName);
-
-      //this.userByUserName = data.filter(uniqueUser => uniqueUser.userName == value);  
             
       this.dataService.getCar().subscribe((car : Car[]) => { 
         
         this.cars = car  
-
-        //this.userCar = this.cars.filter(uniqueCarUser => uniqueCarUser.owner == data[iUser].id); 
         this.userCar = this.cars.filter(uniqueCarUser => uniqueCarUser.owner == data.id); 
       });
     });

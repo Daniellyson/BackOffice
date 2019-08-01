@@ -111,8 +111,8 @@
           <th>Created On</th>
         </tr>
         <tr *ngFor="let user of users | filter:term" #box>
-          <td (click)="getUserByUserName(user.id)" class={{user.role}} tooltip="Click me">
-            <strong>{{ user.userName }}</strong>
+          <td (click)="getUserByUserName(user.id)" class={{user.role}}>
+            <strong class="tooltip">{{ user.userName }}<span class="tooltiptext">{{ user.role }}</span></strong>
           </td>
           <td>{{ user.email }}</td>
           <td>{{ user.createdAt | date:"dd/MM/yy"}}</td>
@@ -125,9 +125,9 @@
       <button (click)="getUsersOtherPage(+1)">Next page</button>   
     </ng-container>
   
-    <div *ngIf="!apiResponse && !allUsers" id="api-res">
+    <!--<div *ngIf="!apiResponse && !allUsers" id="api-res">
       <h3>Please, give a valide User Name</h3>
-    </div>
+    </div>-->
   </div>
 </ng-container>
 
