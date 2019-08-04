@@ -28,7 +28,7 @@
 .tabcontent {
     display: none;
     padding: 6px 12px;
-    margin-left: 250px;
+    
     border: 1px solid #ccc;
     border-top: none;
 } 
@@ -57,6 +57,7 @@ ul {
 li div {
     float: left;
 }
+
 .picValidation {
     height: 200px;
 }

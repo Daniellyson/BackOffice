@@ -5,21 +5,19 @@
     <tr>
       <th>Name</th>
       <th>Date</th>
-      <th>creator</th>
       <th>car</th>
-      <th>dateStart</th>
-      <th>destinationFrom</th>
-      <th>destinationTo</th>
-      <th>nbPlaces</th>
-      <th>placePrice</th>
-      <th>description</th>
+      <th>Date Start</th>
+      <th>From</th>
+      <th>To</th>
+      <th>Places</th>
+      <th>Price</th>
+      <th>Description</th>
     </tr>
-    <tr *ngFor="let carp of newCarpooling ">
+    <tr *ngFor="let carp of carpooling ">
       <td>{{carp.userName}}</td>
       <td>{{carp.createdAt | date:"dd/MM/yy" }}</td>
-      <td>{{carp.creator}}</td>
-      <td>{{carp.car}}</td>
-      <td>{{carp.dateStart}}</td>
+      <td>{{carp.carModel}}</td>
+      <td>{{carp.dateStart | date:"dd/MM/yy" }}</td>
       <td>{{carp.destinationFrom}}</td>
       <td>{{carp.destinationTo}}</td>
       <td>{{carp.nbPlaces}}</td>

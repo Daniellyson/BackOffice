@@ -75,30 +75,31 @@
       </div>
     
       <div class="userInfo" *ngIf="!allUsers"> 
-        <table id="car" *ngIf="apiResponse"> 
-          <ng-container *ngFor="let car of userCar"> <!-- | async-->
-            <tr>
-              <th>Car Model</th>
-              <td>{{ car.carModel }}</td>
-            </tr>
-            <tr>
-              <th>Color</th>
-              <td>{{ car.color }}</td>
-            </tr>
-            <tr>
-              <th>License Plate Number</th>
-              <td>{{car.licensePlateNumber}}</td>
-            </tr>
-            <tr>
-              <th>Created On</th>
-              <td>{{car.createdAt | date:"dd/MM/yy"}}</td>
-            </tr>
-            <tr>
-              <th>Validated On</th>
-              <td>{{car.validatedAt | date:"dd/MM/yy"}}</td>
-            </tr>
-          </ng-container>
-        </table>
+        <ng-container id="car" *ngIf="apiResponse">
+          <table  *ngFor="let car of userCar"> 
+            <!-- | async-->
+              <tr>
+                <th>Model</th>
+                <td>{{ car.carModel }}</td>
+              </tr>
+              <tr>
+                <th>Color</th>
+                <td>{{ car.color }}</td>
+              </tr>
+              <tr>
+                <th>License Plate Number</th>
+                <td>{{car.licensePlateNumber}}</td>
+              </tr>
+              <tr>
+                <th>Created On</th>
+                <td>{{car.createdAt | date:"dd/MM/yy"}}</td>
+              </tr>
+              <tr>
+                <th>Validated On</th>
+                <td>{{car.validatedAt | date:"dd/MM/yy"}}</td>
+              </tr>
+          </table>
+        </ng-container> 
       </div>
     </div>
 
@@ -121,13 +122,9 @@
           <button (click)="deleteUser(user.id)">Delete</button>
         </tr>
       </table>
-      <button (click)="getUsersOtherPage(-1)">previous page</button>
-      <button (click)="getUsersOtherPage(+1)">Next page</button>   
+      <!--<button (click)="getUsersOtherPage(-1)">previous page</button>
+      <button (click)="getUsersOtherPage(+1)">Next page</button>-->
     </ng-container>
-  
-    <!--<div *ngIf="!apiResponse && !allUsers" id="api-res">
-      <h3>Please, give a valide User Name</h3>
-    </div>-->
   </div>
 </ng-container>
 

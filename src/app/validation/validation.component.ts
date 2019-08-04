@@ -17,17 +17,25 @@ export class ValidationComponent implements OnInit {
   updateCar: Cars[];
   newFormUser: User[];
 
+  atLeastOneCarToBeValidate: number = 0;
+
+  //resultPage: number = 0;
+  //totalPageCars: number = 0;
+
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
+
     this.dataService.getCar().subscribe((data : Car[]) => { 
       this.cars = data;
+      //this.totalPageCars = Math.ceil(data.length/5);
 
       this.dataService.getUsers().subscribe((data : User[]) => {
 
         this.pictures = data;
 
-        for(var iCar = 0; iCar < this.cars.length; iCar++) {
+        for(var iCar = 0; iCar < this.cars.length; iCar++) {        
+
           for(var iUser = 0; iUser < data.length && data[iUser].id != this.cars[iCar].owner; iUser++) {  }
 
           this.newFormUser = data.filter(uniqueUser => uniqueUser.id == this.cars[iCar].owner); 
@@ -81,7 +89,7 @@ export class ValidationComponent implements OnInit {
       this.validations(callFrom);
     },
     (err : HttpErrorResponse) => {
-      alert(err.status + " : " + err.message);
+      console.log(err.status + " : " + err.message);
     });
   }
 
@@ -91,18 +99,18 @@ export class ValidationComponent implements OnInit {
       this.validations(callFrom);
     },
     (err : HttpErrorResponse) => {
-      alert(err.status + " : " + err.message);
+      console.log(err.status + " : " + err.message);
     });
   }
 
   validateVehicle(id: number) {   
 
     this.dataService.updateCar(id, true).subscribe(data => {
-      //this.ngOnInit();
+      this.ngOnInit();
       this.validations('vehicle');
     },
     (err : HttpErrorResponse) => {
-      alert(err.status + " : " + err.message);
+      console.log(err.status + " : " + err.message);
     });
   }
 
@@ -113,7 +121,18 @@ export class ValidationComponent implements OnInit {
       this.validations('vehicle');
     },
     (err : HttpErrorResponse) => {
-      alert(err.status + " : " + err.message);
+      console.log(err.status + " : " + err.message);
     });
   }
+
+  /*getCarsOtherPage(value: number) {
+    
+    this.resultPage += value;
+    if(this.resultPage >= 0 && this.resultPage <= this.totalPageCars) {
+      console.log(this.atLeastOneCarToBeValidate);
+      this.dataService.getCarPagination(this.resultPage).subscribe(
+        (data : Car[]) => this.cars = data
+      );
+    }
+  }*/
 }

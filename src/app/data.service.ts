@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { AppComponent } from './app.component';
 
 const pageSize: number = 5;
+const pageSizeCars: number = 5;
 const token: string = localStorage.getItem('userToken');
 
 @Injectable({
@@ -72,7 +73,7 @@ export class DataService {
   }
 
   getUsersPagination(pageIndex: number) {
-    return this.http.get(`${this.rootUrl}/api/Users?pageSize=${pageSize}&pageIndex=${pageIndex}`, {headers : this.header});
+    return this.http.get(`${this.rootUrl}/api/Users?pageIndex=${pageIndex}&pageSize=${pageSize}`, {headers : this.header});
   }
 
   getUserById(id: string) : Observable<User> {
@@ -93,6 +94,14 @@ export class DataService {
 
   getCar() {
     return this.http.get(this.rootUrl + '/api/Cars', {headers : this.header});
+  }
+
+  getCarById(id: number) {
+    return this.http.get(this.rootUrl + '/api/Cars/' + id, {headers : this.header});
+  }
+
+  getCarPagination(pageIndex: number) {
+    return this.http.get(`${this.rootUrl}/api/Cars?pageIndex=${pageIndex}&pageSize=${pageSizeCars}`, {headers : this.header});
   }
   
   updateCar(carId: number, isValid: boolean) {

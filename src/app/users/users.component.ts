@@ -31,33 +31,23 @@ export class UsersComponent implements OnInit {
   userCar: any;
 
   resultPage: number = 0;
-  totalPageUsers: number;
+  totalPageUsers: number = 0;
 
   constructor(private dataService: DataService, private router: Router) {  }
 
   ngOnInit() {
 
-    /*this.dataService.getUsers().subscribe((dataUser : User[]) => {
-      this.totalPageUsers = Math.ceil(dataUser.length/pageSize);
+    this.dataService.getUsers().subscribe((dataUser : User[]) => {
+      //this.totalPageUsers = Math.ceil(dataUser.length/pageSize);
       this.users = dataUser;
-    });*/
+    });
 
-    this.dataService.getUsersPagination(this.resultPage).subscribe(
+    /*this.dataService.getUsersPagination(this.resultPage).subscribe(
       (data : User[]) => {
         this.users = data;
       }
     );    
-    this.getUsersOtherPage(this.resultPage);
-  }
-  //TODO the see a way to get both option paging and search total
-
-  getUsersOtherPage(value: number) {
-    this.resultPage += value;
-    if(this.resultPage >= 0 && this.resultPage <= this.totalPageUsers) {
-      this.dataService.getUsersPagination(this.resultPage).subscribe(
-        (data : User[]) => this.users = data
-      );
-    }
+    this.getUsersOtherPage(this.resultPage);*/
   }
 
   getUserByUserName(value: string) {
@@ -104,4 +94,14 @@ export class UsersComponent implements OnInit {
     this.allUsers = true;
     this.modify_user = false;
   }
+
+  /*getUsersOtherPage(value: number) {
+    
+    this.resultPage += value;
+    if(this.resultPage >= 0 && this.resultPage <= this.totalPageUsers) {
+      this.dataService.getUsersPagination(this.resultPage).subscribe(
+        (data : User[]) => this.users = data
+      );
+    }
+  }*/
 }

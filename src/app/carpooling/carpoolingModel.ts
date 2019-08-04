@@ -17,9 +17,16 @@ export interface Carpooling {
     postalCodeTo: string;
     postalCodeFrom: string;
     userName: string;
+    carModel: string;
+    owner: string;
 }
 
-export interface Carpoolings {
-    userName: string;
-    createdAt: Date;
+export interface Car {
+    id:	number;
+    createdAt:	Date;
+    validatedAt: Date;
+    color:	string;
+    licensePlateNumber:	string;
+    carModel: string;
+    owner: string;
 }
