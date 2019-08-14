@@ -3,6 +3,7 @@ import { DataService } from '../data.service';
 import { User } from './userModel';
 import { Router } from '@angular/router';
 import { Car } from '../validation/carModel';
+import { HttpErrorResponse } from '@angular/common/http';
 
 const pageSize: number = 5;
 
@@ -16,7 +17,6 @@ export class UsersComponent implements OnInit {
 
   users: User[];
 
-  userByID: User[];
   userByUserName: User[];
 
   user: User;
@@ -80,10 +80,12 @@ export class UsersComponent implements OnInit {
 
   
   deleteUser(id: number) {
-    if(confirm("Delete User ?")) {
+    if(confirm("Delete User?")) {
       this.dataService.deleteUser(id).subscribe(user => {
         this.getAllUsersBack();
-        this.users = this.userByID.filter(u => u !== user);
+      },
+      (err : HttpErrorResponse) => {
+        alert("Sorry un error occured : " + err.statusText + " (" +  err.status + ")");
       });
     } 
   }

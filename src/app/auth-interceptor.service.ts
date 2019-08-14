@@ -3,6 +3,7 @@ import { DataService } from './data.service';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from "rxjs/operators";
+import { ResourceLoader } from '@angular/compiler';
 
 
 @Injectable({
@@ -14,6 +15,7 @@ export class AuthInterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
+    this.reload();
     /*const idToken = localStorage.getItem("userToken");
 
     if (idToken) {
@@ -23,6 +25,7 @@ export class AuthInterceptorService implements HttpInterceptor {
       });
 
     }*/
+
     return next.handle(req)
       .pipe(tap(
         (response: HttpEvent<any>) => {
@@ -39,5 +42,13 @@ export class AuthInterceptorService implements HttpInterceptor {
           console.log("completed successfully");
         }
       ));    
+  }
+
+  reload() {
+    const firstTime = localStorage.getItem("firstTime");
+		if(firstTime) {
+			localStorage.removeItem("firstTime");
+			location.reload();
+		}
   }
 }

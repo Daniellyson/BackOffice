@@ -36,19 +36,23 @@ export class ModifyUserComponent implements OnInit {
     this.userService.getUserById(userId).subscribe(data => {
 
       this.newFormUser = data;
-      
-      this.form =  {
-        //"userName" : this.newFormUser.userName,
-        "email": this.newFormUser.email,
-        "phone": this.newFormUser.phone,
-        "address": this.newFormUser.address,
-        "locality": this.newFormUser.locality,
-        "postalCode": this.newFormUser.postalCode,
-        "trustedCarpoolingDriverCode": this.newFormUser.trustedCarpoolingDriverCode
-      };
 
-      this.editForm.setValue(this.form);
+      this.getNewFormUser();   
     });
+  }
+
+  getNewFormUser() {
+    this.form =  {
+      //"userName" : this.newFormUser.userName,
+      "email": this.newFormUser.email,
+      "phone": this.newFormUser.phone,
+      "address": this.newFormUser.address,
+      "locality": this.newFormUser.locality,
+      "postalCode": this.newFormUser.postalCode,
+      "trustedCarpoolingDriverCode": this.newFormUser.trustedCarpoolingDriverCode
+    };
+
+    this.editForm.setValue(this.form);
   }
 
   onSubmit(form: NgForm) {
@@ -78,6 +82,10 @@ export class ModifyUserComponent implements OnInit {
         else {
           inputs[inp].style.cssText = "none";
         }
+      }
+
+      if(err.status == 500) {
+        alert("Sorry un error occured : " + err.statusText + " (" +  err.status + ")");
       }
     }); 
   }

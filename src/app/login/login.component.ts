@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
 
       localStorage.setItem(userId, data.userId);
       
-      this.userService.setEventEmit(true); 
+      this.userService.setEventEmit(true);
 
       this.ngOnInit();
     },

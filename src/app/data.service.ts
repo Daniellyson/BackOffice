@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { AppComponent } from './app.component';
 
 const pageSize: number = 5;
-const pageSizeCars: number = 5;
+
 const token: string = localStorage.getItem('userToken');
 
 @Injectable({
@@ -92,6 +92,10 @@ export class DataService {
     return this.http.get(this.rootUrl + '/api/Carpoolings', {headers : this.header});
   }
 
+  getCarpoolingPagination(pageIndex: number) {
+    return this.http.get(`${this.rootUrl}/api/Carpoolings?pageIndex=${pageIndex}&pageSize=${pageSize}`, {headers : this.header});
+  }
+
   getCar() {
     return this.http.get(this.rootUrl + '/api/Cars', {headers : this.header});
   }
@@ -101,7 +105,7 @@ export class DataService {
   }
 
   getCarPagination(pageIndex: number) {
-    return this.http.get(`${this.rootUrl}/api/Cars?pageIndex=${pageIndex}&pageSize=${pageSizeCars}`, {headers : this.header});
+    return this.http.get(`${this.rootUrl}/api/Cars?pageIndex=${pageIndex}&pageSize=${pageSize}`, {headers : this.header});
   }
   
   updateCar(carId: number, isValid: boolean) {

@@ -32,12 +32,6 @@ export class MainContainerComponent implements OnInit {
 	
 	printDashboard() {
 
-		const firstTime = localStorage.getItem("firstTime");
-		if(firstTime) {
-			localStorage.removeItem("firstTime");
-			location.reload();
-		}
-
 		this.dataService.getCarpooling().subscribe((car: Carpooling[]) => {
 			
 			for(var iCar = 0; iCar < car.length; iCar++) {

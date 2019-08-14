@@ -6,10 +6,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { DataService } from '../data.service';
 
 
-const regexUserName : RegExp = new RegExp("^([a-zA-Z''-'\\s]+)");
+const regexUserName : RegExp = new RegExp("^[a-zA-Z''-'\\s]{4,40}$");
 const regexPassword : RegExp = new RegExp(".{6,}");
 const regexEmail : RegExp = new RegExp("[^@]+@[^\.]+\..+");
-const regexPhone : RegExp = new RegExp("^[0-9\-\+]{9,15}$");
+//const regexPhone : RegExp = new RegExp("^[0-9\-\+]{9,15}$");
+const regexPhone : RegExp = new RegExp("^0[1-68]([-. ]?\\d{2}){4}$");
 const regexAddress : RegExp = new RegExp("(^[a-zA-Z'\\s]+)(\\d+\\s)?([a-zA-Z'\\s]+)?(\,\\s)(\\d+)");
 
 const regexLocality : RegExp = new RegExp("^[A-z,' -]+$");
@@ -35,6 +36,7 @@ export class AddAdminComponent implements OnInit {
 
   passwordNotMatching: boolean;
   notValidPassword: boolean;
+  notValidPasswordConfirm: boolean;
 
   noGender: boolean;
 
@@ -108,6 +110,7 @@ export class AddAdminComponent implements OnInit {
       if(!regexUserName.test(this.newFormUser.userName)) {
         this.notValidName = true;
         this.ok = false;
+        this.newFormUser.userName = "";
       } 
       else {
         for(var iUser = 0; iUser < this.users.length && this.users[iUser].userName != this.newFormUser.userName; iUser++) { }
@@ -122,11 +125,20 @@ export class AddAdminComponent implements OnInit {
       if(!regexPassword.test(this.newFormUser.password)){
         this.notValidPassword = true;
         this.ok = false;
+        this.newFormUser.password = "";
+      }
+    }
+    if(form.value.password != ""){
+      if(!regexPassword.test(form.value.passwordConfirm)){
+        this.notValidPassword = true;
+        this.ok = false;
+        this.newFormUser.password = "";
       }
     }
     if(form.value.password != form.value.passwordConfirm) {
       this.passwordNotMatching = true;
       this.ok = false;
+      this.newFormUser.password = "";
     }
     
     if(this.newFormUser.email != "") {
@@ -186,7 +198,6 @@ export class AddAdminComponent implements OnInit {
 
 
     this.userService.addNewAdm(this.newFormUser).subscribe(() => {
-      alert("In subscribe");
       this.backToAllUsers();
     },
     (error : HttpErrorResponse) => {
