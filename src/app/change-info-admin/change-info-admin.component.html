@@ -9,6 +9,7 @@
       <input type="password" #new_Password required placeholder="New password (Minimun length = 6)" name="new_Password" class="form-control" id="new_Password">
       <p *ngIf="passwordNotMatching">Password not matching</p>
       <p *ngIf="notValidPassword">Password not valid. Minimun length 6</p>
+      <p *ngIf="old_new_password_Are_equals">Old password and new password are the same! Please, choose a new password.</p>
 
       <input type="password" #confirm_new_password required placeholder="Confirm new password" name="confirm_new_password" class="form-control" id="confirm_new_password">
       <p *ngIf="passwordNotMatching">Password not matching</p>

@@ -4,8 +4,8 @@ import { User } from '../users/userModel';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
-const regexPassword : RegExp = new RegExp(".{6,}");
-const password: string = localStorage.getItem("password");
+const regexPassword: RegExp = new RegExp(".{6,}");
+const password: string = localStorage.getItem("myPassword");
 
 @Component({
   selector: 'app-change-info-admin',
@@ -24,6 +24,7 @@ export class ChangeInfoAdminComponent implements OnInit {
   passwordNotMatching: boolean;
   notValidPassword: boolean;
   notValidPasswordConfirm: boolean;
+  old_new_password_Are_equals: boolean;
 
   constructor(private router : Router, private dataService: DataService) {  }
 
@@ -42,16 +43,22 @@ export class ChangeInfoAdminComponent implements OnInit {
     this.passwordNotMatching = false;
     this.notValidPassword = false;
     this.notValidPasswordConfirm = false;
-
-    if(new_Password != "" && confirm_new_Password != "") {
-      if(new_Password != confirm_new_Password) {
-        this.passwordNotMatching = true;
-      }
-    }
+    this.old_new_password_Are_equals = false;
 
     this.notValidPassword = (!regexPassword.test(new_Password));
     this.notValidPasswordConfirm = (!regexPassword.test(confirm_new_Password));
     this.wrongPassword = (password != old_Password);
+
+    if(new_Password != "" && confirm_new_Password != "") {
+      if(new_Password != confirm_new_Password) {
+        this.passwordNotMatching = true;
+        new_Password = "";
+      }
+      if(password == new_Password) {
+        this.old_new_password_Are_equals = true;
+        new_Password = "";
+      }
+    }
     
     this.dataService.updatePassword(this.idAdmin, old_Password, new_Password).subscribe((data : User) => {
 

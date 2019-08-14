@@ -4,7 +4,7 @@
     
     <div class="form-group">
       <label for="userName">User Name<span>*</span></label>
-      <input type="text" required formControlName="userName" placeholder="Not allowed special characters" name="userName" class="form-control" id="userName">
+      <input type="text" required formControlName="userName" placeholder="Not allowed special characters. Minimun length 4" name="userName" class="form-control" id="userName">
       <p *ngIf="takenName">User name already exist. Please, choose another User name</p>
       <p *ngIf="notValidName">Name not valid</p>
     </div>
