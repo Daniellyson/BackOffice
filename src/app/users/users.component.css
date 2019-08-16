@@ -51,9 +51,11 @@ table#car {
 
 .backoffice {
     color: blue;
+    cursor: pointer;
 }
 .client {
     color: rgb(221, 9, 9);
+    cursor: pointer;
 }
 
 .tooltip {
