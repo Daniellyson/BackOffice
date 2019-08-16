@@ -30,22 +30,30 @@ export class ValidationComponent implements OnInit {
       this.cars = data;
       //this.totalPageCars = Math.ceil(data.length/5);
 
-      this.dataService.getUsers().subscribe((data : User[]) => {
-
-        this.pictures = data;
-
-        for(var iCar = 0; iCar < this.cars.length; iCar++) {        
-
-          for(var iUser = 0; iUser < data.length && data[iUser].id != this.cars[iCar].owner; iUser++) {  }
-
-          this.newFormUser = data.filter(uniqueUser => uniqueUser.id == this.cars[iCar].owner); 
-          this.user = data.filter(uniqueUser => uniqueUser.id == this.cars[iCar].owner).map(name => name.userName);
-
-          this.cars[iCar].ownerName = this.user;
-        }
-      });
+      this.getUsers();
     });
     this.validations('profilePicture');
+  }
+
+  getUsers() {
+    this.dataService.getUsers().subscribe((data : User[]) => {
+
+      this.pictures = data;
+      this.getCars(data);
+    });
+  }
+
+  getCars(data : User[]) {
+    
+    for(var iCar = 0; iCar < this.cars.length; iCar++) {        
+
+      for(var iUser = 0; iUser < data.length && data[iUser].id != this.cars[iCar].owner; iUser++) {  }
+
+      this.newFormUser = data.filter(uniqueUser => uniqueUser.id == this.cars[iCar].owner); 
+      this.user = data.filter(uniqueUser => uniqueUser.id == this.cars[iCar].owner).map(name => name.userName);
+
+      this.cars[iCar].ownerName = this.user;
+    }
   }
 
   validations(validation) {
@@ -62,7 +70,6 @@ export class ValidationComponent implements OnInit {
     }
 
     document.getElementById(validation).style.display = "block";
-    //evt.currentTarget.className += " active";
   } 
 
   validatePictures(id: string, callFrom: string) {

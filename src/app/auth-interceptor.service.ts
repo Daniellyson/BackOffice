@@ -3,7 +3,6 @@ import { DataService } from './data.service';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from "rxjs/operators";
-import { ResourceLoader } from '@angular/compiler';
 
 
 @Injectable({

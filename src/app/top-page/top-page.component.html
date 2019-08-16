@@ -6,7 +6,7 @@
         <h2 id="titleMidlePage">{{getTitle()}}</h2>
     </div>  
 
-    <div id="user-logout">
+    <!--<div id="user-logout">
         <div id="userName"> <h3> {{adminName}} </h3> </div>
         <div id="menu">
             <select>
@@ -16,5 +16,14 @@
                 <option routerLink="add-admin" id="add-admin" (click)="changeTitle('Add')"> Add a new Admin </option>
             </select>
         </div> 
+    </div>-->
+    <div id="mySidebar">
+        <a id="closebtn" (click)="closeNav()">x</a>
+        <a (click)="logout()"> Logout </a>
+        <a routerLink="changeInfoAdmin" id="changeInfoAdmin" (click)="changeTitle('password')" (click)="closeNav()"> Change Password </a>
+        <a routerLink="add-admin" id="add-admin" (click)="changeTitle('Add')" (click)="closeNav()"> Add a new Admin </a>
     </div>
+    <button id="openbtn" (click)="openNav()">
+        {{(adminName == "Daniellyson")? adminName + " Developer" : adminName}} ☰ 
+    </button>
 </div>

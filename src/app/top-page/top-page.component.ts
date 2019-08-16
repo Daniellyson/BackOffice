@@ -39,4 +39,16 @@ export class TopPageComponent implements OnInit {
     localStorage.removeItem('administrator');
     this.router.navigate(['']);*/
   }
+
+  openNav() {
+    if(window.matchMedia("(min-width: 601px)").matches) {
+      document.getElementById("mySidebar").style.width = "250px";
+    }
+    else {
+      document.getElementById("mySidebar").style.width = "125px";
+    }
+  }
+  closeNav() {
+    document.getElementById("mySidebar").style.width = "0";
+  }
 }
