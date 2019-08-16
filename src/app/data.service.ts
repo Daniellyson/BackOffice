@@ -51,6 +51,7 @@ export class DataService {
     localStorage.removeItem('myPassword');
     localStorage.removeItem('firstTime');
     localStorage.removeItem('userId');
+    localStorage.removeItem("editUserId");
     this.router.navigate(['']);
   }
 

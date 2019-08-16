@@ -113,7 +113,9 @@
         </tr>
         <tr *ngFor="let user of users | filter:term" #box>
           <td (click)="getUserByUserName(user.id)" class={{user.role}}>
-            <strong class="tooltip">{{ user.userName }}<span class="tooltiptext">{{ user.role }}</span></strong>
+            <strong class="tooltip">{{ user.userName }}
+              <span class="tooltiptext">{{ (user.role) }}</span>
+            </strong>
           </td>
           <td>{{ user.email }}</td>
           <td>{{ user.createdAt | date:"dd/MM/yy"}}</td>

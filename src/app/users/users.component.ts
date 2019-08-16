@@ -71,10 +71,9 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  modifyUser(id: string) { 
-    localStorage.removeItem("editUserId");
+  modifyUser(id: string) {     
+    localStorage.removeItem("editUserId");    
     localStorage.setItem("editUserId", id);
-
     this.modify_user = true;
   }
 

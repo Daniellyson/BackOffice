@@ -9,26 +9,31 @@
     <div class="form-group">
       <label for="email">Email address<span>*</span></label>
       <input type="email" required formControlName="email" placeholder="Email" name="email" class="form-control" id="email">
+      <p *ngIf="notValidEmail">Email not valid</p>
     </div>
 
     <div class="form-group">
       <label for="phone">Phone Number</label>
       <input formControlName="phone" placeholder="Phone Number" name="phone" class="form-control" id="phone">
+      <p *ngIf="notValidPhone">Phone number not valid</p>
     </div>
 
     <div class="form-group">
       <label for="address">Address<span>*</span></label>
-      <input formControlName="address" required placeholder="Address" name="address" class="form-control" id="address">
+      <input formControlName="address" required placeholder="Street of 3 rivers, 7" name="address" class="form-control" id="address">
+      <p *ngIf="notValidAddress">Address not valid</p>
     </div>
 
     <div class="form-group">
       <label for="locality">Locality<span>*</span></label>
       <input formControlName="locality" required placeholder="Locality" name="locality" class="form-control" id="locality">
+      <p *ngIf="notValidLocality">Locality not valid</p>
     </div>
 
     <div class="form-group">
       <label for="postalCode">Postcode<span>*</span></label>
       <input formControlName="postalCode" required placeholder="Postcode" name="postalCode" class="form-control" id="postalCode">
+      <p *ngIf="notValidPostalCode">Postalcode not valid</p>
     </div>
 
     <div class="form-group">
