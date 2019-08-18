@@ -62,7 +62,7 @@ export class MainContainerComponent implements OnInit {
 				}
 
 				for(let i = 0; i < this.users.length; i++) {
-					if(this.users[i].gender == 'f') {
+					if(this.users[i].gender.toLowerCase() == 'f') {
 						this.women++;						
 					} 
 					else {
